@@ -27,7 +27,6 @@ cd choreonoid-1.7.0/ext
 git clone https://github.com/xinyiz0931/grasp-plugin-choreonoid-1.7.git
 ```
 4. Install graspPlugin, you can follow manuals from graspPlugin [wiki](http://www.hlab.sys.es.osaka-u.ac.jp/grasp/ja/node/311). Otherwise follow these steps: 
-5. 
 ```
 cd choreonoid-1.7.0
 ./ext/Grasp/install-requiresities-ubuntu.sh
@@ -44,3 +43,9 @@ make
 cd choreonoid-1.7.0
 bin/chorenoid ext/graspPlugin/BinPicking/project/binpicking.cnoid
 ```
+7. Test if the python script can be loaded
+```
+cd choreonoid-1.7.0
+bin/choreonoid -p /graspPlugin/BinPicking/project/demo_pa10_ahiru_python.cnoid
+```
+Click the `play` button to check if the motion is planned
