@@ -1,0 +1,200 @@
+items: 
+  id: 0
+  name: "Root"
+  plugin: Excade
+  class: RootItem
+  children: 
+    - 
+      id: 1
+      name: "HRP1"
+      plugin: Robotics
+      class: BodyItem
+      data: 
+        modelFile: "iARM.yaml"
+        currentBaseLink: "BASE"
+        rootPosition: [  0.000000,  0.000000,  0.200000 ]
+        rootAttitude: [ 
+           1.000000,  0.000000,  0.000000, 
+           0.000000,  1.000000,  0.000000, 
+           0.000000,  0.000000,  1.000000 ]
+        jointPositions: [  0.123949, -0.240576,  0.204428,  9.495289, -1.499147, -9.428793, -0.050000,  0.045000,  0.000000,  0.000000 ]
+        selfCollisionDetection: true
+    - 
+      id: 2
+      name: "can200"
+      plugin: Robotics
+      class: BodyItem
+      data: 
+        modelFile: "${PROGRAM_TOP}/ExcadePlugins/Grasplot/Object/can200hrp.wrl"
+        currentBaseLink: "WAIST"
+        rootPosition: [ -0.486782, -0.154931,  0.185760 ]
+        rootAttitude: [ 
+           1.000000,  0.000000,  0.000000, 
+           0.000000,  1.000000,  0.000000, 
+           0.000000,  0.000000,  1.000000 ]
+        jointPositions: [  ]
+        selfCollisionDetection: true
+views: 
+  "Items": 
+    checked: [ 1, 2 ]
+    expanded: [ "1" ]
+  "Scene": 
+    mode: edit
+    floorGrid: true
+    shadow: false
+    collisions: false
+    hiPriorityRendering: false
+    camera: 
+      perspective: [ 40, 0.00617679, 12.6007 ]
+      eye: [ -0.384375, 1.08434, 0.12613 ]
+      center: [ -0.530818, 0.0963144, 0.174768 ]
+      up: [ 0.00713083, 0.0481122, 0.998816 ]
+  "Links": 
+    listingMode: "link list"
+    bodyItems: 
+      - 
+        id: -1
+        selectedLinks: [ 0 ]
+  "Body / Link": 
+    showRotationMatrix: false
+  "Joint Sliders": 
+    showAllJoints: false
+    jointId: false
+    name: true
+    numColumns: 1
+    spinBox: true
+    slider: true
+    labelOnLeft: true
+  "Pose Seq": 
+    defaultTransitionTime: 0
+    updateAll: true
+    autoUpdate: false
+    timeSync: true
+    listingMode: "part tree"
+    mode: normal
+    splitMode: vertical
+    splitPosition: 297
+  "Pose Roll": 
+    defaultTransitionTime: 0
+    updateAll: true
+    autoUpdate: false
+    timeSync: true
+    listingMode: "part tree"
+    timeLength: 10
+    showLipSync: false
+    gridInterval: 1
+  "Multi Value Seq": 
+    mode: view
+    editMode: freeLine
+    original: true
+    velocity: false
+    acceleration: false
+    limits: true
+    grid: true
+    gridWidth: 0.2
+    gridHeight: 0.2
+    lineWidth: 1
+    rulers: true
+    sync: true
+    controlPointStep: 1
+    controlPointOffset: 0
+    controlPointHeighlight: false
+    scrollMode: continuous
+    lower: -10
+    upper: 10
+  "Multi Se3 Seq": 
+    mode: view
+    editMode: freeLine
+    original: true
+    velocity: false
+    acceleration: false
+    limits: true
+    grid: true
+    gridWidth: 0.2
+    gridHeight: 0.2
+    lineWidth: 1
+    rulers: true
+    sync: true
+    controlPointStep: 1
+    controlPointOffset: 0
+    controlPointHeighlight: false
+    scrollMode: continuous
+    lower: -10
+    upper: 10
+    visibleElements: [ 0, 1, 2 ]
+toolbars: 
+  "TimeBar": 
+    minTime: 0
+    maxTime: 30
+    frameRate: 100
+    currentTime: 0
+  "BodyBar": 
+    stanceWidth: 0.15
+  "PoseSeqBar": 
+    balancer: false
+    autoGeneration: false
+    timeScaleRatio: 1
+    finalPoseDuration: 1
+    onlyTimeBarRange: false
+    timeToStartBalancer: 0
+    balancerIterations: 2
+    boundaryConditionType: 0
+    boundarySmootherType: 3
+    boundarySmootherTime: 0.5
+    plainBalancerMode: false
+    dynamicsTimeRatio: 1
+    stealthyStepMode: true
+    stealthyHeightRatioThresh: 2
+    flatLiftingHeight: 0.005
+    flatLandingHeight: 0.005
+    impactReductionHeight: 0.005
+    impactReductionTime: 0.04
+    autoZmp: true
+    minZmpTransitionTime: 0.1
+    zmpCenteringTimeThresh: 0.03
+    zmpTimeMarginBeforeLiftingSpin: 0
+    allLinkPositions: false
+    lipSyncMix: false
+  "KinematicsBar": 
+    mode: IK
+    attitude: true
+    penetrationBlock: false
+    footSnap: true
+    collisionLinkHighlight: false
+    snapDistance: 0.025
+    penetrationBlockDepth: 0.0005
+    lazyCollisionDetectionMode: true
+  "GraspBar": 
+    graspRobot: 1
+    graspObject: 2
+Excade: 
+  "MovieGenerator": 
+    folder: 
+    basename: scene
+    begin: 0
+    fps: 30
+    width: 640
+    heiht: 480
+Robotics: 
+  "KinematicFaultChecker": 
+    checkJointPositions: true
+    angleMargin: 0
+    translationMargin: 0
+    checkJointVelocities: true
+    velocityLimitRatio: 100
+    targetJoints: all
+    checkSelfCollisions: true
+    onlyTimeBarRange: false
+  "SceneBodyManager": 
+    sceneBodies: 
+      - 
+        bodyItem: 1
+        editable: true
+        centerOfMass: false
+        zmp: false
+      - 
+        bodyItem: 2
+        editable: true
+        centerOfMass: false
+        zmp: false
+currentFileDialogDirectory: "${PROGRAM_TOP}/ExcadePlugins/Grasplot/Object"

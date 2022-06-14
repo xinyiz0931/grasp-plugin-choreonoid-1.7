@@ -1,0 +1,9 @@
+modelFile: iarm-main-fixed.wrl
+
+graspPluginSetting: 
+  base: BASE
+  palm: J6
+  fingerEnds: [ LEFTTIP, RIGHTTIP ]
+  prehensionList: [prehension]
+  armStandardPose: [0, 0, 0, 0, 0, 0]
+  GrasplotPluginDir: ./

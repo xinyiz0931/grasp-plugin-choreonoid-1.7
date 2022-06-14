@@ -1,0 +1,75 @@
+modelFile: main_expipe.wrl
+
+standardPose: [ 
+0, 0, 0,
+0, 0, -90,  15, 0, 0,
+0, 0, -90, -15, 0, 0,
+0, 0, 0, 0,
+0, 0, 0, 0, 0, 0, 0 ]
+
+
+linkGroup: 
+  - name: HEAD
+    links: [ HEAD_JOINT0, HEAD_JOINT1 ]
+  - name: CHEST
+    links: [ CHEST_JOINT0 ]
+  - name: ARMS
+    links:
+      - name: R-ARM
+        links: [ RARM_JOINT0, RARM_JOINT1, RARM_JOINT2, RARM_JOINT3, RARM_JOINT4, RARM_JOINT5 ]
+      - name: R-HAND
+        links: [ RHAND_JOINT0, RHAND_JOINT1, RHAND_JOINT2, RHAND_JOINT3 ]
+      - name: L-ARM
+        links: [ LARM_JOINT0, LARM_JOINT1, LARM_JOINT2, LARM_JOINT3, LARM_JOINT4, LARM_JOINT5 ]
+      - name: L-HAND
+        links: [ LHAND_JOINT0, LHAND_JOINT1, LHAND_JOINT2, LHAND_JOINT3, LHAND_JOINT4, LHAND_JOINT5, LHAND_JOINT6 ]
+  - WAIST
+
+defaultIKsetup:
+  WAIST: [ R_ANKLE_R, L_ANKLE_R ]
+  RARM_JOINT5: [ CHEST_JOINT0 ]
+  LARM_JOINT5: [ CHEST_JOINT0 ]
+
+
+symmetricJoints:
+  - [ CHEST_JOINT0 ]
+  - [ HEAD_JOINT0 ]
+  - [ RARM_JOINT0, LARM_JOINT0, -1 ]
+  - [ RARM_JOINT1, LARM_JOINT1     ]
+  - [ RARM_JOINT2, LARM_JOINT2     ]
+  - [ RARM_JOINT3, LARM_JOINT3, -1 ]
+  - [ RARM_JOINT4, LARM_JOINT4     ]
+  - [ RARM_JOINT5, LARM_JOINT5, -1 ]
+
+
+divisionNumberOfPrimitiveGeometries: 16
+
+selfCollisionDetection:
+  excludeTreeDepth: 2
+
+
+graspPluginSetting: 
+  -
+    base: WAIST
+    palm: RARM_JOINT5
+    fingerEnds: [ RHAND_JOINT1, RHAND_JOINT3 ]
+    dataFilePath: right_data
+    prehensionList: [prehension_R]
+    armStandardPose: [0, 0, 0, -1.57, 0, 0, 0]
+    fingerOpenPose: [0, 0, 0, 0]
+    fingerOpenPoseOffset: [0.1, 0.1, 0.1, 0.1]
+    fingerOffset: [0.0]
+    GrasplotPluginDir: ./
+  - 
+    base: WAIST
+    palm: LARM_JOINT5
+    fingerEnds: [ LHAND_JOINT2, LHAND_JOINT5, LHAND_JOINT6 ]
+    dataFilePath: left_data
+    prehensionList: [prehension_L_pipe]
+    armStandardPose: [0, 0, 0, -1.57, 0, 0, 0]
+    fingerOpenPose: [-0.8726, 0, 0, -0.8726, 0, 0, 0.8726]
+    fingerOpenPoseOffset: [0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1]
+    fingerOffset: [0.0]
+    GrasplotPluginDir: ./
+    mu: 0.8
+    fmax: 15.0

@@ -1,0 +1,354 @@
+items: 
+  id: 0
+  name: "Root"
+  plugin: Base
+  class: RootItem
+  children: 
+    - 
+      id: 1
+      name: "World"
+      plugin: Body
+      class: WorldItem
+      data: 
+        collisionDetection: false
+      children: 
+        - 
+          id: 2
+          name: "HIRO"
+          plugin: Body
+          class: BodyItem
+          data: 
+            modelFile: "${PROGRAM_TOP}/extplugin/graspPlugin/RobotModels/HIRO/HIRO4finger.yaml"
+            currentBaseLink: "WAIST"
+            rootPosition: [ -0.400000,  0.100000,  0.100000 ]
+            rootAttitude: [ 
+               1.000000,  0.000000,  0.000000, 
+               0.000000,  1.000000,  0.000000, 
+               0.000000,  0.000000,  1.000000 ]
+            jointPositions: [ 
+               0.118773,  0.000000,  0.000000,  0.081997,  0.349540, -2.447399,  0.260995, -0.026055, -0.210608, 
+               0.000000, -0.000000, -2.117731, -0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000, 
+               0.000000,  0.000000,  0.000000,  0.000000,  0.000000, -0.000000, -0.000000, -0.000000, -0.000000 ]
+            initialRootPosition: [  0.000000,  0.000000,  0.000000 ]
+            initialRootAttitude: [ 
+               1.000000,  0.000000,  0.000000, 
+               0.000000,  1.000000,  0.000000, 
+               0.000000,  0.000000,  1.000000 ]
+            initialJointPositions: [ 
+               0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000, 
+               0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000, 
+               0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000 ]
+            zmp: [ -0.000000, -0.000000,  0.000000 ]
+            selfCollisionDetection: false
+          children: 
+            - 
+              id: 3
+              name: "SimpleGraspController"
+              plugin: SimpleController
+              class: SimpleControllerItem
+              data: 
+                isImmediateMode: true
+                controller: "SimpleGraspController"
+                reloading: true
+                inputLinkPositions: false
+        - 
+          id: 4
+          name: "AISTSimulator"
+          plugin: Body
+          class: AISTSimulatorItem
+          data: 
+            realtimeSync: false
+            recordingMode: TimeBar range
+            onlyActiveControlPeriod: true
+            timeLength: 60
+            allLinkPositionOutputMode: false
+            deviceStateRecording: true
+            dynamicsMode: Forward dynamics
+            integrationMode: Runge Kutta
+            gravity: [ 0, 0, -9.80665 ]
+            staticFriction: 0.3
+            slipFriction: 0.15
+            cullingThresh: 0.005
+            errorCriterion: 0.001
+            maxNumIterations: 1000
+            contactCorrectionDepth: 0.0001
+            contactCorrectionVelocityRatio: 50
+            2Dmode: false
+        - 
+          id: 5
+          name: "table-can"
+          plugin: Body
+          class: BodyItem
+          data: 
+            modelFile: "${PROGRAM_TOP}/extplugin/graspPlugin/Samples/Object/table-canhrp.wrl"
+            currentBaseLink: "table-WAIST"
+            rootPosition: [  0.150000,  0.000000, -0.810000 ]
+            rootAttitude: [ 
+               1.000000,  0.000000,  0.000000, 
+               0.000000,  1.000000,  0.000000, 
+               0.000000,  0.000000,  1.000000 ]
+            jointPositions: [  ]
+            initialRootPosition: [  0.000000,  0.000000,  0.000000 ]
+            initialRootAttitude: [ 
+               1.000000,  0.000000,  0.000000, 
+               0.000000,  1.000000,  0.000000, 
+               0.000000,  0.000000,  1.000000 ]
+            zmp: [  0.000000,  0.000000,  0.000000 ]
+            staticModel: true
+            selfCollisionDetection: false
+        - 
+          id: 6
+          name: "upper"
+          plugin: Body
+          class: BodyItem
+          data: 
+            modelFile: "upper_Hrp.wrl"
+            currentBaseLink: "WAIST"
+            rootPosition: [  0.015000, -0.005000,  0.007000 ]
+            rootAttitude: [ 
+               1.000000,  0.000000,  0.000000, 
+               0.000000,  1.000000,  0.000000, 
+               0.000000,  0.000000,  1.000000 ]
+            jointPositions: [  ]
+            initialRootPosition: [  0.000000,  0.000000,  0.000000 ]
+            initialRootAttitude: [ 
+               1.000000,  0.000000,  0.000000, 
+               0.000000,  1.000000,  0.000000, 
+               0.000000,  0.000000,  1.000000 ]
+            zmp: [  0.000000,  0.000000,  0.000000 ]
+            selfCollisionDetection: false
+views: 
+  "Items": 
+    selected: [ 4 ]
+    checked: [ 2, 5, 6 ]
+    expanded: [ 1, 2, 3 ]
+  "OSG": 
+    mode: view
+    floorGird: true
+    collisions: true
+    shadow: false
+    floorGridSpan: 10
+    floorGridInterval: 0.5
+    hiPriorityRendering: false
+    camera: 
+      projection: perspetive
+      perspective: [ 40, 1.87934, 0.00177931, 3.62979 ]
+      ortho: [ -1, 1, -0.767416, 0.767416, -1, 1 ]
+      eye: [ 0.175106, 0.00689754, 0.237593 ]
+      center: [ -0.400309, -0.0704629, -0.576601 ]
+      up: [ -0.806934, -0.108492, 0.580592 ]
+    backgroundColor: [ 0.1, 0.1, 0.3, 1 ]
+    gridColor: [ 0.9, 0.9, 0.9, 1 ]
+  "Scene": 
+    walkthrough: false
+    showCollisions: true
+    wireframe: false
+    defaultHeadLight: true
+    defaultHeadLightIntensity: 0.75
+    worldLight: false
+    worldLightIntensity: 0.5
+    worldLightAmbient: 0.3
+    additionalLights: true
+    floorGrid: false
+    floorGridSpan: 10
+    floorGridInterval: 0.5
+    normalVisualization: false
+    normalLength: 0.01
+    coordinateAxes: true
+    showFPS: false
+    useBufferForPicking: true
+    camera: 
+      current: Perspective
+      eye: [ 0.285563, -0.116692, 0.0481165 ]
+      direction: [ -0.967984, 0.24341, -0.0613025 ]
+      up: [ -0.0594517, 0.0149497, 0.998119 ]
+      fieldOfView: 0.6978
+      near: 0.01
+      far: 10000
+      orthoHeight: 20
+    backgroundColor: [ 0.1, 0.1, 0.3 ]
+    gridColor: [ 0.9, 0.9, 0.9, 1 ]
+  "Multi Value Seq": 
+    mode: view
+    editMode: freeLine
+    original: true
+    velocity: false
+    acceleration: false
+    limits: true
+    grid: true
+    gridWidth: 0.2
+    gridHeight: 0.2
+    lineWidth: 1
+    rulers: false
+    sync: true
+    controlPointStep: 1
+    controlPointOffset: 0
+    controlPointHeighlight: false
+    scrollMode: continuous
+    lower: -10
+    upper: 10
+  "Multi SE3 Seq": 
+    mode: view
+    editMode: freeLine
+    original: true
+    velocity: false
+    acceleration: false
+    limits: true
+    grid: true
+    gridWidth: 0.2
+    gridHeight: 0.2
+    lineWidth: 1
+    rulers: false
+    sync: true
+    controlPointStep: 1
+    controlPointOffset: 0
+    controlPointHeighlight: false
+    scrollMode: continuous
+    lower: -10
+    upper: 10
+    visibleElements: [ 0, 1, 2 ]
+  "Links": 
+    listingMode: "Link List"
+    currentBodyItem: 6
+  "Body / Link": 
+    showRotationMatrix: false
+  "Joint Sliders": 
+    showAllJoints: false
+    jointId: false
+    name: true
+    numColumns: 1
+    spinBox: true
+    slider: true
+    labelOnLeft: true
+    currentBodyItem: 6
+  "Joint Trajectories": 
+    mode: view
+    editMode: freeLine
+    original: true
+    velocity: false
+    acceleration: false
+    limits: true
+    grid: true
+    gridWidth: 0.2
+    gridHeight: 0.2
+    lineWidth: 1
+    rulers: false
+    sync: true
+    controlPointStep: 1
+    controlPointOffset: 0
+    controlPointHeighlight: false
+    scrollMode: continuous
+    lower: -10
+    upper: 10
+  "Multi Affine3 Seq": 
+    mode: view
+    editMode: freeLine
+    original: true
+    velocity: false
+    acceleration: false
+    limits: true
+    grid: true
+    gridWidth: 0.2
+    gridHeight: 0.2
+    lineWidth: 1
+    rulers: false
+    sync: true
+    controlPointStep: 1
+    controlPointOffset: 0
+    controlPointHeighlight: false
+    scrollMode: continuous
+    lower: -10
+    upper: 10
+    visibleElements: [ 0, 1, 2 ]
+  "Pose Roll": 
+    defaultTransitionTime: 0
+    updateAll: true
+    autoUpdate: false
+    timeSync: true
+    listingMode: "Part Tree"
+    timeLength: 13
+    showLipSync: false
+    gridInterval: 1
+toolbars: 
+  "TimeBar": 
+    minTime: 0
+    maxTime: 30
+    frameRate: 100
+    playbackFrameRate: 50
+    idleLoopDrivenMode: false
+    currentTime: 0
+    speedScale: 1
+    syncToOngoingUpdates: false
+  "BodyMotionGenerationBar": 
+    balancer: false
+    autoGeneration: false
+    timeScaleRatio: 1
+    preInitialDuration: 1
+    postFinalDuration: 1
+    onlyTimeBarRange: false
+    makeNewBodyItem: true
+    stealthyStepMode: true
+    stealthyHeightRatioThresh: 2
+    flatLiftingHeight: 0.005
+    flatLandingHeight: 0.005
+    impactReductionHeight: 0.005
+    impactReductionTime: 0.04
+    autoZmp: true
+    minZmpTransitionTime: 0.1
+    zmpCenteringTimeThresh: 0.03
+    zmpTimeMarginBeforeLiftingSpin: 0
+    zmpMaxDistanceFromCenter: 0.02
+    allLinkPositions: false
+    lipSyncMix: false
+  "GraspBar": 
+    graspRobot: 2
+    graspObject: 6
+    objTag2Item: [ -1, 6 ]
+  "KinematicsBar": 
+    mode: FK
+    attitude: false
+    penetrationBlock: true
+    collisionLinkHighlight: false
+    snapDistance: 0.025
+    penetrationBlockDepth: 0.0005
+    lazyCollisionDetectionMode: true
+  "BodyBar": 
+    current: 6
+    stanceWidth: 0.15
+Base: 
+  "MovieGenerator": 
+    directory: 
+    basename: scene
+    begin: 0
+    fps: 30
+    width: 640
+    heiht: 480
+Body: 
+  "BodyMotionEngine": 
+    updateJointVelocities: false
+  "KinematicFaultChecker": 
+    checkJointPositions: true
+    angleMargin: 0
+    translationMargin: 0
+    checkJointVelocities: true
+    velocityLimitRatio: 100
+    targetJoints: all
+    checkSelfCollisions: true
+    onlyTimeBarRange: false
+  "OSGSceneBodyManager": 
+    sceneBodies: 
+      - 
+        bodyItem: 2
+        editable: true
+        centerOfMass: false
+        zmp: false
+      - 
+        bodyItem: 5
+        editable: true
+        centerOfMass: false
+        zmp: false
+      - 
+        bodyItem: 6
+        editable: true
+        centerOfMass: false
+        zmp: false

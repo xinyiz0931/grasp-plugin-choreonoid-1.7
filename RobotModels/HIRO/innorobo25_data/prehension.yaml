@@ -1,0 +1,18 @@
+Prehension: 
+  - 
+    GRCDES: 
+      Edges: [ 0.05, 0.02, 0.02 ]
+      Position: [ -0.197, -0.004, 0.016 ]
+      Rpy: [ -3.14159, 0.261799, -1.5708 ]
+    GRCMAX: 
+      Edges: [ 0.1, 0.04, 0.04 ]
+      Position: [ -0.197, -0.004, 0.016 ]
+      Rpy: [ -3.14159, 0.261799, -1.5708 ]
+    GRCMIN: 
+      Edges: [ 0.01, 0.004, 0.004 ]
+      Position: [ -0.197, -0.004, 0.016 ]
+      Rpy: [ -3.14159, 0.261799, -1.5708 ]
+    Load: [ 0, 1 ]
+    Reference_Motion: prehension
+    name: prehension
+    palmCloseDir: [ -1, 0, 0 ]

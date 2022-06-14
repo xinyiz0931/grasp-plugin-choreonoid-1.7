@@ -1,0 +1,88 @@
+modelFile: main_forTsha.wrl
+
+standardPose: [ 
+0, 0, 0,
+0, 0, -90,  15, 0, 0,
+0, 0, -90, -15, 0, 0,
+0, 0, 0, 0,
+0, 0, 0, 0 ]
+
+
+linkGroup: 
+  - name: HEAD
+    links: [ HEAD_JOINT0, HEAD_JOINT1 ]
+  - name: CHEST
+    links: [ CHEST_JOINT0 ]
+  - name: ARMS
+    links:
+      - name: R-ARM
+        links: [ RARM_JOINT0, RARM_JOINT1, RARM_JOINT2, RARM_JOINT3, RARM_JOINT4, RARM_JOINT5 ]
+      - name: L-ARM
+        links: [ LARM_JOINT0, LARM_JOINT1, LARM_JOINT2, LARM_JOINT3, LARM_JOINT4, LARM_JOINT5 ]
+      - name: L-HAND
+        links: [ LHAND_L, LHAND_R ]
+  - WAIST
+
+defaultIKsetup:
+  WAIST: [ R_ANKLE_R, L_ANKLE_R ]
+  RARM_JOINT5: [ CHEST_JOINT0 ]
+  LARM_JOINT5: [ CHEST_JOINT0 ]
+
+
+symmetricJoints:
+  - [ CHEST_JOINT0 ]
+  - [ HEAD_JOINT0 ]
+  - [ RARM_JOINT0, LARM_JOINT0, -1 ]
+  - [ RARM_JOINT1, LARM_JOINT1     ]
+  - [ RARM_JOINT2, LARM_JOINT2     ]
+  - [ RARM_JOINT3, LARM_JOINT3, -1 ]
+  - [ RARM_JOINT4, LARM_JOINT4     ]
+  - [ RARM_JOINT5, LARM_JOINT5, -1 ]
+
+
+divisionNumberOfPrimitiveGeometries: 16
+
+selfCollisionDetection:
+  excludeTreeDepth: 2
+
+
+graspPluginSetting: 
+  -
+    name: righthand
+    base: WAIST
+    palm: RARM_JOINT5
+    fingerEnds: [  ]
+    dataFilePath: ./Tshademo/right_data
+    prehensionList: [prehension]
+    armStandardPose: [0, 0, 0, -1.57, 0, 0, 0]
+    # armCheckingPose: [0, 0.0165, -0.8163, -1.5291, 0.3601, 0.7459, 0.000]
+    armCheckingPose: [0, 0.0978, -0.73, -2.0986, 0.7559, 1.1863, 0.6204]
+    regraspPoseRel_Yaw: [0, 0.4, -0.4, 0.6, -0.6, 0.7, -0.7, 0.7854, -0.7854, 0.9, -0.9, 1.0, -1.0, 1.1, -1.1, 1.2, -1.2, 1.3, -1.3, 1.5708,  -1.5708, 1.7, -1.7, 2.3562, -2.3562]
+    handName: noHand
+    GrasplotPluginDir: ./
+  -
+    name: lefthand
+    base: WAIST
+    palm: LARM_JOINT5
+    fingerEnds: [ LHAND_L, LHAND_R ]
+    dataFilePath: ./Tshademo/left_data
+    prehensionList: [prehension]
+    armStandardPose: [0, 0, 0, -1.57, 0, 0, 0]
+    armCheckingPose: [0, -0.0165, -0.8163, -1.5291, -0.3601, 0.7459, -0.2378]
+    fingerOpenPose: [0.03, -0.03]
+    fingerOpenPoseOffset: [0.003, -0.003]
+    handName: HIROparalle
+    GrasplotPluginDir: ./
+    selfContactPair: [RARM_JOINT0, RARM_JOINT2, RARM_JOINT0, RARM_JOINT3, RARM_JOINT0, RARM_JOINT4, RARM_JOINT0, RARM_JOINT5, RARM_JOINT0, LARM_JOINT0, RARM_JOINT0, LARM_JOINT1, RARM_JOINT0, LARM_JOINT2, RARM_JOINT0, LARM_JOINT3, RARM_JOINT0, LARM_JOINT4, RARM_JOINT0, LARM_JOINT5, RARM_JOINT0, LHAND_L, RARM_JOINT0, LHAND_R, RARM_JOINT2, RARM_JOINT4,  LARM_JOINT2, LARM_JOINT4, LARM_JOINT4, LHAND_L, LARM_JOINT4, LHAND_R ]
+    mu: 0.8
+    fmax: 15.0
+camera:
+  -
+    name: LHANDCAM
+    type: HAND
+    base: WAIST
+    cameraLink: LARM_JOINT5
+    minDistance: 0.5
+    focal_distance: 0.6
+    maxDistance: 1.0
+    transMatFile: "../../PCL/calibtools/hirolhandcam.txt"

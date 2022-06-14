@@ -1,0 +1,526 @@
+items: 
+  id: 0
+  name: "Root"
+  plugin: Base
+  class: RootItem
+  children: 
+    - 
+      id: 1
+      name: "HIRO"
+      plugin: Body
+      class: BodyItem
+      data: 
+        modelFile: "${PROGRAM_TOP}/extplugin/graspPlugin/RobotModels/HIRO/HIRO4finger.yaml"
+        currentBaseLink: "WAIST"
+        rootPosition: [  0.000000,  0.000000,  0.000000 ]
+        rootAttitude: [ 
+           1.000000,  0.000000,  0.000000, 
+           0.000000,  1.000000,  0.000000, 
+           0.000000,  0.000000,  1.000000 ]
+        jointPositions: [ 
+           0.000000,  0.000000,  0.000000, -0.023888, -0.304457, -1.303574,  0.253163,  0.006295,  0.064284, 
+           0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000, 
+          -0.002000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000 ]
+        initialRootPosition: [  0.000000,  0.000000,  0.000000 ]
+        initialRootAttitude: [ 
+           1.000000,  0.000000,  0.000000, 
+           0.000000,  1.000000,  0.000000, 
+           0.000000,  0.000000,  1.000000 ]
+        initialJointPositions: [ 
+           0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000, 
+           0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000, 
+           0.000000,  0.000000,  0.000000,  0.000000,  0.000000 ]
+        zmp: [  0.000000,  0.000000,  0.000000 ]
+        selfCollisionDetection: false
+    - 
+      id: 2
+      name: "main_withHands"
+      plugin: Body
+      class: BodyItem
+      data: 
+        modelFile: "${PROGRAM_TOP}/extplugin/graspPlugin/RobotModels/HIRO/HIRO_with_provision.yaml"
+        currentBaseLink: "WAIST"
+        rootPosition: [  0.000000,  0.000000,  0.000000 ]
+        rootAttitude: [ 
+           1.000000,  0.000000,  0.000000, 
+           0.000000,  1.000000,  0.000000, 
+           0.000000,  0.000000,  1.000000 ]
+        jointPositions: [ 
+           0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000291, 
+          -0.001745,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000, 
+           0.000000 ]
+        initialRootPosition: [  0.000000,  0.000000,  0.000000 ]
+        initialRootAttitude: [ 
+           1.000000,  0.000000,  0.000000, 
+           0.000000,  1.000000,  0.000000, 
+           0.000000,  0.000000,  1.000000 ]
+        initialJointPositions: [ 
+           0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000, 
+           0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000, 
+           0.000000 ]
+        zmp: [  0.000000,  0.000000,  0.000000 ]
+        selfCollisionDetection: false
+    - 
+      id: 3
+      name: "M0"
+      plugin: Body
+      class: BodyItem
+      data: 
+        modelFile: "testHrp.wrl"
+        currentBaseLink: "WAIST"
+        rootPosition: [  0.000000,  0.000000,  0.000000 ]
+        rootAttitude: [ 
+           1.000000,  0.000000,  0.000000, 
+           0.000000,  1.000000,  0.000000, 
+           0.000000,  0.000000,  1.000000 ]
+        jointPositions: [  ]
+        initialRootPosition: [  0.000000,  0.000000,  0.000000 ]
+        initialRootAttitude: [ 
+           1.000000,  0.000000,  0.000000, 
+           0.000000,  1.000000,  0.000000, 
+           0.000000,  0.000000,  1.000000 ]
+        zmp: [  0.000000,  0.000000,  0.000000 ]
+        selfCollisionDetection: false
+      children: 
+        - 
+          id: 4
+          name: "M0"
+          plugin: Body
+          class: BodyItem
+          data: 
+            modelFile: "testHrp2.wrl"
+            currentBaseLink: "WAIST"
+            rootPosition: [ -0.014000, -0.008000,  0.000000 ]
+            rootAttitude: [ 
+               1.000000,  0.000000,  0.000000, 
+               0.000000,  0.000000,  1.000000, 
+               0.000000, -1.000000,  0.000000 ]
+            jointPositions: [  ]
+            initialRootPosition: [  0.000000,  0.000000,  0.000000 ]
+            initialRootAttitude: [ 
+               1.000000,  0.000000,  0.000000, 
+               0.000000,  1.000000,  0.000000, 
+               0.000000,  0.000000,  1.000000 ]
+            zmp: [  0.000000,  0.000000,  0.000000 ]
+            selfCollisionDetection: false
+          children: 
+            - 
+              id: 5
+              name: "M0"
+              plugin: Body
+              class: BodyItem
+              data: 
+                modelFile: "testHrp4.wrl"
+                currentBaseLink: "WAIST"
+                rootPosition: [ -0.122000,  0.008000, -0.008000 ]
+                rootAttitude: [ 
+                  -1.000000, -0.000000, -0.000000, 
+                   0.000000, -0.000000, -1.000000, 
+                   0.000000, -1.000000,  0.000000 ]
+                jointPositions: [  ]
+                initialRootPosition: [  0.000000,  0.000000,  0.000000 ]
+                initialRootAttitude: [ 
+                   1.000000,  0.000000,  0.000000, 
+                   0.000000,  1.000000,  0.000000, 
+                   0.000000,  0.000000,  1.000000 ]
+                zmp: [  0.000000,  0.000000,  0.000000 ]
+                selfCollisionDetection: false
+    - 
+      id: 6
+      name: "M0"
+      plugin: Body
+      class: BodyItem
+      data: 
+        modelFile: "testHrp5.wrl"
+        currentBaseLink: "WAIST"
+        rootPosition: [ -0.037000,  0.077000, -0.016000 ]
+        rootAttitude: [ 
+           0.000000, -0.000000, -1.000000, 
+           1.000000,  0.000000,  0.000000, 
+           0.000000, -1.000000,  0.000000 ]
+        jointPositions: [  ]
+        initialRootPosition: [  0.000000,  0.000000,  0.000000 ]
+        initialRootAttitude: [ 
+           1.000000,  0.000000,  0.000000, 
+           0.000000,  1.000000,  0.000000, 
+           0.000000,  0.000000,  1.000000 ]
+        zmp: [  0.000000,  0.000000,  0.000000 ]
+        selfCollisionDetection: false
+    - 
+      id: 7
+      name: "M0"
+      plugin: Body
+      class: BodyItem
+      data: 
+        modelFile: "testHrp3.wrl"
+        currentBaseLink: "WAIST"
+        rootPosition: [ -0.053000, -0.041000, -0.008000 ]
+        rootAttitude: [ 
+           0.000000,  0.000000,  1.000000, 
+          -1.000000,  0.000000,  0.000000, 
+           0.000000, -1.000000,  0.000000 ]
+        jointPositions: [  ]
+        initialRootPosition: [  0.000000,  0.000000,  0.000000 ]
+        initialRootAttitude: [ 
+           1.000000,  0.000000,  0.000000, 
+           0.000000,  1.000000,  0.000000, 
+           0.000000,  0.000000,  1.000000 ]
+        zmp: [  0.000000,  0.000000,  0.000000 ]
+        selfCollisionDetection: false
+    - 
+      id: 8
+      name: "M0"
+      plugin: Body
+      class: BodyItem
+      data: 
+        modelFile: "testHrp3.wrl"
+        currentBaseLink: "WAIST"
+        rootPosition: [  0.000000,  0.000000,  0.000000 ]
+        rootAttitude: [ 
+           0.000000,  0.000000,  1.000000, 
+          -1.000000,  0.000000,  0.000000, 
+           0.000000, -1.000000,  0.000000 ]
+        jointPositions: [  ]
+        initialRootPosition: [  0.000000,  0.000000,  0.000000 ]
+        initialRootAttitude: [ 
+           1.000000,  0.000000,  0.000000, 
+           0.000000,  1.000000,  0.000000, 
+           0.000000,  0.000000,  1.000000 ]
+        zmp: [  0.000000,  0.000000,  0.000000 ]
+        selfCollisionDetection: false
+      children: 
+        - 
+          id: 9
+          name: "M0"
+          plugin: Body
+          class: BodyItem
+          data: 
+            modelFile: "testHrp6.wrl"
+            currentBaseLink: "WAIST"
+            rootPosition: [  0.015200, -0.027000, -0.045300 ]
+            rootAttitude: [ 
+               0.000000, -0.000000, -1.000000, 
+               1.000000,  0.000000,  0.000000, 
+               0.000000, -1.000000,  0.000000 ]
+            jointPositions: [  ]
+            initialRootPosition: [  0.000000,  0.000000,  0.000000 ]
+            initialRootAttitude: [ 
+               1.000000,  0.000000,  0.000000, 
+               0.000000,  1.000000,  0.000000, 
+               0.000000,  0.000000,  1.000000 ]
+            zmp: [  0.000000,  0.000000,  0.000000 ]
+            selfCollisionDetection: false
+    - 
+      id: 10
+      name: "M0"
+      plugin: Body
+      class: BodyItem
+      data: 
+        modelFile: "testHrp2.wrl"
+        currentBaseLink: "WAIST"
+        rootPosition: [  0.000000,  0.000000,  0.000000 ]
+        rootAttitude: [ 
+           1.000000,  0.000000,  0.000000, 
+           0.000000,  0.000000,  1.000000, 
+           0.000000, -1.000000,  0.000000 ]
+        jointPositions: [  ]
+        initialRootPosition: [  0.000000,  0.000000,  0.000000 ]
+        initialRootAttitude: [ 
+           1.000000,  0.000000,  0.000000, 
+           0.000000,  1.000000,  0.000000, 
+           0.000000,  0.000000,  1.000000 ]
+        zmp: [  0.000000,  0.000000,  0.000000 ]
+        selfCollisionDetection: false
+      children: 
+        - 
+          id: 11
+          name: "M0"
+          plugin: Body
+          class: BodyItem
+          data: 
+            modelFile: "testHrp6.wrl"
+            currentBaseLink: "WAIST"
+            rootPosition: [  0.000000,  0.015200,  0.000000 ]
+            rootAttitude: [ 
+              -1.000000,  0.000000,  0.000000, 
+              -0.000000, -0.000000, -1.000000, 
+               0.000000, -1.000000,  0.000000 ]
+            jointPositions: [  ]
+            initialRootPosition: [  0.000000,  0.000000,  0.000000 ]
+            initialRootAttitude: [ 
+               1.000000,  0.000000,  0.000000, 
+               0.000000,  1.000000,  0.000000, 
+               0.000000,  0.000000,  1.000000 ]
+            zmp: [  0.000000,  0.000000,  0.000000 ]
+            selfCollisionDetection: false
+views: 
+  "Items": 
+    selected: [ 1 ]
+    checked: [ 1, 10, 11 ]
+    expanded: [ 3, 4, 5, 6, 7, 8, 9, 10 ]
+  "OSG": 
+    mode: edit
+    floorGird: true
+    collisions: true
+    shadow: false
+    floorGridSpan: 10
+    floorGridInterval: 0.5
+    hiPriorityRendering: false
+    camera: 
+      projection: perspetive
+      perspective: [ 40, 1.8554, 0.00152769, 3.11648 ]
+      ortho: [ -1, 1, -1, 1, -1, 1 ]
+      eye: [ 0.553475, -0.102092, 0.201261 ]
+      center: [ 0.287095, -0.386021, -0.719839 ]
+      up: [ -0.630226, -0.671745, 0.389325 ]
+    backgroundColor: [ 0.1, 0.1, 0.3, 1 ]
+    gridColor: [ 0.9, 0.9, 0.9, 1 ]
+  "Scene": 
+    walkthrough: false
+    showCollisions: true
+    wireframe: false
+    defaultHeadLight: true
+    defaultHeadLightIntensity: 0.75
+    worldLight: true
+    worldLightIntensity: 0.5
+    worldLightAmbient: 0.3
+    additionalLights: true
+    floorGrid: true
+    floorGridSpan: 10
+    floorGridInterval: 0.5
+    normalVisualization: false
+    normalLength: 0.01
+    coordinateAxes: true
+    showFPS: false
+    useBufferForPicking: true
+    camera: 
+      current: Perspective
+      eye: [ 4, 2, 1.5 ]
+      direction: [ -0.888889, -0.444444, -0.111111 ]
+      up: [ -0.0993808, -0.0496904, 0.993808 ]
+      fieldOfView: 0.6978
+      near: 0.01
+      far: 10000
+      orthoHeight: 20
+    backgroundColor: [ 0.1, 0.1, 0.3 ]
+    gridColor: [ 0.9, 0.9, 0.9, 1 ]
+  "Multi Value Seq": 
+    mode: view
+    editMode: freeLine
+    original: true
+    velocity: false
+    acceleration: false
+    limits: true
+    grid: true
+    gridWidth: 0.2
+    gridHeight: 0.2
+    lineWidth: 1
+    rulers: false
+    sync: true
+    controlPointStep: 1
+    controlPointOffset: 0
+    controlPointHeighlight: false
+    scrollMode: continuous
+    lower: -10
+    upper: 10
+  "Multi SE3 Seq": 
+    mode: view
+    editMode: freeLine
+    original: true
+    velocity: false
+    acceleration: false
+    limits: true
+    grid: true
+    gridWidth: 0.2
+    gridHeight: 0.2
+    lineWidth: 1
+    rulers: false
+    sync: true
+    controlPointStep: 1
+    controlPointOffset: 0
+    controlPointHeighlight: false
+    scrollMode: continuous
+    lower: -10
+    upper: 10
+    visibleElements: [ 0, 1, 2 ]
+  "Links": 
+    listingMode: "Link List"
+    currentBodyItem: 1
+  "Body / Link": 
+    showRotationMatrix: true
+  "Joint Sliders": 
+    showAllJoints: true
+    jointId: false
+    name: true
+    numColumns: 1
+    spinBox: true
+    slider: true
+    labelOnLeft: true
+    currentBodyItem: 1
+  "Joint Trajectories": 
+    mode: view
+    editMode: freeLine
+    original: true
+    velocity: false
+    acceleration: false
+    limits: true
+    grid: true
+    gridWidth: 0.2
+    gridHeight: 0.2
+    lineWidth: 1
+    rulers: false
+    sync: true
+    controlPointStep: 1
+    controlPointOffset: 0
+    controlPointHeighlight: false
+    scrollMode: continuous
+    lower: -10
+    upper: 10
+  "Multi Affine3 Seq": 
+    mode: view
+    editMode: freeLine
+    original: true
+    velocity: false
+    acceleration: false
+    limits: true
+    grid: true
+    gridWidth: 0.2
+    gridHeight: 0.2
+    lineWidth: 1
+    rulers: false
+    sync: true
+    controlPointStep: 1
+    controlPointOffset: 0
+    controlPointHeighlight: false
+    scrollMode: continuous
+    lower: -10
+    upper: 10
+    visibleElements: [ 0, 1, 2 ]
+  "Pose Roll": 
+    defaultTransitionTime: 0
+    updateAll: true
+    autoUpdate: false
+    timeSync: true
+    listingMode: "Part Tree"
+    timeLength: 10
+    showLipSync: false
+    gridInterval: 1
+toolbars: 
+  "TimeBar": 
+    minTime: 0
+    maxTime: 30
+    frameRate: 100
+    playbackFrameRate: 50
+    idleLoopDrivenMode: false
+    currentTime: 0
+    speedScale: 1
+    syncToOngoingUpdates: false
+  "BodyMotionGenerationBar": 
+    balancer: false
+    autoGeneration: false
+    timeScaleRatio: 1
+    preInitialDuration: 1
+    postFinalDuration: 1
+    onlyTimeBarRange: false
+    makeNewBodyItem: true
+    stealthyStepMode: true
+    stealthyHeightRatioThresh: 2
+    flatLiftingHeight: 0.005
+    flatLandingHeight: 0.005
+    impactReductionHeight: 0.005
+    impactReductionTime: 0.04
+    autoZmp: true
+    minZmpTransitionTime: 0.1
+    zmpCenteringTimeThresh: 0.03
+    zmpTimeMarginBeforeLiftingSpin: 0
+    zmpMaxDistanceFromCenter: 0.02
+    allLinkPositions: false
+    lipSyncMix: false
+  "KinematicsBar": 
+    mode: FK
+    attitude: false
+    penetrationBlock: true
+    collisionLinkHighlight: false
+    snapDistance: 0.025
+    penetrationBlockDepth: 0.0005
+    lazyCollisionDetectionMode: true
+  "BodyBar": 
+    current: 1
+    stanceWidth: 0.15
+Base: 
+  "MovieGenerator": 
+    directory: 
+    basename: scene
+    begin: 0
+    fps: 30
+    width: 640
+    heiht: 480
+Body: 
+  "BodyMotionEngine": 
+    updateJointVelocities: false
+  "KinematicFaultChecker": 
+    checkJointPositions: true
+    angleMargin: 0
+    translationMargin: 0
+    checkJointVelocities: true
+    velocityLimitRatio: 100
+    targetJoints: all
+    checkSelfCollisions: true
+    onlyTimeBarRange: false
+  "OSGSceneBodyManager": 
+    sceneBodies: 
+      - 
+        bodyItem: 2
+        editable: true
+        centerOfMass: false
+        zmp: false
+      - 
+        bodyItem: 3
+        editable: true
+        centerOfMass: false
+        zmp: false
+      - 
+        bodyItem: 4
+        editable: true
+        centerOfMass: false
+        zmp: false
+      - 
+        bodyItem: 7
+        editable: true
+        centerOfMass: false
+        zmp: false
+      - 
+        bodyItem: 6
+        editable: true
+        centerOfMass: false
+        zmp: false
+      - 
+        bodyItem: 5
+        editable: true
+        centerOfMass: false
+        zmp: false
+      - 
+        bodyItem: 8
+        editable: true
+        centerOfMass: false
+        zmp: false
+      - 
+        bodyItem: 9
+        editable: true
+        centerOfMass: false
+        zmp: false
+      - 
+        bodyItem: 10
+        editable: true
+        centerOfMass: false
+        zmp: false
+      - 
+        bodyItem: 11
+        editable: true
+        centerOfMass: false
+        zmp: false
+      - 
+        bodyItem: 1
+        editable: true
+        centerOfMass: false
+        zmp: false

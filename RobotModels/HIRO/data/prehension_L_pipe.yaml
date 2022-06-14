@@ -1,0 +1,30 @@
+Prehension: 
+  - 
+    FingerSetting: 
+      - 
+        Close: [ 0.0010472, 0.0010472, 0.0010472 ]
+        Comp: [ 0, 0, 0 ]
+        Contact: [ 1, 0, 0 ]
+      - 
+        Close: [ 0.0010472, 0.0010472, 0.0010472 ]
+        Comp: [ 0, 0, 0 ]
+        Contact: [ 1, 0, 0 ]
+      - 
+        Close: [ -0.0010472 ]
+        Comp: [ 0 ]
+        Contact: [ 1 ]
+    GRCDES: 
+      Edges: [ 0.1, 0.03, 0.02 ]
+      Position: [ -0.092, 0.0114, 0.038 ]
+      Rpy: [ 2.0944, -0.261799, -1.5708 ]
+    GRCMAX: 
+      Edges: [ 0.2, 0.06, 0.04 ]
+      Position: [ -0.092, 0.0114, 0.038 ]
+      Rpy: [ 2.0944, -0.261799, -1.5708 ]
+    GRCMIN: 
+      Edges: [ 0.02, 0.006, 0.004 ]
+      Position: [ -0.092, 0.0114, 0.038 ]
+      Rpy: [ 2.0944, -0.261799, -1.5708 ]
+    Load: [ 0, 1 ]
+    Reference_Motion: prehension
+    name: prehension_L_pipe

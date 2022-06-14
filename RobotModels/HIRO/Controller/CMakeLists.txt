@@ -1,0 +1,2 @@
+add_cnoid_simple_controller(SimpleGraspController SimpleGraspController.cpp)
+target_link_libraries(SimpleGraspController CnoidPoseSeqPlugin)

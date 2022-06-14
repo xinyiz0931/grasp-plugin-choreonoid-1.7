@@ -1,0 +1,17 @@
+[START]
+Reference_Motion prehension
+palmCloseDir 0 0 0
+GRCdes_Position  0 0 0
+GRCdes_Rpy       0 0 0 
+GRCdes_Edges     0 0 0
+GRCmax_Position  0 0 0
+GRCmax_Rpy       -3.14 0 -1.57
+GRCmax_Edges     0 0 0
+GRCmin_Position  0 0 0
+GRCmin_Rpy       0 0 0 
+GRCmin_Edges     0 0 0
+Max_Load  1.0
+Min_Load  0
+Approach_Vector  1
+GRC_Pos_Deviation  0.0 0.0 0.0 
+[END]

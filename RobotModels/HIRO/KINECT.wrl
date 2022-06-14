@@ -1,0 +1,10 @@
+Shape {
+  geometry Box {
+    size 0.06 0.20 0.05
+  }
+  appearance Appearance {
+    material Material {
+      diffuseColor 0.2 0.2 0.2
+    }
+  }
+}

@@ -1,0 +1,8 @@
+modelFile: RH1.wrl
+
+graspPluginSetting: 
+  base: BASE
+  palm: J6
+  fingerEnds: [ J7 ]
+  prehensionList: [prehension]
+  armStandardPose: [0, 0, 1.57, 0, 0, 0]

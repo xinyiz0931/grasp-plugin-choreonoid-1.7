@@ -1,0 +1,196 @@
+items: 
+  id: 0
+  name: "Root"
+  plugin: Excade
+  class: RootItem
+  children: 
+    - 
+      id: 1
+      name: "HRP1"
+      plugin: Robotics
+      class: BodyItem
+      data: 
+        modelFile: "${PROGRAM_TOP}/ExcadePlugins/Grasp/PA10/PA10.yaml"
+        currentBaseLink: "BASE"
+        rootPosition: [  0.000000,  0.000000,  0.000000 ]
+        rootAttitude: [ 
+           1.000000,  0.000000,  0.000000, 
+           0.000000,  1.000000,  0.000000, 
+           0.000000,  0.000000,  1.000000 ]
+        jointPositions: [  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000 ]
+        selfCollisionDetection: false
+    - 
+      id: 2
+      name: "petfruit"
+      plugin: Robotics
+      class: BodyItem
+      data: 
+        modelFile: "${PROGRAM_TOP}/ExcadePlugins/Grasp/Object/petfruithrp.wrl"
+        currentBaseLink: "WAIST"
+        rootPosition: [ -0.019501, -0.570460,  0.361028 ]
+        rootAttitude: [ 
+           0.119007,  0.864422, -0.488479, 
+          -0.000000,  0.491976,  0.870609, 
+           0.992893, -0.103608,  0.058548 ]
+        jointPositions: [  ]
+        selfCollisionDetection: false
+views: 
+  "Body / Link": 
+    showRotationMatrix: false
+  "Items": 
+    selected: [ 1 ]
+    checked: [ 1, 2 ]
+  "Joint Sliders": 
+    showAllJoints: false
+    jointId: false
+    name: true
+    numColumns: 1
+    spinBox: true
+    slider: true
+    labelOnLeft: true
+    currentBodyItem: 1
+  "Links": 
+    listingMode: "link list"
+    currentBodyItem: 1
+    bodyItems: 
+      - 
+        id: 2
+        selectedLinks: [ 0 ]
+  "Media": 
+    keepAspectRatio: true
+    keepOriginalSize: true
+  "Multi Se3 Seq": 
+    mode: view
+    editMode: freeLine
+    original: true
+    velocity: false
+    acceleration: false
+    limits: true
+    grid: true
+    gridWidth: 0.2
+    gridHeight: 0.2
+    lineWidth: 1
+    rulers: true
+    sync: true
+    controlPointStep: 1
+    controlPointOffset: 0
+    controlPointHeighlight: false
+    scrollMode: continuous
+    lower: -10
+    upper: 10
+    visibleElements: [ 0, 1, 2 ]
+  "Multi Value Seq": 
+    mode: view
+    editMode: freeLine
+    original: true
+    velocity: false
+    acceleration: false
+    limits: true
+    grid: true
+    gridWidth: 0.2
+    gridHeight: 0.2
+    lineWidth: 1
+    rulers: true
+    sync: true
+    controlPointStep: 1
+    controlPointOffset: 0
+    controlPointHeighlight: false
+    scrollMode: continuous
+    lower: -10
+    upper: 10
+  "Pose Roll": 
+    defaultTransitionTime: 0
+    updateAll: true
+    autoUpdate: false
+    timeSync: true
+    defaultWaistHeightAdjustmentOffset: 0
+    listingMode: "part tree"
+    timeLength: 10
+    showLipSync: false
+    gridInterval: 1
+  "Pose Seq": 
+    defaultTransitionTime: 0
+    updateAll: true
+    autoUpdate: false
+    timeSync: true
+    defaultWaistHeightAdjustmentOffset: 0
+    listingMode: "part tree"
+    mode: normal
+    splitMode: vertical
+    splitPosition: 245
+  "Scene": 
+    mode: view
+    floorGrid: true
+    shadow: false
+    collisions: true
+    camera: 
+      perspective: [ 40, 0.00715079, 14.5876 ]
+      eye: [ 0.218637, -1.00978, 0.314516 ]
+      center: [ -0.226649, -0.120982, 0.422951 ]
+      up: [ 0.048571, -0.0969489, 0.994103 ]
+toolbars: 
+  "TimeBar": 
+    minTime: 0
+    maxTime: 30
+    frameRate: 100
+    currentTime: 0
+  "BodyBar": 
+    current: 1
+    stanceWidth: 0.15
+  "PoseSeqBar": 
+    balancer: false
+    autoGeneration: false
+    timeScaleRatio: 1
+    finalPoseDuration: 1
+    balancerTimeMargin: 0
+    balancerIterations: 2
+    boundaryConditionType: 0
+    boundarySmootherType: 3
+    boundarySmootherTime: 0.5
+    plainBalancerMode: true
+    stealthyStepMode: true
+    stealthyDistance: 0.005
+    stealthyVelocity: 0.09
+    isStealthyOnlyRotation: false
+    blendingMarginRatioForCartesinSpaceWithTouching: 0
+    autoZmp: true
+    minZmpTransitionTime: 0.1
+    allLinkPositions: false
+    lipSyncMix: false
+  "KinematicsBar": 
+    mode: IK
+    attitude: true
+    penetrationBlock: true
+    footSnap: true
+  "GraspBar": 
+    current: 1
+Excade: 
+  "MovieGenerator": 
+    folder: 
+    basename: scene
+    begin: 0
+    fps: 30
+    width: 640
+    heiht: 480
+Robotics: 
+  "KinematicFaultChecker": 
+    checkJointPositions: true
+    angleMargin: 0
+    translationMargin: 0
+    checkJointVelocities: true
+    velocityLimitRatio: 100
+    targetJoints: all
+    checkSelfCollisions: true
+  "SceneBodyManager": 
+    sceneBodies: 
+      - 
+        bodyItem: 1
+        editable: true
+        centerOfMass: false
+        zmp: false
+      - 
+        bodyItem: 2
+        editable: true
+        centerOfMass: false
+        zmp: false
+currentFileDialogDirectory: "${PROGRAM_TOP}/ExcadePlugins/Grasp/Object"

@@ -1,0 +1,31 @@
+Transform {
+	translation -0.015 0 0.085
+	children [
+		Shape {
+		  appearance DEF CoverAppearance Appearance {
+        material Material {
+          diffuseColor		 1 1 1
+          specularColor		 0 0 0
+          emissiveColor		 0 0 0
+          shininess				 0.05
+          transparency		 0
+          ambientIntensity 0
+        }
+      }
+			geometry Box {
+				size 0.2 0.25 0.07
+			}
+		}
+	]
+}
+Transform {
+	translation -0.015 0 0.155
+	children [
+		Shape {
+		  appearance USE CoverAppearance
+			geometry Box {
+				size 0.2 0.08 0.075
+			}
+		}
+	]
+}

@@ -1,0 +1,11 @@
+Shape {
+  geometry Cylinder {
+    height 0.055
+    radius 0.05
+  }
+  appearance Appearance {
+    material Material {
+      diffuseColor 0 0 0.5
+    }
+  }
+}

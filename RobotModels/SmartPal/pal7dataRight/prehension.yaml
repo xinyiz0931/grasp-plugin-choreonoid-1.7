@@ -1,0 +1,24 @@
+Prehension:
+-
+  name: tip
+  palmCloseDir: [0, 1, 0]
+  FingerSetting:
+    -
+      Contact:  [1]
+      Comp:     [0]
+      Close:    [0.01]
+  GRCDES:
+    Position:   [0.010, 0.047, -0.190]
+    Rpy:        [-1.57, 0, 0]
+    Edges:      [0.05, 0.05, 0.05]
+  GRCMAX:
+    Position:   [0.010, 0.047, -0.190]
+    Rpy:        [-1.57, 0, 0]
+    Edges:      [0.30, 0.30, 0.10]
+  GRCMIN:
+    Position:   [0.010, 0.047, -0.190]
+    Rpy:        [-1.57, 0, 0]
+    Edges:      [0.01, 0.01, 0.01]
+  Load:         [0, 1.0]
+  Reference_Motion: [prehension]
+

@@ -1,0 +1,112 @@
+# Body pose sequence format version 1.0 defined by Excade-Robotics
+
+type: PoseSeq
+name: "PoseSeqItem"
+refs: 
+  - 
+    time: 0
+    maxTransitionTime: 1
+    refer: 
+      type: Pose
+      name: ""
+      joints: [ 
+        0, 1, 2, 3, 4, 5, 6, 7, 8, 
+        9, 10, 11, 12, 13 ]
+      q: [ 
+        0, 0, 0, 0, 0, 0, 0, 0.141304, 0.738407, 
+        1.79664, -0.0142877, -1.05098, 1.53431, 0.02625 ]
+  - 
+    time: 0
+    maxTransitionTime: 1
+    refer: 
+      type: Pose
+      name: ""
+      joints: [ 
+        0, 1, 2, 3, 4, 5, 6, 7, 8, 
+        9, 10, 11, 12, 13 ]
+      q: [ 
+        0, 0, 0, 0, 0, 0, 0, 0.141304, 0.738407, 
+        1.79664, -0.0142877, -1.05098, 1.53431, 0.02625 ]
+  - 
+    time: 0
+    refer: 
+      type: Pose
+      name: ""
+      joints: [ 
+        0, 1, 2, 3, 4, 5, 6, 7, 8, 
+        9, 10, 11, 12, 13 ]
+      q: [ 
+        0, 0, 0, 0, 0, 0, 0, 0.141304, 0.738407, 
+        1.79664, -0.0142877, -1.05098, 1.53431, 0.02625 ]
+  - 
+    time: 0
+    maxTransitionTime: 1
+    refer: 
+      type: Pose
+      name: ""
+      joints: [ 
+        0, 1, 2, 3, 4, 5, 6, 7, 8, 
+        9, 10, 11, 12, 13 ]
+      q: [ 
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 
+        0, 0, 0, 0, 0 ]
+  - 
+    time: 0
+    refer: 
+      type: Pose
+      name: ""
+      joints: [ 
+        0, 1, 2, 3, 4, 5, 6, 7, 8, 
+        9, 10, 11, 12, 13 ]
+      q: [ 
+        0, 0, 0, 0, 0, 0, 0, 0.228988, 0.866599, 
+        1.25297, 0.144674, -0.566152, -0.243396, 0 ]
+      spJoints: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 
+        10, 11, 12, 13 ]
+      ikLinks: 
+        - 
+          index: 0
+          isBaseLink: true
+          translation: [ 0, 0, 0.1 ]
+          rotation: [ 
+            1, 0, 0, 
+            0, 1, 0, 
+            0, 0, 1 ]
+      zmp: [ 0, 0, 0 ]
+      isZmpStationaryPoint: true
+  - 
+    time: 1
+    maxTransitionTime: 1
+    refer: 
+      type: Pose
+      name: ""
+      joints: [ 
+        0, 1, 2, 3, 4, 5, 6, 7, 8, 
+        9, 10, 11, 12, 13 ]
+      q: [ 
+        0, 0, 0, 0, 0, 0, 0, 0.217212, 0.79289, 
+        1.59865, 0.0800848, -0.909199, 1.4713, 0.00525 ]
+  - 
+    time: 1
+    maxTransitionTime: 1
+    refer: 
+      type: Pose
+      name: ""
+      joints: [ 
+        0, 1, 2, 3, 4, 5, 6, 7, 8, 
+        9, 10, 11, 12, 13 ]
+      q: [ 
+        0, 0, 0, 0, 0, 0, 0, 0.141304, 0.738407, 
+        1.79664, -0.0142877, -1.05098, 1.53431, 0.02625 ]
+  - 
+    time: 1.18
+    maxTransitionTime: 3
+    refer: 
+      type: Pose
+      name: ""
+      joints: [ 
+        0, 1, 2, 3, 4, 5, 6, 7, 8, 
+        9, 10, 11, 12, 13 ]
+      q: [ 
+        0, 0, 0, 0, 0, 0, 0, 0.217212, 0.79289, 
+        1.59865, 0.0800848, -0.909199, 1.4713, 0.00525 ]

@@ -1,0 +1,66 @@
+modelFile: main.wrl
+
+standardPose: [
+0, 0, 0,
+-10, -20, -125, 0, 0, 0,
+-10, -20, -125, 0, 0, 0 ]
+
+
+linkGroup: 
+  - name: HEAD
+    links: [ HEAD_JOINT0, HEAD_JOINT1 ]
+  - name: CHEST
+    links: [ CHEST_JOINT0 ]
+  - name: ARMS
+    links:
+      - name: R-ARM
+        links: [ RARM_JOINT0, RARM_JOINT1, RARM_JOINT2, RARM_JOINT3, RARM_JOINT4, RARM_JOINT5 ]
+      - name: R-HAND
+        links: [ ]
+      - name: L-ARM
+        links: [ LARM_JOINT0, LARM_JOINT1, LARM_JOINT2, LARM_JOINT3, LARM_JOINT4, LARM_JOINT5 ]
+      - name: L-HAND
+        links: [ ]
+  - WAIST
+
+defaultIKsetup:
+  RARM_JOINT5: [ CHEST_JOINT0 ]
+  LARM_JOINT5: [ CHEST_JOINT0 ]
+
+symmetricJoints:
+  - [ CHEST_JOINT0 ]
+  - [ HEAD_JOINT0 ]
+  - [ RARM_JOINT0, LARM_JOINT0, -1 ]
+  - [ RARM_JOINT1, LARM_JOINT1     ]
+  - [ RARM_JOINT2, LARM_JOINT2     ]
+  - [ RARM_JOINT3, LARM_JOINT3, -1 ]
+  - [ RARM_JOINT4, LARM_JOINT4     ]
+  - [ RARM_JOINT5, LARM_JOINT5, -1 ]
+
+
+divisionNumberOfPrimitiveGeometries: 16
+
+selfCollisiondetection:
+  excludeTreeDepth: 2
+
+
+graspPluginSetting: 
+  -
+    base: WAIST
+    palm: RARM_JOINT5
+    fingerEnds: [ ]
+    prehensionList: [prehension2]
+#    armStandardPose: [0, 0, 0, 0, 0, 0]
+    armStandardPose: [0, 0, -2.356, 0, 0, 0]
+#    armStandardPose: [0, 0, -5.356, 0, 0, 0]
+    GrasplotPluginDir: ./
+
+  - 
+    base: WAIST
+    palm: LARM_JOINT5
+    fingerEnds: [ ]
+    prehensionList: [prehension]
+#    armStandardPose: [0, 0, 0, 0, 0, 0]
+    armStandardPose: [0, 0, -125, 0, 0, 0]
+    GrasplotPluginDir: ./
+

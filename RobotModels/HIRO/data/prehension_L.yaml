@@ -1,0 +1,27 @@
+Prehension:
+-
+  name: prehension_L
+  FingerSetting:
+    -
+      Contact:  [0, 0, 1]
+      Comp:     [0, 0, 0]
+      Close:    [0.001, 0.001, 0.001]
+    -
+      Contact:  [1]
+      Comp:     [0]
+      Close:    [-0.001]
+  GRCDES:
+    Position:   [-0.1065, 0.0214, 0.0801]
+    Rpy:        [1.33226, -0.10986, -0.42331]
+    Edges:      [0, 0, 0]
+  GRCMAX:
+    Position:   [-0.1065, 0.0214, 0.0801]
+    Rpy:        [1.33226, -0.10986, -0.42331]
+    Edges:      [0.05, 0.04, 0.06]
+  GRCMIN:
+    Position:   [-0.1065, 0.0214, 0.0801]
+    Rpy:        [1.33226, -0.10986, -0.42331]
+    Edges:      [0, 0, 0]
+  Load:         [0, 1.0]
+  Reference_Motion: [prehension]
+

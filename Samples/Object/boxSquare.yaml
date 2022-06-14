@@ -1,0 +1,39 @@
+modelFile: ./boxSquareHrp.wrl
+objID: 200
+size: [ 0.3, 0.3, 0.087 ]
+offset: [ 0, 0, 0.008 ]
+gridResolution: [ 0.01, 0.01, 0.01 ]
+
+PuttingPosition:
+  -
+    position: [ 0.06, 0.06, 0.008 ]
+  -
+    position: [ 0.06, 0.00, 0.008 ]
+  -
+    position: [ 0.06, -0.06, 0.008 ]
+  -
+    position: [ 0.00, 0.06, 0.008 ]
+  -
+    position: [ 0.00, 0.00, 0.008 ]
+  -
+    position: [ 0.00, -0.06, 0.008 ]
+  -
+    position: [ -0.06, 0.06, 0.008 ]
+  -
+    position: [ -0.06, 0.00, 0.008 ]
+  -
+    position: [ -0.06, -0.06, 0.008 ]
+
+
+EnvCluster:
+  -
+    id: [ 8 ]
+    area: [ 0.09 ]
+    outer_normal: [ 0, 0, 1 ]
+    tangent_vector: [ 1, 0, 0 ]
+    convexhull: [ -0.15, 0.15, 0.008, 0.15, 0.15, 0.008, 0.15, -0.15, 0.008, -0.15, -0.15, 0.008 ]
+    boundary: [ -0.15, -0.15, 0.008, 0.15, -0.15, 0.008, 0.15, 0.15, 0.008, -0.15, 0.15, 0.008 ]
+    convexity: [ 1 ]
+    bounding_box_edge: [ 0.3, 0.3, 0 ]
+    bounding_box_center: [ 0, 0, 0.008 ]
+    is_putting_cluster: [ 1 ]

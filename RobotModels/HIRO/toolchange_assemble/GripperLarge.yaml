@@ -1,0 +1,12 @@
+modelFile: main_gripper_large.wrl
+
+graspPluginHandSetting:
+ palm: PALM
+ fingerEnds: [ HAND_L_L, HAND_L_R ]
+ dataFilePath: hand_large_data
+ prehensionList: [prehension_hand_large]
+ fingerOpenPose: [0.05, -0.05]
+ fingerOpenPoseOffset: [0.003, -0.003]
+ handName: GRIPPERFORLARGE
+ mu: 0.8
+ fmax: 15.0

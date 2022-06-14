@@ -1,0 +1,14 @@
+modelFile: main_righthand.wrl
+
+graspPluginHandSetting:
+ palm: PALM
+ interlink: [ [RHAND_JOINT0, 1.0 , RHAND_JOINT1, -1.0 ] , [RHAND_JOINT2, 1.0 , RHAND_JOINT3, -1.0 ]]
+ fingerEnds: [ RHAND_JOINT1, RHAND_JOINT3 ]
+ dataFilePath: righthand_data
+ prehensionList: [prehension_righthand]
+ fingerOpenPose: [0.9, -0.9, -0.9, 0.9]
+ fingerOpenPoseOffset: [0.17, -0.17, -0.17, 0.17]
+ fingerCloseOffset: [-0.175, 0.1, 0.1, -0.175]
+ handName: HIRORIGHTSAMPLE
+ mu: 0.8
+ fmax: 15.0
