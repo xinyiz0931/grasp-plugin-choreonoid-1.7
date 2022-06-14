@@ -58,7 +58,7 @@ items:
       class: PythonScriptItem
       data: 
         file: "${PROJECT_DIR}/../script/grasp_pa10_ahiru.py"
-        executionOnLoading: false
+        executionOnLoading: true
         backgroundExecution: false
 views: 
   - 
