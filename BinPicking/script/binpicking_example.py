@@ -58,19 +58,14 @@ point_array = get_point_cloud(depth_dir, cfg['pick']['distance'],
 
 # =======================  compute grasp =============================
 
-grasps, img_input = detect_grasp_point(n_grasp=10, 
-                                img_path=img_path, 
-                                margins=cfg['pick']['margin'],
-                                g_params=cfg['graspability'],
-                                h_params=cfg['gripper'])
-cv2.imwrite(crop_path, img_input)
-
-
-# notice_print("load motion file")
-# load_file()
-# notice_print("get planned motion")
-# get_motion()
-
+if point_array is not None: 
+    grasps, img_input = detect_grasp_point(n_grasp=10, 
+                                    img_path=img_path, 
+                                    margins=cfg['pick']['margin'],
+                                    g_params=cfg['graspability'],
+                                    h_params=cfg['gripper'])
+    cv2.imwrite(crop_path, img_input)
+else: grasps = None
 
 # =======================  picking policy ===========================
 if grasps is None:
@@ -101,27 +96,27 @@ else:
                     img_path, calib_path, point_array, cfg["pick"]["margin"])
 
 # draw grasp 
-img_grasp = draw_grasps(grasps, crop_path,  cfg['gripper'], top_idx=best_graspno, color=(73,192,236), top_color=(0,255,0))
-cv2.imwrite(draw_path, img_grasp)
+    img_grasp = draw_grasps(grasps, crop_path,  cfg['gripper'], top_idx=best_graspno, color=(73,192,236), top_color=(0,255,0))
+    cv2.imwrite(draw_path, img_grasp)
 
 # =======================  generate motion ===========================
 
-gen_success = generate_motion(mf_path, [rx,ry,rz,ra], best_action)
-plan_success = load_file() 
-if gen_success and plan_success:
-    nxt = NxtRobot(host='[::]:15005')
-    motion_seq = np.loadtxt(traj_path)
-    for m in motion_seq:
-        if m[1] == 0: 
-            nxt.closeHandToolLft()
-        elif m[1] == 1:
-            nxt.openHandToolLft()
-        nxt.setJointAngles(m[2:27],tm=m[0]) # no hand open-close control
-    main_proc_print("Finish! ")
-else: 
-    warning_print("Planning failed! ")
-# ======================= Record the data ===================s=========
-main_proc_print("Save the results! ")
+    gen_success = generate_motion(mf_path, [rx,ry,rz,ra], best_action)
+    plan_success = load_file() 
+    if gen_success and plan_success:
+        nxt = NxtRobot(host='[::]:15005')
+        motion_seq = np.loadtxt(traj_path)
+        for m in motion_seq:
+            if m[1] == 0: 
+                nxt.closeHandToolLft()
+            elif m[1] == 1:
+                nxt.openHandToolLft()
+            nxt.setJointAngles(m[2:27],tm=m[0]) # no hand open-close control
+        main_proc_print("Finish! ")
+    else: 
+        warning_print("Planning failed! ")
+    # ======================= Record the data ===================s=========
+    main_proc_print("Save the results! ")
 
 # if success_flag:
 #     tdatetime = dt.now()

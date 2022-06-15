@@ -1,3 +1,6 @@
+"""
+Require `python_pa19_grasp_plan_ahiru.cnoid` 
+"""
 from cnoid.Util import *
 from cnoid.Base import *
 from cnoid.BodyPlugin import *
@@ -7,16 +10,15 @@ from cnoid.BinPicking import *
 rootItem = RootItem.instance
 
 # set grasping robot
-robotItem = rootItem.find("main_withHands")
-set_robot(robotItem, arm_id=1)
+robotItem = rootItem.find("PA10")
+set_robot(robotItem)
 
 # set target object
-objItem = rootItem.find("M0")
+objItem = rootItem.find("ahiru")
 set_object(objItem)
 
 # execute grasp
-# grasp()
+grasp()
 
 # execute motion planning
-# plan()
-
+plan()

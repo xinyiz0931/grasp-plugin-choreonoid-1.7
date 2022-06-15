@@ -6,39 +6,35 @@ items:
   children: 
     - 
       id: 1
-      name: "main_withHands"
+      name: "PA10"
       plugin: Body
       class: BodyItem
       data: 
-        modelFile: "${PROGRAM_TOP}/ext/graspPlugin/RobotModels/HIRO/HIRO_with_provision.yaml"
-        currentBaseLink: ""
+        modelFile: "${PROGRAM_TOP}/ext/graspPlugin/RobotModels/PA10/PA10.yaml"
+        currentBaseLink: "BASE"
         rootPosition: [ 0, 0, 0 ]
         rootAttitude: [ 
           1, 0, 0, 
           0, 1, 0, 
           0, 0, 1 ]
-        jointPositions: [ 
-           0.000000,  0.000000,  0.000000,  0.000000, -0.448550, -2.225294,  0.000000,  0.000000,  0.000000,  0.139626, 
-          -0.448550, -2.333505, -0.122173,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000 ]
+        jointPositions: [  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000 ]
         initialRootPosition: [ 0, 0, 0 ]
         initialRootAttitude: [ 
           1, 0, 0, 
           0, 1, 0, 
           0, 0, 1 ]
-        initialJointPositions: [ 
-           0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000, 
-           0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000 ]
+        initialJointPositions: [  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000 ]
         zmp: [ 0, 0, 0 ]
         collisionDetection: true
         selfCollisionDetection: false
         isEditable: true
     - 
       id: 2
-      name: "M0"
+      name: "ahiru"
       plugin: Body
       class: BodyItem
       data: 
-        modelFile: "${PROGRAM_TOP}/ext/graspPlugin/Samples/Object/M0Hrp.wrl"
+        modelFile: "${PROGRAM_TOP}/ext/graspPlugin/Samples/Object/ahiruLowHrp.wrl"
         currentBaseLink: "WAIST"
         rootPosition: [ 0.59, -0.1, 0.55 ]
         rootAttitude: [ 
@@ -57,12 +53,12 @@ items:
         isEditable: true
     - 
       id: 3
-      name: "grasp_hiro.py"
+      name: "pa10_grasp_plan_ahiru.py"
       plugin: Python
       class: PythonScriptItem
       data: 
-        file: "${PROJECT_DIR}/../script/grasp_hiro.py"
-        executionOnLoading: false
+        file: "${PROJECT_DIR}/../script/pa10_grasp_plan_ahiru.py"
+        executionOnLoading: true
         backgroundExecution: false
 views: 
   - 
@@ -76,8 +72,7 @@ views:
     class: ItemTreeView
     mounted: true
     state: 
-      selected: [ 1 ]
-      checked: [ 1, [ 1, "right_arm", "tip" ], [ 1, "left_arm", "tip" ], 2, 3 ]
+      checked: [ 1, 2, 3 ]
   - 
     id: 2
     plugin: Base
@@ -93,7 +88,6 @@ views:
       viewpointControlMode: thirdPerson
       collisionLines: false
       polygonMode: fill
-      cullingMode: enabled
       defaultHeadLight: true
       defaultHeadLightIntensity: 0.75
       headLightLightingFromBack: false
@@ -116,11 +110,9 @@ views:
       normalVisualization: false
       normalLength: 0.01
       coordinateAxes: true
-      fpsTestIteration: 1
       showFPS: false
       enableNewDisplayListDoubleRendering: false
       useBufferForPicking: true
-      upsideDown: false
       cameras: 
         - 
           camera: [ System, Perspective ]
@@ -128,7 +120,7 @@ views:
           fieldOfView: 0.6978
           near: 0.01
           far: 100
-          eye: [ 2.3918925, 1.75371445, 0.912598195 ]
+          eye: [ 2.37066824, 1.69934544, 1.35069196 ]
           direction: [ -0.806727273, -0.580383862, -0.111111111 ]
           up: [ -0.0901948511, -0.0648888884, 0.99380799 ]
         - 
@@ -160,9 +152,8 @@ views:
       numColumns: 1
       spinBox: true
       slider: true
-      dial: false
       labelOnLeft: true
-      currentBodyItem: 1
+      currentBodyItem: 2
   - 
     id: 6
     plugin: Body
@@ -170,14 +161,9 @@ views:
     mounted: true
     state: 
       listingMode: "Link List"
-      currentBodyItem: 1
+      currentBodyItem: 2
   - 
     id: 7
-    plugin: MotionFile
-    class: MotionEdit
-    mounted: true
-  - 
-    id: 8
     plugin: Python
     class: PythonConsoleView
     mounted: true
@@ -193,9 +179,6 @@ toolbars:
     syncToOngoingUpdates: true
     autoExpansion: true
   "GraspBar": 
-    graspRobot: 1
-    graspObject: 2
-    objTag2Item: [ 2 ]
     camera: 0
   "KinematicsBar": 
     mode: AUTO
@@ -206,7 +189,7 @@ toolbars:
     penetrationBlockDepth: 0.0005
     lazyCollisionDetectionMode: true
   "BodyBar": 
-    current: 1
+    current: 2
   "LeggedBodyBar": 
     stanceWidth: 0.15
   "BodyMotionGenerationBar": 
@@ -267,11 +250,6 @@ Body:
     targetJoints: all
     checkSelfCollisions: true
     onlyTimeBarRange: false
-  "SplineFilterDialog": 
-    isInputFrameRateSpecified: false
-    inputFrameRate: 200
-    isOutputFrameRateSpecified: false
-    outputFrameRate: 200
 viewAreas: 
   - 
     type: embedded
@@ -279,12 +257,12 @@ viewAreas:
     contents: 
       type: splitter
       orientation: horizontal
-      sizes: [ 315, 1534 ]
+      sizes: [ 326, 1588 ]
       children: 
         - 
           type: splitter
           orientation: vertical
-          sizes: [ 463, 461 ]
+          sizes: [ 462, 461 ]
           children: 
             - 
               type: pane
@@ -297,16 +275,16 @@ viewAreas:
         - 
           type: splitter
           orientation: vertical
-          sizes: [ 660, 264 ]
+          sizes: [ 659, 264 ]
           children: 
             - 
               type: splitter
               orientation: horizontal
-              sizes: [ 665, 865 ]
+              sizes: [ 688, 894 ]
               children: 
                 - 
                   type: pane
-                  views: [ 4, 5, 7 ]
+                  views: [ 4, 5 ]
                   current: 4
                 - 
                   type: pane
@@ -314,7 +292,7 @@ viewAreas:
                   current: 3
             - 
               type: pane
-              views: [ 2, 8 ]
+              views: [ 2, 7 ]
               current: 2
 layoutOfToolBars: 
   rows: 
@@ -331,4 +309,5 @@ layoutOfToolBars:
       - { name: "GraspBar", x: 234, priority: 0 }
     - 
       - { name: "BodyMotionGenerationBar", x: 0, priority: 0 }
-      - { name: "MotionFileBar", x: 145, priority: 0 }
+      - { name: "GraspRtcBar", x: 137, priority: 0 }
+      - { name: "GraspDataGenBar", x: 399, priority: 0 }
