@@ -54,4 +54,31 @@ Click the `play` button to check if the motion is planned
 
 ### Usage
 
-In 
+#### Structures
+
+See `ext/graspPlugin/BinPicking/project/`, if a `.cnoid` project's name starts with `python_`, then it is a project containing a python script in `ext/graspPlugin/BinPicking/script/`. The python script which it will execute has a similar name as itself but starts with . For example, 
+
+Project: `ext/graspPlugin/BinPicking/project/python_pa10_grasp_plan_ahiru.cnoid`\\
+Script: `ext/graspPlugin/BinPicking/script/script_pa10_grasp_plan_ahiru.py`
+
+In this case, you can execute the python-script-inside project via: 
+```
+bin/choreonoid ext/graspPlugin/BinPicking/project/python_pa10_grasp_plan_ahiru.cnoid
+```
+
+Also, `ext/graspPlugin/BinPicking/project/`, if a `.cnoid` project's name doesn't containing `python_`, then it can be directly executed via: 
+```
+bin/choreonoid -p ext/graspPlugin/BinPicking/script/pa10_grasp_plan_ahiru.py
+```
+
+#### BinPicking plugin functions (NEW)
+
+```
+plan_success = load_motionfile(mf_path)
+# plan_success is 0 or 1
+motion_seq = get_motion()
+num_seq = int(len(motion_seq)/21)
+motion_seq = np.reshape(motion_seq, (num_seq, 21))
+# motion_seq is a list that can be reshaped to a (Nx21) array, same with the old `motion_ik.dat`
+# Reshaped motion_seq can be execute on the robot
+```
