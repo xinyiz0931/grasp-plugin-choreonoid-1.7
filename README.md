@@ -58,7 +58,8 @@ Click the `play` button to check if the motion is planned
 
 See `ext/graspPlugin/BinPicking/project/`, if a `.cnoid` project's name starts with `python_`, then it is a project containing a python script in `ext/graspPlugin/BinPicking/script/`. The python script which it will execute has a similar name as itself but starts with . For example, 
 
-Project: `ext/graspPlugin/BinPicking/project/python_pa10_grasp_plan_ahiru.cnoid`\\
+Project: `ext/graspPlugin/BinPicking/project/python_pa10_grasp_plan_ahiru.cnoid`
+
 Script: `ext/graspPlugin/BinPicking/script/script_pa10_grasp_plan_ahiru.py`
 
 In this case, you can execute the python-script-inside project via: 
@@ -73,9 +74,15 @@ bin/choreonoid -p ext/graspPlugin/BinPicking/script/pa10_grasp_plan_ahiru.py
 
 #### BinPicking plugin functions (NEW)
 
+I revised the motion planning part. Two functions can be used
+
+- load_motionfile()
+- get_motion()
+
 ```
 plan_success = load_motionfile(mf_path)
 # plan_success is 0 or 1
+
 motion_seq = get_motion()
 num_seq = int(len(motion_seq)/21)
 motion_seq = np.reshape(motion_seq, (num_seq, 21))
