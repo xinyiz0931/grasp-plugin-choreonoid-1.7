@@ -46,6 +46,12 @@ bin/chorenoid ext/graspPlugin/BinPicking/project/binpicking.cnoid
 7. Test if the python script can be loaded
 ```
 cd choreonoid-1.7.0
-bin/choreonoid -p /graspPlugin/BinPicking/project/demo_pa10_ahiru_python.cnoid
+bin/choreonoid -p ext/graspPlugin/BinPicking/script/pa10_grasp_plan_ahiru.py
+(or)
+bin/choreonoid ext/graspPlugin/BinPicking/project/python_pa10_grasp_plan_ahiru.cnoid
 ```
 Click the `play` button to check if the motion is planned
+
+### Usage
+
+In 
