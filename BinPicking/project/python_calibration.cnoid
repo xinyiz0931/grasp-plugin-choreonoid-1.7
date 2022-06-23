@@ -12,13 +12,12 @@ items:
       data: 
         modelFile: "${PROGRAM_TOP}/ext/graspPlugin/RobotModels/HIRO/HIRO_with_provision.yaml"
         currentBaseLink: ""
-        rootPosition: [ 0, 0, 0 ]
-        rootAttitude: [ 
+        rootPosition: [ 0, 0, 0   rootAttitude: [ 
           1, 0, 0, 
           0, 1, 0, 
-          -0, 0, 1 ]
+          0, 0, 1 ]
         jointPositions: [ 
-           0.000000,  0.000000,  0.000000, -0.174533, -0.448550, -2.225294,  0.000000,  0.000000,  0.000000,  0.401426, 
+           0.000000,  0.000000,  0.000000,  0.000000, -0.448550, -2.225294,  0.000000,  0.000000,  0.000000,  0.139626, 
           -0.448550, -2.333505, -0.122173,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000 ]
         initialRootPosition: [ 0, 0, 0 ]
         initialRootAttitude: [ 
@@ -40,11 +39,11 @@ items:
       data: 
         modelFile: "${PROGRAM_TOP}/ext/graspPlugin/Samples/Object/M0Hrp.wrl"
         currentBaseLink: "WAIST"
-        rootPosition: [ -0.0596527109, 0.557434984, 0.0390833805 ]
+        rootPosition: [ 0.5, 0, -0.07 ]
         rootAttitude: [ 
-          -0.208980305, -0.977918985, 0.00130038335, 
-          0.977917981, -0.20898232, -0.00167674402, 
-          0.00191147694, 0.000921261782, 0.999997749 ]
+          1, 0, 0, 
+          0, 1, 0, 
+          0, 0, 1 ]
         jointPositions: [  ]
         initialRootPosition: [ 0, 0, 0 ]
         initialRootAttitude: [ 
@@ -103,11 +102,11 @@ items:
         isEditable: false
     - 
       id: 5
-      name: "binpicking_example.py"
+      name: "script_calibration.py"
       plugin: Python
       class: PythonScriptItem
       data: 
-        file: "${PROGRAM_TOP}/ext/graspPlugin/BinPicking/script/binpicking_example.py"
+        file: "${PROGRAM_TOP}/ext/graspPlugin/BinPicking/script/script_calibration.py"
         executionOnLoading: true
         backgroundExecution: false
 views: 
@@ -122,7 +121,7 @@ views:
     class: ItemTreeView
     mounted: true
     state: 
-      selected: [ 3 ]
+      selected: [ 1 ]
       checked: [ 1, [ 1, "right_arm", "tip" ], [ 1, "left_arm", "tip" ], 3, 4, 5 ]
       expanded: [ 1 ]
   - 
@@ -209,7 +208,7 @@ views:
       slider: true
       dial: false
       labelOnLeft: true
-      currentBodyItem: 3
+      currentBodyItem: 1
   - 
     id: 6
     plugin: Body
@@ -217,7 +216,7 @@ views:
     mounted: true
     state: 
       listingMode: "Link List"
-      currentBodyItem: 3
+      currentBodyItem: 1
       bodyItems: 
         - 
           id: 1
@@ -236,34 +235,6 @@ views:
     class: PythonConsoleView
     mounted: true
 toolbars: 
-  "TimeBar": 
-    minTime: 0
-    maxTime: 30
-    frameRate: 100
-    playbackFrameRate: 50
-    idleLoopDrivenMode: false
-    currentTime: 0
-    speedScale: 5
-    syncToOngoingUpdates: true
-    autoExpansion: true
-  "GraspBar": 
-    graspRobot: 1
-    graspObject: 2
-    graspEnv: [ 3 ]
-    objTag2Item: [ 2 ]
-    camera: 0
-  "KinematicsBar": 
-    mode: AUTO
-    enablePositionDragger: true
-    penetrationBlock: false
-    collisionLinkHighlight: false
-    snapDistance: 0.025
-    penetrationBlockDepth: 0.0005
-    lazyCollisionDetectionMode: true
-  "BodyBar": 
-    current: 3
-  "LeggedBodyBar": 
-    stanceWidth: 0.15
   "BodyMotionGenerationBar": 
     autoGenerationForNewBody: true
     balancer: false
@@ -297,6 +268,33 @@ toolbars:
     waistHeightRelaxation: false
     gravity: 9.8
     dynamicsTimeRatio: 1
+  "TimeBar": 
+    minTime: 0
+    maxTime: 30
+    frameRate: 100
+    playbackFrameRate: 50
+    idleLoopDrivenMode: false
+    currentTime: 0
+    speedScale: 1
+    syncToOngoingUpdates: true
+    autoExpansion: true
+  "GraspBar": 
+    graspRobot: 1
+    graspObject: 2
+    objTag2Item: [ 2 ]
+    camera: 0
+  "LeggedBodyBar": 
+    stanceWidth: 0.15
+  "KinematicsBar": 
+    mode: AUTO
+    enablePositionDragger: true
+    penetrationBlock: false
+    collisionLinkHighlight: false
+    snapDistance: 0.025
+    penetrationBlockDepth: 0.0005
+    lazyCollisionDetectionMode: true
+  "BodyBar": 
+    current: 1
 Body: 
   "BodyMotionEngine": 
     updateJointVelocities: false
@@ -362,7 +360,7 @@ viewAreas:
         - 
           type: splitter
           orientation: vertical
-          sizes: [ 463, 461 ]
+          sizes: [ 660, 264 ]
           children: 
             - 
               type: splitter

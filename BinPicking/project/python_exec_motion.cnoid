@@ -16,9 +16,9 @@ items:
         rootAttitude: [ 
           1, 0, 0, 
           0, 1, 0, 
-          0, 0, 1 ]
+          -0, 0, 1 ]
         jointPositions: [ 
-           0.000000,  0.000000,  0.000000,  0.000000, -0.448550, -2.225294,  0.000000,  0.000000,  0.000000,  0.139626, 
+           0.000000,  0.000000,  0.000000, -0.174533, -0.448550, -2.225294,  0.000000,  0.000000,  0.000000,  0.401426, 
           -0.448550, -2.333505, -0.122173,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000 ]
         initialRootPosition: [ 0, 0, 0 ]
         initialRootAttitude: [ 
@@ -40,7 +40,30 @@ items:
       data: 
         modelFile: "${PROGRAM_TOP}/ext/graspPlugin/Samples/Object/M0Hrp.wrl"
         currentBaseLink: "WAIST"
-        rootPosition: [ 0.59, -0.1, 0.55 ]
+        rootPosition: [ -0.0596527109, 0.557434984, 0.0390833805 ]
+        rootAttitude: [ 
+          -0.208980305, -0.977918985, 0.00130038335, 
+          0.977917981, -0.20898232, -0.00167674402, 
+          0.00191147694, 0.000921261782, 0.999997749 ]
+        jointPositions: [  ]
+        initialRootPosition: [ 0, 0, 0 ]
+        initialRootAttitude: [ 
+          1, 0, 0, 
+          0, 1, 0, 
+          0, 0, 1 ]
+        zmp: [ 0, 0, 0 ]
+        collisionDetection: true
+        selfCollisionDetection: false
+        isEditable: true
+    - 
+      id: 3
+      name: "table-can"
+      plugin: Body
+      class: BodyItem
+      data: 
+        modelFile: "${PROGRAM_TOP}/ext/graspPlugin/Samples/Object/table-canhrp.wrl"
+        currentBaseLink: "table-WAIST"
+        rootPosition: [ 0.5, 0, -0.95 ]
         rootAttitude: [ 
           1, 0, 0, 
           0, 1, 0, 
@@ -56,13 +79,36 @@ items:
         selfCollisionDetection: false
         isEditable: true
     - 
-      id: 3
-      name: "script_hiro_grasp_plan_box.py"
+      id: 4
+      name: "box"
+      plugin: Body
+      class: BodyItem
+      data: 
+        modelFile: "${PROGRAM_TOP}/ext/graspPlugin/RobotModels/HIRO/PCbox.wrl"
+        currentBaseLink: "WAIST"
+        rootPosition: [ 0, 0, -0.4 ]
+        rootAttitude: [ 
+          1, 0, 0, 
+          0, 1, 0, 
+          0, 0, 1 ]
+        jointPositions: [  ]
+        initialRootPosition: [ 0, 0, 0.4 ]
+        initialRootAttitude: [ 
+          1, 0, 0, 
+          0, 1, 0, 
+          0, 0, 1 ]
+        zmp: [ 0, 0, 0 ]
+        collisionDetection: true
+        selfCollisionDetection: false
+        isEditable: false
+    - 
+      id: 5
+      name: "script_exec_motion.py"
       plugin: Python
       class: PythonScriptItem
       data: 
-        file: "${PROJECT_DIR}/../script/script_hiro_grasp_plan_box.py"
-        executionOnLoading: true
+        file: "${PROGRAM_TOP}/ext/graspPlugin/BinPicking/script/script_exec_motion.py"
+        executionOnLoading: false 
         backgroundExecution: false
 views: 
   - 
@@ -76,8 +122,9 @@ views:
     class: ItemTreeView
     mounted: true
     state: 
-      selected: [ 1 ]
-      checked: [ 1, [ 1, "right_arm", "tip" ], [ 1, "left_arm", "tip" ], 2, 3 ]
+      selected: [ 3 ]
+      checked: [ 1, [ 1, "right_arm", "tip" ], [ 1, "left_arm", "tip" ], 3, 4, 5 ]
+      expanded: [ 1 ]
   - 
     id: 2
     plugin: Base
@@ -128,9 +175,9 @@ views:
           fieldOfView: 0.6978
           near: 0.01
           far: 100
-          eye: [ 2.3918925, 1.75371445, 0.912598195 ]
-          direction: [ -0.806727273, -0.580383862, -0.111111111 ]
-          up: [ -0.0901948511, -0.0648888884, 0.99380799 ]
+          eye: [ 2.7977075, 1.25701235, 0.632840636 ]
+          direction: [ -0.885175967, -0.399174303, -0.239004988 ]
+          up: [ -0.217875876, -0.09825216, 0.97101834 ]
         - 
           camera: [ System, Orthographic ]
           orthoHeight: 20
@@ -162,7 +209,7 @@ views:
       slider: true
       dial: false
       labelOnLeft: true
-      currentBodyItem: 1
+      currentBodyItem: 3
   - 
     id: 6
     plugin: Body
@@ -170,7 +217,14 @@ views:
     mounted: true
     state: 
       listingMode: "Link List"
-      currentBodyItem: 1
+      currentBodyItem: 3
+      bodyItems: 
+        - 
+          id: 1
+          selectedLinks: [ 0 ]
+        - 
+          id: 3
+          selectedLinks: [ 0 ]
   - 
     id: 7
     plugin: MotionFile
@@ -189,12 +243,13 @@ toolbars:
     playbackFrameRate: 50
     idleLoopDrivenMode: false
     currentTime: 0
-    speedScale: 1
+    speedScale: 5
     syncToOngoingUpdates: true
     autoExpansion: true
   "GraspBar": 
     graspRobot: 1
     graspObject: 2
+    graspEnv: [ 3 ]
     objTag2Item: [ 2 ]
     camera: 0
   "KinematicsBar": 
@@ -206,7 +261,7 @@ toolbars:
     penetrationBlockDepth: 0.0005
     lazyCollisionDetectionMode: true
   "BodyBar": 
-    current: 1
+    current: 3
   "LeggedBodyBar": 
     stanceWidth: 0.15
   "BodyMotionGenerationBar": 
@@ -257,6 +312,16 @@ Body:
         showCenterOfMass: false
         showPpcom: false
         showZmp: false
+      - 
+        bodyItem: 3
+        showCenterOfMass: false
+        showPpcom: false
+        showZmp: false
+      - 
+        bodyItem: 4
+        showCenterOfMass: false
+        showPpcom: false
+        showZmp: false
     staticModelEditing: true
   "KinematicFaultChecker": 
     checkJointPositions: true
@@ -297,12 +362,12 @@ viewAreas:
         - 
           type: splitter
           orientation: vertical
-          sizes: [ 660, 264 ]
+          sizes: [ 463, 461 ]
           children: 
             - 
               type: splitter
               orientation: horizontal
-              sizes: [ 665, 865 ]
+              sizes: [ 815, 715 ]
               children: 
                 - 
                   type: pane

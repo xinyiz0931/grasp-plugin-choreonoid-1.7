@@ -1,5 +1,6 @@
 #include <iostream>
 #include <fstream>
+#include <math.h>
 #include <cnoid/PyBase>
 #include <cnoid/BodyItem>
 #include <cnoid/MessageView>
@@ -10,7 +11,8 @@
 #include "../../Grasp/PlanInterface.h"
 #include "../../MotionFile/MotionFileControl.h"
 #include "../../MotionFile/MotionFileBar.h"
-
+#include <pybind11/stl.h> // vector
+#include <pybind11/operators.h>//operator
 using namespace std;
 using namespace cnoid;
 using namespace grasp;
@@ -21,8 +23,6 @@ namespace py = pybind11;
 namespace {
 int add (int j) {
 	int i = 1994;
-	// i = TrajectoryPlanner::testPlanning();
-	// TrajectoryPlanner::doTrajectoryPlanning();
 	return i + j;
 }
 
@@ -41,28 +41,51 @@ void Plan_motion() {
 		cnoid::MessageView::instance()->cout() << "Trajectory Planning is failed" << endl;
 
 }
-bool Load_motion_file() {
+bool Load_motion_file(string motionfilename) {
 	
 	static MotionFileControl* instance = new MotionFileControl();
-	string motionfile;
-	motionfile = "./ext/bpbot/data/motion/motion.dat";
+	// string motionfile;
+	// motionfile = "./ext/bpbot/data/motion/motion.dat";
 	FILE *fp;
 	bool success;
-	if( (fp = fopen((motionfile).c_str(), "r")) != NULL ){
-		success = MotionFileControl::instance()->LoadFromMotionFile(motionfile);
+	if( (fp = fopen((motionfilename).c_str(), "r")) != NULL ){
+		success = MotionFileControl::instance()->LoadFromMotionFile(motionfilename);
 		fclose(fp);
 	}
 	cnoid::MessageView::instance()->cout() << "Loaded motion file: " << success << endl;
 
 	return success;
 }
-void Get_motion() {
+vector<double> Get_motion() {
+	vector<double> seqs;
 	PlanBase * tc = PlanBase::instance();
 	int size = tc->graspMotionSeq.size();
-	cnoid::MessageView::instance()->cout() << "[ xinyi test ] Size is " << size << endl;
+
+	int stateLft_old = tc->NOT_GRASPING;
+
 	for (int i; i < size; i++) {
-		cout << "motionTime: " << tc->graspMotionSeq[i].motionTime << endl;
+		// start to create motion sequence
+		seqs.push_back(tc->graspMotionSeq[i].motionTime);
+
+		int gstateLft = tc->graspMotionSeq[i].graspingState2;
+	
+		// 0: close , 1: open, 2. nothing, stay same
+		if (gstateLft == tc->GRASPING && stateLft_old == tc->UNDER_GRASPING) 
+			seqs.push_back(0);
+		else if (gstateLft == tc->NOT_GRASPING && stateLft_old == tc->UNDER_GRASPING) 
+			seqs.push_back(1);
+		else if (gstateLft == tc->UNDER_GRASPING && stateLft_old == tc->NOT_GRASPING)
+			seqs.push_back(1);
+		else 
+			seqs.push_back(2);
+		
+		for (int j=0;j<tc->bodyItemRobot()->body()->numJoints();j++) {
+			seqs.push_back(tc->graspMotionSeq[i].jointSeq[j]*180.0/M_PI); // radian to degree
+		}
+		stateLft_old = gstateLft;
 	}
+	cnoid::MessageView::instance()->cout() << "Get all joints data! " << endl;
+	return seqs;	
 }
 }
 
@@ -72,7 +95,7 @@ void exportPlanning(py::module m) {
 	m.doc() = "pybind11 motion planning";
 	m.def("add", &add);
 	m.def("plan", &Plan_motion);
-	m.def("load_file", &Load_motion_file);
+	m.def("load_motionfile", &Load_motion_file);
 	m.def("get_motion", &Get_motion);
 }
 }

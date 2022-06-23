@@ -50,21 +50,21 @@ void Plan_Motion() {
 		cnoid::MessageView::instance()->cout() << "Trajectory Planning is failed" << endl;
 
 }
-void Load_Motion_File() {
-	cout << "initial pose (xinyi printing)"  <<endl;
-	cout << PlanBase::instance()->bodyItemRobot()->body()->link(0)->p().transpose() <<endl;
+// void Load_Motion_File() {
+// 	cout << "initial pose (xinyi printing)"  <<endl;
+// 	cout << PlanBase::instance()->bodyItemRobot()->body()->link(0)->p().transpose() <<endl;
 	
-	static MotionFileControl* instance = new MotionFileControl();
-	string motionfile;
-	motionfile = "./ext/bpbot/data/motion/motion.dat";
-	FILE *fp;
+// 	static MotionFileControl* instance = new MotionFileControl();
+// 	string motionfile;
+// 	motionfile = "./ext/bpbot/data/motion/motion.dat";
+// 	FILE *fp;
 
-	if( (fp = fopen((motionfile).c_str(), "r")) != NULL ){
-		MotionFileControl::instance()->LoadFromMotionFile(motionfile);
-		fclose(fp);
-	}
-	cnoid::MessageView::instance()->cout() << "Loaded motion file" << endl;
-}
+// 	if( (fp = fopen((motionfile).c_str(), "r")) != NULL ){
+// 		MotionFileControl::instance()->LoadFromMotionFile(motionfile);
+// 		fclose(fp);
+// 	}
+// 	cnoid::MessageView::instance()->cout() << "Loaded motion file" << endl;
+// }
 }
 
 namespace cnoid {
@@ -74,7 +74,7 @@ void exportPlanning(py::module m) {
 	m.def("add", &add);
 	m.def("set_test", &Set_Test, py::arg("bodyitem"), py::arg("arm_id")=0);
 	m.def("plan_motion", &Plan_Motion);
-	m.def("load_file", &Load_Motion_File);
+	// m.def("load_file", &Load_Motion_File);
 
 }
 }

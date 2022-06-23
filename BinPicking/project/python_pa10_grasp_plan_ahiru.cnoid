@@ -53,11 +53,11 @@ items:
         isEditable: true
     - 
       id: 3
-      name: "pa10_grasp_plan_ahiru.py"
+      name: "script_pa10_grasp_plan_ahiru.py"
       plugin: Python
       class: PythonScriptItem
       data: 
-        file: "${PROJECT_DIR}/../script/pa10_grasp_plan_ahiru.py"
+        file: "${PROJECT_DIR}/../script/script_pa10_grasp_plan_ahiru.py"
         executionOnLoading: true
         backgroundExecution: false
 views: 

@@ -1,6 +1,9 @@
 """
 Require `python_pa19_grasp_plan_ahiru.cnoid` 
 """
+import sys
+print("----------------------------")
+print(sys.version)
 from cnoid.Util import *
 from cnoid.Base import *
 from cnoid.BodyPlugin import *

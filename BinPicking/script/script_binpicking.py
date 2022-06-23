@@ -1,4 +1,3 @@
-from logging import warning
 import os
 import random
 
@@ -15,15 +14,11 @@ from bpbot.robotcon.nxt.nxtrobot_client import NxtRobot
 
 import timeit
 import numpy as np
-from bpbot.utils import main_proc_print, warning_print, notice_print
-
 start = timeit.default_timer()
 
 # ========================== define path =============================
 topdir = executableTopDirectory
 
-# plan_motion()
-# load_file()
 # get root dir
 #root_dir = os.path.abspath("./")
 root_dir = os.path.join(topdir, "ext/bpbot/")
@@ -91,7 +86,6 @@ else:
         best_grasp = grasps[0]
         best_action = random.sample(list(range(6)),1)[0]
 
-    # rx,ry,rz,ra = transform_coordinates(best_grasp, point_array, img_path, calib_path, cfg.width, cfg.margins)
     (rx,ry,rz,ra) = transform_image_to_robot((best_grasp[1],best_grasp[2],best_grasp[4]),
                     img_path, calib_path, point_array, cfg["pick"]["margin"])
 
@@ -102,17 +96,22 @@ else:
 # =======================  generate motion ===========================
 
     gen_success = generate_motion(mf_path, [rx,ry,rz,ra], best_action)
-    plan_success = load_file() 
-    if gen_success and plan_success:
+    plan_success = load_motionfile(mf_path)
+    # if gen_success and plan_success:
+    if plan_success:
         nxt = NxtRobot(host='[::]:15005')
-        motion_seq = np.loadtxt(traj_path)
+        motion_seq = get_motion()
+        num_seq = int(len(motion_seq)/21)
+        print(f"Total {num_seq} motion sequences! ")
+        motion_seq = np.reshape(motion_seq, (num_seq, 21))
         for m in motion_seq:
             if m[1] == 0: 
                 nxt.closeHandToolLft()
             elif m[1] == 1:
                 nxt.openHandToolLft()
-            nxt.setJointAngles(m[2:27],tm=m[0]) # no hand open-close control
+            nxt.setJointAngles(m[2:21],tm=m[0]) # no hand open-close control
         main_proc_print("Finish! ")
+        
     else: 
         warning_print("Planning failed! ")
     # ======================= Record the data ===================s=========
