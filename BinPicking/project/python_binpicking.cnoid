@@ -107,8 +107,8 @@ items:
       plugin: Python
       class: PythonScriptItem
       data: 
-        file: "${PROGRAM_TOP}/ext/graspPlugin/BinPicking/script/script_binpicking.py"
-        executionOnLoading: true 
+        file: "${PROGRAM_TOP}/ext/graspPlugin/BinPicking/script/script_pick.py"
+        executionOnLoading: false 
         backgroundExecution: false
 views: 
   - 

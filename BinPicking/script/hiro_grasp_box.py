@@ -15,15 +15,18 @@ robotItem = BodyItem()
 robotItem.load(topdir+"/ext/graspPlugin/RobotModels/HIRO/HIRO_with_provision.yaml")
 
 rootItem.addChildItem(robotItem)
-print('---------------- TEST -----------------')
-print(robotItem.body.joint(4).q)
-#ItemTreeView.instance().checkItem(robotItem)
+
+init_joint_position = [ 
+           0.000000,  0.000000,  0.000000, -0.174533, -0.448550, -2.225294,  0.000000,  0.000000,  0.000000,  0.401426, 
+          -0.448550, -2.333505, -0.122173,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000 ]
+
+set_joint_position(robotItem, init_joint_position)
 ItemTreeView.instance.checkItem(robotItem)
 
 # load object model
 objItem = BodyItem()
-objItem.load(topdir + "/ext/graspPlugin/Samples/Object/M0Hrp.wrl")
-# objItem.load(topdir + "/ext/graspPlugin/Samples/Object/ahiruLowHrp.wrl")
+# objItem.load(topdir + "/ext/graspPlugin/Samples/Object/M0Hrp.wrl")
+objItem.load(topdir + "/ext/graspPlugin/Samples/Object/ahiruLowHrp.wrl")
 objItem.body.rootLink.setTranslation([0.50, 0.20, 0.20])
 rootItem.addChildItem(objItem)
 ItemTreeView.instance.checkItem(objItem)
@@ -34,4 +37,9 @@ set_robot(robotItem, arm_id=1)
 set_object(objItem)
 # execute grasp
 grasp()
-# plan()
+plan()
+print('----------------------------------')
+joint_q = []
+for i in range(19):
+    joint_q.append(robotItem.body.joint(i).q)
+print(joint_q)

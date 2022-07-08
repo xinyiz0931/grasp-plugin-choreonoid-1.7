@@ -1,12 +1,18 @@
 import os
 import random
-
-from cnoid.Util import *
-from cnoid.Base import *
-from cnoid.Body import *
-from cnoid.BodyPlugin import *
-from cnoid.GraspPlugin import *
-from cnoid.BinPicking import *
+import importlib
+spec = importlib.util.find_spec("cnoid")
+found_cnoid = spec is not None
+if found_cnoid: 
+    from cnoid.Util import *
+    from cnoid.Base import *
+    from cnoid.Body import *
+    from cnoid.BodyPlugin import *
+    from cnoid.GraspPlugin import *
+    from cnoid.BinPicking import *
+    topdir = executableTopDirectory
+else: 
+    topdir = "/home/hlab/choreonoid-1.7.0/"
 
 from bpbot.binpicking import *
 from bpbot.config import BinConfig
@@ -17,7 +23,6 @@ import numpy as np
 start = timeit.default_timer()
 
 # ========================== define path =============================
-topdir = executableTopDirectory
 
 # get root dir
 #root_dir = os.path.abspath("./")
@@ -94,7 +99,7 @@ else:
     cv2.imwrite(draw_path, img_grasp)
 
 # =======================  generate motion ===========================
-
+if found_cnoid: 
     gen_success = generate_motion(mf_path, [rx,ry,rz,ra], best_action)
     plan_success = load_motionfile(mf_path)
     # if gen_success and plan_success:
