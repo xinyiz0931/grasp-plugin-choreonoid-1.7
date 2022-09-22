@@ -10,16 +10,17 @@ items:
       plugin: Body
       class: BodyItem
       data: 
-        modelFile: "${PROGRAM_TOP}/ext/graspPlugin/RobotModels/HIRO/HIRO_with_provision.yaml"
+        modelFile: "${PROGRAM_TOP}/ext/graspPlugin/RobotModels/HIRO/HIRO_dualarm.yaml"
         currentBaseLink: ""
         rootPosition: [ 0, 0, 0 ]
         rootAttitude: [ 
           1, 0, 0, 
           0, 1, 0, 
           -0, 0, 1 ]
-        jointPositions: [ 
-           0.000000,  0.000000,  0.000000, -0.174533, -0.448550, -2.225294,  0.000000,  0.000000,  0.000000,  0.401426, 
-          -0.448550, -2.333505, -0.122173,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000 ]
+        jointPositions: [0, 0, 0, 
+						-0.174533, -0.448550, -2.22529, 0, 0, 0, 
+						 0.401426, -0.448550, -2.22529, -0.12213, 0, 0, 
+						 0.0230, -0.0230, 0.0170, -0.0170]
         initialRootPosition: [ 0, 0, 0 ]
         initialRootAttitude: [ 
           1, 0, 0, 
@@ -63,7 +64,7 @@ items:
       data: 
         modelFile: "${PROGRAM_TOP}/ext/graspPlugin/Samples/Object/table-canhrp.wrl"
         currentBaseLink: "table-WAIST"
-        rootPosition: [ 0.5, 0, -0.95 ]
+        rootPosition: [ 0.54, 0, -0.927 ]
         rootAttitude: [ 
           1, 0, 0, 
           0, 1, 0, 
@@ -108,7 +109,7 @@ items:
       class: PythonScriptItem
       data: 
         file: "${PROGRAM_TOP}/ext/graspPlugin/BinPicking/script/script_exec_motion.py"
-        executionOnLoading: false 
+        executionOnLoading: false
         backgroundExecution: false
 views: 
   - 
@@ -262,8 +263,6 @@ toolbars:
     lazyCollisionDetectionMode: true
   "BodyBar": 
     current: 3
-  "LeggedBodyBar": 
-    stanceWidth: 0.15
   "BodyMotionGenerationBar": 
     autoGenerationForNewBody: true
     balancer: false
@@ -297,6 +296,8 @@ toolbars:
     waistHeightRelaxation: false
     gravity: 9.8
     dynamicsTimeRatio: 1
+  "LeggedBodyBar": 
+    stanceWidth: 0.15
 Body: 
   "BodyMotionEngine": 
     updateJointVelocities: false
@@ -344,12 +345,12 @@ viewAreas:
     contents: 
       type: splitter
       orientation: horizontal
-      sizes: [ 315, 1534 ]
+      sizes: [ 166, 808 ]
       children: 
         - 
           type: splitter
           orientation: vertical
-          sizes: [ 463, 461 ]
+          sizes: [ 432, 429 ]
           children: 
             - 
               type: pane
@@ -362,12 +363,12 @@ viewAreas:
         - 
           type: splitter
           orientation: vertical
-          sizes: [ 463, 461 ]
+          sizes: [ 672, 189 ]
           children: 
             - 
               type: splitter
               orientation: horizontal
-              sizes: [ 815, 715 ]
+              sizes: [ 406, 398 ]
               children: 
                 - 
                   type: pane
@@ -397,3 +398,4 @@ layoutOfToolBars:
     - 
       - { name: "BodyMotionGenerationBar", x: 0, priority: 0 }
       - { name: "MotionFileBar", x: 145, priority: 0 }
+      - { name: "PCLBar", x: 451, priority: 0 }

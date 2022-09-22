@@ -69,9 +69,12 @@ using namespace cnoid;
 
 			void loadObjectData( void );
 			// void LoadFromMotionFile( std::string motionfilename );
-			bool LoadFromMotionFile( std::string motionfilename );
+			void LoadFromMotionFile( std::string motionfilename, bool fixwaist=false);
 			void ClearMotionFile( void );
 			void SavePositionToDB( void );
+
+			// added by xinyi
+			std::vector<bool> isMotionFileSucceed;
 
 			private:
 
@@ -90,6 +93,9 @@ using namespace cnoid;
 			bool LinearAbs( int LR_flag, double Ts, double Te, VectorXd Value );
 			bool LinearRel( int LR_flag, double Ts, double Te, VectorXd Value );
 			bool setObject( int id);
+
+			bool ArmXYZAbsFixedWaist( int LR_flag, double Ts, double Te, VectorXd Value );
+			bool ArmXYZRelFixedWaist( int LR_flag, double Ts, double Te, VectorXd Value );
 
 			void TrackObjectPose( void );
 			void setMotionState(MotionState gm, MotionState gm_prev);

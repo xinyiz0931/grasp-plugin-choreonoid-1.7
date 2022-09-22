@@ -41,19 +41,16 @@ void Plan_motion() {
 		cnoid::MessageView::instance()->cout() << "Trajectory Planning is failed" << endl;
 
 }
-bool Load_motion_file(string motionfilename) {
+vector<bool> Load_motion_file(string motionfilename, bool dual_arm=false) {
+//bool Load_motion_file(string motionfilename) {
 	
-	static MotionFileControl* instance = new MotionFileControl();
-	// string motionfile;
-	// motionfile = "./ext/bpbot/data/motion/motion.dat";
+	MotionFileControl* instance = new MotionFileControl();
 	FILE *fp;
-	bool success;
 	if( (fp = fopen((motionfilename).c_str(), "r")) != NULL ){
-		success = MotionFileControl::instance()->LoadFromMotionFile(motionfilename);
+		instance->LoadFromMotionFile(motionfilename, dual_arm);
 		fclose(fp);
 	}
-	cnoid::MessageView::instance()->cout() << "Loaded motion file: " << success << endl;
-
+	vector<bool> success = instance->isMotionFileSucceed;
 	return success;
 }
 vector<double> Get_motion() {
@@ -61,30 +58,28 @@ vector<double> Get_motion() {
 	PlanBase * tc = PlanBase::instance();
 	int size = tc->graspMotionSeq.size();
 
-	int stateLft_old = tc->NOT_GRASPING;
+	//int stateLft_old = tc->NOT_GRASPING;
 
 	for (int i; i < size; i++) {
 		// start to create motion sequence
 		seqs.push_back(tc->graspMotionSeq[i].motionTime);
 
-		int gstateLft = tc->graspMotionSeq[i].graspingState2;
-	
-		// 0: close , 1: open, 2. nothing, stay same
-		if (gstateLft == tc->GRASPING && stateLft_old == tc->UNDER_GRASPING) 
-			seqs.push_back(0);
-		else if (gstateLft == tc->NOT_GRASPING && stateLft_old == tc->UNDER_GRASPING) 
-			seqs.push_back(1);
-		else if (gstateLft == tc->UNDER_GRASPING && stateLft_old == tc->NOT_GRASPING)
-			seqs.push_back(1);
-		else 
-			seqs.push_back(2);
+		//int gstateLft = tc->graspMotionSeq[i].graspingState2;
+		//// 0: close , 1: open, 2. nothing, stay same
+		//if (gstateLft == tc->GRASPING && stateLft_old == tc->UNDER_GRASPING) 
+		//	seqs.push_back(0);
+		//else if (gstateLft == tc->NOT_GRASPING && stateLft_old == tc->UNDER_GRASPING) 
+		//	seqs.push_back(1);
+		//else if (gstateLft == tc->UNDER_GRASPING && stateLft_old == tc->NOT_GRASPING)
+		//	seqs.push_back(1);
+		//else 
+		//	seqs.push_back(2);
 		
 		for (int j=0;j<tc->bodyItemRobot()->body()->numJoints();j++) {
 			seqs.push_back(tc->graspMotionSeq[i].jointSeq[j]*180.0/M_PI); // radian to degree
 		}
-		stateLft_old = gstateLft;
+		//stateLft_old = gstateLft;
 	}
-	cnoid::MessageView::instance()->cout() << "Get all joints data! " << endl;
 	return seqs;	
 }
 }
@@ -95,7 +90,7 @@ void exportPlanning(py::module m) {
 	m.doc() = "pybind11 motion planning";
 	m.def("add", &add);
 	m.def("plan", &Plan_motion);
-	m.def("load_motionfile", &Load_motion_file);
+	m.def("load_motionfile", &Load_motion_file, py::arg("motionfilename"), py::arg("dual_arm")=false);
 	m.def("get_motion", &Get_motion);
 }
 }

@@ -17,9 +17,10 @@ items:
           1, 0, 0, 
           0, 1, 0, 
           0, 0, 1 ]
-        jointPositions: [ 
-           0.000000,  0.000000,  0.000000,  0.000000, -0.448550, -2.225294,  0.000000,  0.000000,  0.000000,  0.139626, 
-          -0.448550, -2.333505, -0.122173,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000 ]
+        jointPositions: [0, 0, 0, 
+                        -0.174533, -0.448550, -2.22529, 0, 0, 0, 
+                         0.401426, -0.448550, -2.22529, -0.12213, 0, 0, 
+                         0.0300, -0.0300, 0.0240, -0.0240] 
         initialRootPosition: [ 0, 0, 0 ]
         initialRootAttitude: [ 
           1, 0, 0, 
@@ -63,7 +64,7 @@ items:
       data: 
         modelFile: "${PROGRAM_TOP}/ext/graspPlugin/Samples/Object/table-canhrp.wrl"
         currentBaseLink: "table-WAIST"
-        rootPosition: [ 0.5, 0, -0.95 ]
+        rootPosition: [ 0.54, 0, -0.927 ]
         rootAttitude: [ 
           1, 0, 0, 
           0, 1, 0, 

@@ -1,10 +1,18 @@
 # Project Description
 
-1. **3dprint.cnoid**: robot with 3D printer.
+1. **binpicking.cnoid**: usually used bin picking scene.
 
-2. **demo.cnoid**: standard bin picking scene.
+2. **demo.cnoid**: standard bin picking scene with boxes.
 
-3. **cable.cnoid**: extend bin picking scene, with the table lower than the robot base.  
+3. **python_binpicking.cnoid**: `binpicking.cnoid` and an executable python script
+
+4. **python_calibration.cnoid**: with a executable python script and PCL plugin
+
+5. **python_exec_motion.cnoid**: MotionFile and PCL plugin
+
+6. **python_hiro_grasp_plan_box.cnoid**: demo script, hiro moves to grasp a box
+
+7. **python_pa10_grasp_plan_ahiro.cnoid**: demo script, pa10 moves to grasp a duck toy
 
 Robot: 
 

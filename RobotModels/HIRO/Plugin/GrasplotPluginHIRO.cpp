@@ -71,7 +71,6 @@ void HIRO_Arm::adjustArm(const VectorXd& q_old){
 }
 
 bool HIRO_Arm::solveIK(const Vector3& p, const Matrix3& Rp, double phi, const VectorXd& q_old){
-
         if(base->name() != "WAIST"){
                 if(Arm::IK_arm(p, Rp)) {
                         adjustArm(q_old);
@@ -121,9 +120,9 @@ bool HIRO_Arm::solveIK(const Vector3& p, const Matrix3& Rp, double phi, const Ve
         }
 
         //if(fabs(phi) > 0.0001)
-        if(bothArm)
+        if (bothArm) {
                 arm_path->joint(0)->q() = phi;
-
+        }
         Matrix3 Rz = rotFromRpy(0,0,arm_path->joint(0)->q());
         Vector3 p0 = Rz.transpose()*bp;
         Matrix3 R0 = Rz.transpose()*bR;

@@ -2258,7 +2258,7 @@ void PlanBase::initialCollision(){
 	initialRoughClearance();
 #endif
 
-	os << "coldetPairData size" << coldetPairData.size() << endl;
+	// os << "coldetPairData size" << coldetPairData.size() << endl;
 }
 
 void PlanBase::initialRoughClearance(){

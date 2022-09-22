@@ -591,8 +591,8 @@ DEF main_withHands Humanoid{
 								   ]
 								}
                 Transform {
-                   #translation 0 0 0
-					translation -0.03 0 0
+                   # translation 0 0 0
+				   translation -0.03 0 0
 								   rotation -0.5773 0.5773 0.5773 2.09
 								   children[
 								      Inline { url "./provision/hand.wrl" }
@@ -875,7 +875,7 @@ DEF main_withHands Humanoid{
 								   ]
 								}
                 Transform {
-                   # translation 0 0 0
+                   #translation 0 0 0
                    translation -0.03 0 0
 								   rotation 0.5773 -0.5773 0.5773 2.09
 								   children[

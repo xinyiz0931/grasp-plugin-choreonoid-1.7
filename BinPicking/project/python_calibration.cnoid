@@ -12,13 +12,15 @@ items:
       data: 
         modelFile: "${PROGRAM_TOP}/ext/graspPlugin/RobotModels/HIRO/HIRO_with_provision.yaml"
         currentBaseLink: ""
-        rootPosition: [ 0, 0, 0   rootAttitude: [ 
+        rootPosition: [ 0, 0, 0 ]
+        rootAttitude: [ 
           1, 0, 0, 
           0, 1, 0, 
-          0, 0, 1 ]
-        jointPositions: [ 
-           0.000000,  0.000000,  0.000000,  0.000000, -0.448550, -2.225294,  0.000000,  0.000000,  0.000000,  0.139626, 
-          -0.448550, -2.333505, -0.122173,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000 ]
+          -0, 0, 1 ]
+        jointPositions: [0, 0, 0, 
+                        -0.174533, -0.448550, -2.22529, 0, 0, 0, 
+                         0.401426, -0.448550, -2.22529, -0.12213, 0, 0, 
+                         0.0300, -0.0300, 0.0240, -0.0240] 
         initialRootPosition: [ 0, 0, 0 ]
         initialRootAttitude: [ 
           1, 0, 0, 
@@ -39,11 +41,11 @@ items:
       data: 
         modelFile: "${PROGRAM_TOP}/ext/graspPlugin/Samples/Object/M0Hrp.wrl"
         currentBaseLink: "WAIST"
-        rootPosition: [ 0.5, 0, -0.07 ]
+        rootPosition: [ -0.484742775, 0.342802634, 0.0660838235 ]
         rootAttitude: [ 
-          1, 0, 0, 
-          0, 1, 0, 
-          0, 0, 1 ]
+          -0.870891718, -0.491470374, 0.00211819046, 
+          0.491471218, -0.870893807, -0.000136955792, 
+          0.00191202867, 0.00092175598, 0.999997747 ]
         jointPositions: [  ]
         initialRootPosition: [ 0, 0, 0 ]
         initialRootAttitude: [ 
@@ -62,7 +64,7 @@ items:
       data: 
         modelFile: "${PROGRAM_TOP}/ext/graspPlugin/Samples/Object/table-canhrp.wrl"
         currentBaseLink: "table-WAIST"
-        rootPosition: [ 0.5, 0, -0.95 ]
+        rootPosition: [ 0.54, 0, -0.927 ]
         rootAttitude: [ 
           1, 0, 0, 
           0, 1, 0, 
@@ -102,12 +104,12 @@ items:
         isEditable: false
     - 
       id: 5
-      name: "script_calibration.py"
+      name: "script_calib.py"
       plugin: Python
       class: PythonScriptItem
       data: 
-        file: "${PROGRAM_TOP}/ext/graspPlugin/BinPicking/script/script_calibration.py"
-        executionOnLoading: true
+        file: "${PROGRAM_TOP}/ext/bpbot/example/script_hand_eye.py"
+        executionOnLoading: false
         backgroundExecution: false
 views: 
   - 
@@ -121,7 +123,7 @@ views:
     class: ItemTreeView
     mounted: true
     state: 
-      selected: [ 1 ]
+      selected: [ 3 ]
       checked: [ 1, [ 1, "right_arm", "tip" ], [ 1, "left_arm", "tip" ], 3, 4, 5 ]
       expanded: [ 1 ]
   - 
@@ -208,7 +210,7 @@ views:
       slider: true
       dial: false
       labelOnLeft: true
-      currentBodyItem: 1
+      currentBodyItem: 3
   - 
     id: 6
     plugin: Body
@@ -216,7 +218,7 @@ views:
     mounted: true
     state: 
       listingMode: "Link List"
-      currentBodyItem: 1
+      currentBodyItem: 3
       bodyItems: 
         - 
           id: 1
@@ -235,6 +237,34 @@ views:
     class: PythonConsoleView
     mounted: true
 toolbars: 
+  "TimeBar": 
+    minTime: 0
+    maxTime: 30
+    frameRate: 100
+    playbackFrameRate: 50
+    idleLoopDrivenMode: false
+    currentTime: 0
+    speedScale: 5
+    syncToOngoingUpdates: true
+    autoExpansion: true
+  "GraspBar": 
+    graspRobot: 1
+    graspObject: 2
+    graspEnv: [ 3 ]
+    objTag2Item: [ 2 ]
+    camera: 0
+  "KinematicsBar": 
+    mode: AUTO
+    enablePositionDragger: true
+    penetrationBlock: false
+    collisionLinkHighlight: false
+    snapDistance: 0.025
+    penetrationBlockDepth: 0.0005
+    lazyCollisionDetectionMode: true
+  "BodyBar": 
+    current: 3
+  "LeggedBodyBar": 
+    stanceWidth: 0.15
   "BodyMotionGenerationBar": 
     autoGenerationForNewBody: true
     balancer: false
@@ -268,33 +298,6 @@ toolbars:
     waistHeightRelaxation: false
     gravity: 9.8
     dynamicsTimeRatio: 1
-  "TimeBar": 
-    minTime: 0
-    maxTime: 30
-    frameRate: 100
-    playbackFrameRate: 50
-    idleLoopDrivenMode: false
-    currentTime: 0
-    speedScale: 1
-    syncToOngoingUpdates: true
-    autoExpansion: true
-  "GraspBar": 
-    graspRobot: 1
-    graspObject: 2
-    objTag2Item: [ 2 ]
-    camera: 0
-  "LeggedBodyBar": 
-    stanceWidth: 0.15
-  "KinematicsBar": 
-    mode: AUTO
-    enablePositionDragger: true
-    penetrationBlock: false
-    collisionLinkHighlight: false
-    snapDistance: 0.025
-    penetrationBlockDepth: 0.0005
-    lazyCollisionDetectionMode: true
-  "BodyBar": 
-    current: 1
 Body: 
   "BodyMotionEngine": 
     updateJointVelocities: false
@@ -342,12 +345,12 @@ viewAreas:
     contents: 
       type: splitter
       orientation: horizontal
-      sizes: [ 315, 1534 ]
+      sizes: [ 166, 808 ]
       children: 
         - 
           type: splitter
           orientation: vertical
-          sizes: [ 463, 461 ]
+          sizes: [ 431, 430 ]
           children: 
             - 
               type: pane
@@ -360,12 +363,12 @@ viewAreas:
         - 
           type: splitter
           orientation: vertical
-          sizes: [ 660, 264 ]
+          sizes: [ 431, 430 ]
           children: 
             - 
               type: splitter
               orientation: horizontal
-              sizes: [ 815, 715 ]
+              sizes: [ 428, 376 ]
               children: 
                 - 
                   type: pane

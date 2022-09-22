@@ -28,7 +28,7 @@
 #include "../Grasp/ObjectManager.h"
 
 //#define USE_EXACT_TIME
-#define DEBUG_MOTIONFILE_INPUT
+// #define DEBUG_MOTIONFILE_INPUT 1
 
 using namespace std;
 using namespace boost;
@@ -304,8 +304,6 @@ bool TrajectoryPlanner::doTrajectoryPlanning() {
 			outputGraspMotionSeq = false;
 			//gc->graspMotionSeq.clear();
 			MotionState startMotionState, endMotionState;
-			cout << "xy | start id: " << gc->startMotionState.id << endl;
-			cout << "xy | end id: " << gc->endMotionState.id << endl;
 			if(gc->startMotionState.id > 0){
 				startMotionState = gc->startMotionState;
 			}
@@ -333,7 +331,6 @@ bool TrajectoryPlanner::doTrajectoryPlanning() {
 			inputMotionSeq.push_back(startMotionState);
 			inputMotionSeq.push_back(endMotionState);
 		}
-		cout << "xy | finish define motion state" <<endl;
 		//
 		gc->setGraspingState(PlanBase::NOT_GRASPING);
 		gc->setGraspingState2(PlanBase::NOT_GRASPING);
@@ -412,7 +409,6 @@ bool TrajectoryPlanner::doTrajectoryPlanning() {
 		eepos.resize(eeindex_list.size());
 		baserpy.resize(baseindex_list.size());
 		eerpy.resize(eeindex_list.size());
-		cout << "xy | input motion seq size: " << inputMotionSeq.size() << endl;
 
 		if(inputMotionSeq.size() > 1){
 			
@@ -460,7 +456,6 @@ bool TrajectoryPlanner::doTrajectoryPlanning() {
 				}
 
 				isTrajectorySectionSucceed.push_back(success);
-
 				if(!success) successAll=false;
 
 				if(useSafeBB) grasp::PlanBase::instance()->useRobotSafeBoundingBox=true;
