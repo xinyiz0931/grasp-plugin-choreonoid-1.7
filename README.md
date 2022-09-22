@@ -106,11 +106,13 @@ rm -r lib/choreonoid-1.7/*
 if(USE_PYTHON3)
   set(Python_ADDITIONAL_VERSIONS 3.7 3.6 3.5 3.4)
   find_package(PythonLibs 3 REQUIRED)
-↓↓
+↓↓ (CMake < 3.12:)
 if(USE_PYTHON3)
   set(Python_ADDITIONAL_VERSIONS 3.9 3.8 3.7 3.6 3.5 3.4)
   find_package(PythonInterp 3 REQUIRED)
   find_package(PythonLibs 3 REQUIRED)
+↓↓ (CMake < 3.12:)
+  find_package(Python 3.9 EXACT REQUIRED COMPOENNTS Interpreter Development)
 ```
 
 3. Start compile, since we delete the cache file, we need to add the necesasry plugin again
