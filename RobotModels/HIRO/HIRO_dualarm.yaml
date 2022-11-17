@@ -1,4 +1,4 @@
-modelFile: main_dualarm.wrl
+modelFile: main_dualarm_ft_right.wrl
 
 standardPose: [ 
 0, 0, 0,

@@ -75,6 +75,7 @@ using namespace cnoid;
 
 			// added by xinyi
 			std::vector<bool> isMotionFileSucceed;
+			// void LoadFromJntFile( std::string jntfilename);
 
 			private:
 

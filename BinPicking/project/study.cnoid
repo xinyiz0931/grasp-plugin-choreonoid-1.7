@@ -1,0 +1,1436 @@
+items: 
+  id: 0
+  name: "Root"
+  plugin: Base
+  class: RootItem
+  children: 
+    - 
+      id: 1
+      name: "World"
+      plugin: Body
+      class: WorldLogFileItem
+      data: 
+        filename: 
+        timeStampSuffix: false
+        recordingFrameRate: 0
+      children: 
+        - 
+          id: 2
+          name: "container"
+          plugin: Body
+          class: BodyItem
+          data: 
+            modelFile: "${PROJECT_DIR}/Samples/Object/palletize_rack_bold_meshup3.yaml"
+            currentBaseLink: "Root"
+            rootPosition: [ 0.197, 0.147, 0.15 ]
+            rootAttitude: [ 
+              -6.123234e-17, -2.4492936e-16, -1, 
+              -7.49879891e-33, 1, -2.4492936e-16, 
+              1, -7.49879891e-33, -6.123234e-17 ]
+            jointPositions: [  ]
+            initialRootPosition: [ 0, 0, 0 ]
+            initialRootAttitude: [ 
+              1, 0, 0, 
+              0, 1, 0, 
+              0, 0, 1 ]
+            zmp: [ 0, 0, 0 ]
+            collisionDetection: true
+            selfCollisionDetection: false
+            isEditable: false
+        - 
+          id: 3
+          name: "HIRO"
+          plugin: Body
+          class: BodyItem
+          data: 
+            modelFile: "${PROJECT_DIR}/RobotModels/HIRO/HIRO_expipe_AirHand2.yaml"
+            currentBaseLink: "WAIST"
+            rootPosition: [ 0.598054364, 0.131667542, 0.102805703 ]
+            rootAttitude: [ 
+              -0.999941517, -0.010814966, 0, 
+              0.010814966, -0.999941517, 0, 
+              0, 0, 1 ]
+            jointPositions: [ 
+              -0.080285,  0.000000,  0.000000,  0.000000, -1.122247, -1.165880,  0.000000,  0.000000,  0.000000,  0.000000, 
+              -1.576032, -1.521927, -0.418879,  0.165806,  0.429351,  0.040000, -0.041000 ]
+            initialRootPosition: [ 0, 0, 0 ]
+            initialRootAttitude: [ 
+              1, 0, 0, 
+              0, 1, 0, 
+              0, 0, 1 ]
+            initialJointPositions: [ 
+               0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000, 
+               0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000 ]
+            zmp: [ 0, 0, 0 ]
+            collisionDetection: true
+            selfCollisionDetection: true
+            isEditable: true
+        - 
+          id: 4
+          name: "table-can"
+          plugin: Body
+          class: BodyItem
+          data: 
+            modelFile: "${PROJECT_DIR}/Samples/Object/table-can_merge.yaml"
+            currentBaseLink: "table-WAIST"
+            rootPosition: [ 0.765800874, 0.178182063, -0.73166618 ]
+            rootAttitude: [ 
+              1, 0, 0, 
+              0, 1, 0, 
+              0, 0, 1 ]
+            jointPositions: [  ]
+            initialRootPosition: [ 0, 0, 0 ]
+            initialRootAttitude: [ 
+              1, 0, 0, 
+              0, 1, 0, 
+              0, 0, 1 ]
+            zmp: [ 0, 0, 0 ]
+            collisionDetection: true
+            selfCollisionDetection: false
+            isEditable: true
+        - 
+          id: 5
+          name: "table-can2"
+          plugin: Body
+          class: BodyItem
+          data: 
+            modelFile: "${PROJECT_DIR}/Samples/Object/table-can_merge.yaml"
+            currentBaseLink: "table-WAIST"
+            rootPosition: [ 0.164440943, 0.180064411, -0.733016015 ]
+            rootAttitude: [ 
+              1, 0, 0, 
+              0, 1, 0, 
+              0, 0, 1 ]
+            jointPositions: [  ]
+            initialRootPosition: [ 0, 0, 0 ]
+            initialRootAttitude: [ 
+              1, 0, 0, 
+              0, 1, 0, 
+              0, 0, 1 ]
+            zmp: [ 0, 0, 0 ]
+            collisionDetection: true
+            selfCollisionDetection: false
+            isEditable: true
+        - 
+          id: 6
+          name: "cap1"
+          plugin: Body
+          class: BodyItem
+          data: 
+            modelFile: "${PROJECT_DIR}/PRM2222/cap_3.yaml"
+            currentBaseLink: "WAIST"
+            rootPosition: [ 0.102682364, -0.121477719, 0.262958652 ]
+            rootAttitude: [ 
+              1.00000004, 2.3939184e-16, 8.86443696e-16, 
+              -1.22471477e-15, 1.00000004, -1.28659561e-15, 
+              9.19403442e-16, -1.29643475e-15, 1 ]
+            jointPositions: [  ]
+            initialRootPosition: [ 0, 0, 0 ]
+            initialRootAttitude: [ 
+              1, 0, 0, 
+              0, 1, 0, 
+              0, 0, 1 ]
+            zmp: [ 0, 0, 0 ]
+            collisionDetection: true
+            selfCollisionDetection: false
+            isEditable: true
+        - 
+          id: 7
+          name: "cap2"
+          plugin: Body
+          class: BodyItem
+          data: 
+            modelFile: "${PROJECT_DIR}/PRM2222/cap_4.yaml"
+            currentBaseLink: "WAIST"
+            rootPosition: [ 0.120181288, 0.392276074, 0.221267242 ]
+            rootAttitude: [ 
+              1, 0, 0, 
+              0, 1, 0, 
+              0, 0, 1 ]
+            jointPositions: [  ]
+            initialRootPosition: [ 0, 0, 0 ]
+            initialRootAttitude: [ 
+              1, 0, 0, 
+              0, 1, 0, 
+              0, 0, 1 ]
+            zmp: [ 0, 0, 0 ]
+            collisionDetection: true
+            selfCollisionDetection: false
+            isEditable: true
+        - 
+          id: 8
+          name: "cap3"
+          plugin: Body
+          class: BodyItem
+          data: 
+            modelFile: "${PROJECT_DIR}/PRM2222/cap_5.yaml"
+            currentBaseLink: "WAIST"
+            rootPosition: [ -0.0333084913, -0.102981795, 0.261393821 ]
+            rootAttitude: [ 
+              1, 0, 0, 
+              0, 1, 0, 
+              0, 0, 1 ]
+            jointPositions: [  ]
+            initialRootPosition: [ 0, 0, 0 ]
+            initialRootAttitude: [ 
+              1, 0, 0, 
+              0, 1, 0, 
+              0, 0, 1 ]
+            zmp: [ 0, 0, 0 ]
+            collisionDetection: true
+            selfCollisionDetection: false
+            isEditable: true
+        - 
+          id: 9
+          name: "cap4"
+          plugin: Body
+          class: BodyItem
+          data: 
+            modelFile: "${PROJECT_DIR}/PRM2222/cap_6.yaml"
+            currentBaseLink: "WAIST"
+            rootPosition: [ 0, 0, 0 ]
+            rootAttitude: [ 
+              1, 0, 0, 
+              0, 1, 0, 
+              0, 0, 1 ]
+            jointPositions: [  ]
+            initialRootPosition: [ 0, 0, 0 ]
+            initialRootAttitude: [ 
+              1, 0, 0, 
+              0, 1, 0, 
+              0, 0, 1 ]
+            zmp: [ 0, 0, 0 ]
+            collisionDetection: true
+            selfCollisionDetection: false
+            isEditable: true
+        - 
+          id: 10
+          name: "cap5"
+          plugin: Body
+          class: BodyItem
+          data: 
+            modelFile: "${PROJECT_DIR}/PRM2222/cap_7.yaml"
+            currentBaseLink: "WAIST"
+            rootPosition: [ 0, 0, 0 ]
+            rootAttitude: [ 
+              1, 0, 0, 
+              0, 1, 0, 
+              0, 0, 1 ]
+            jointPositions: [  ]
+            initialRootPosition: [ 0, 0, 0 ]
+            initialRootAttitude: [ 
+              1, 0, 0, 
+              0, 1, 0, 
+              0, 0, 1 ]
+            zmp: [ 0, 0, 0 ]
+            collisionDetection: true
+            selfCollisionDetection: false
+            isEditable: true
+        - 
+          id: 11
+          name: "cap6"
+          plugin: Body
+          class: BodyItem
+          data: 
+            modelFile: "${PROJECT_DIR}/PRM2222/cap_8.yaml"
+            currentBaseLink: "WAIST"
+            rootPosition: [ 0, 0, 0 ]
+            rootAttitude: [ 
+              1, 0, 0, 
+              0, 1, 0, 
+              0, 0, 1 ]
+            jointPositions: [  ]
+            initialRootPosition: [ 0, 0, 0 ]
+            initialRootAttitude: [ 
+              1, 0, 0, 
+              0, 1, 0, 
+              0, 0, 1 ]
+            zmp: [ 0, 0, 0 ]
+            collisionDetection: true
+            selfCollisionDetection: false
+            isEditable: true
+        - 
+          id: 12
+          name: "cap7"
+          plugin: Body
+          class: BodyItem
+          data: 
+            modelFile: "${PROJECT_DIR}/PRM2222/cap_9.yaml"
+            currentBaseLink: "WAIST"
+            rootPosition: [ 0, 0, 0 ]
+            rootAttitude: [ 
+              1, 0, 0, 
+              0, 1, 0, 
+              0, 0, 1 ]
+            jointPositions: [  ]
+            initialRootPosition: [ 0, 0, 0 ]
+            initialRootAttitude: [ 
+              1, 0, 0, 
+              0, 1, 0, 
+              0, 0, 1 ]
+            zmp: [ 0, 0, 0 ]
+            collisionDetection: true
+            selfCollisionDetection: false
+            isEditable: true
+        - 
+          id: 13
+          name: "cap8"
+          plugin: Body
+          class: BodyItem
+          data: 
+            modelFile: "${PROJECT_DIR}/PRM2222/cap_10.yaml"
+            currentBaseLink: "WAIST"
+            rootPosition: [ 0, 0, 0 ]
+            rootAttitude: [ 
+              1, 0, 0, 
+              0, 1, 0, 
+              0, 0, 1 ]
+            jointPositions: [  ]
+            initialRootPosition: [ 0, 0, 0 ]
+            initialRootAttitude: [ 
+              1, 0, 0, 
+              0, 1, 0, 
+              0, 0, 1 ]
+            zmp: [ 0, 0, 0 ]
+            collisionDetection: true
+            selfCollisionDetection: false
+            isEditable: true
+        - 
+          id: 14
+          name: "cap9"
+          plugin: Body
+          class: BodyItem
+          data: 
+            modelFile: "${PROJECT_DIR}/PRM2222/cap_2.yaml"
+            currentBaseLink: "WAIST"
+            rootPosition: [ 0, 0, 0 ]
+            rootAttitude: [ 
+              1, 0, 0, 
+              0, 1, 0, 
+              0, 0, 1 ]
+            jointPositions: [  ]
+            initialRootPosition: [ 0, 0, 0 ]
+            initialRootAttitude: [ 
+              1, 0, 0, 
+              0, 1, 0, 
+              0, 0, 1 ]
+            zmp: [ 0, 0, 0 ]
+            collisionDetection: true
+            selfCollisionDetection: false
+            isEditable: true
+        - 
+          id: 15
+          name: "cap10"
+          plugin: Body
+          class: BodyItem
+          data: 
+            modelFile: "${PROJECT_DIR}/PRM2222/cap_1.yaml"
+            currentBaseLink: "WAIST"
+            rootPosition: [ 0, 0, 0 ]
+            rootAttitude: [ 
+              1, 0, 0, 
+              0, 1, 0, 
+              0, 0, 1 ]
+            jointPositions: [  ]
+            initialRootPosition: [ 0, 0, 0 ]
+            initialRootAttitude: [ 
+              1, 0, 0, 
+              0, 1, 0, 
+              0, 0, 1 ]
+            zmp: [ 0, 0, 0 ]
+            collisionDetection: true
+            selfCollisionDetection: false
+            isEditable: true
+        - 
+          id: 16
+          name: "mistery"
+          plugin: Body
+          class: BodyItem
+          data: 
+            modelFile: "${PROJECT_DIR}/PRM2222/dbox.yaml"
+            currentBaseLink: "WAIST"
+            rootPosition: [ 0, 0, 0 ]
+            rootAttitude: [ 
+              1, 0, 0, 
+              0, 1, 0, 
+              0, 0, 1 ]
+            jointPositions: [  ]
+            initialRootPosition: [ 0, 0, 0 ]
+            initialRootAttitude: [ 
+              1, 0, 0, 
+              0, 1, 0, 
+              0, 0, 1 ]
+            zmp: [ 0, 0, 0 ]
+            collisionDetection: true
+            selfCollisionDetection: false
+            isEditable: true
+        - 
+          id: 17
+          name: "box_L1"
+          plugin: Body
+          class: BodyItem
+          data: 
+            modelFile: "${PROJECT_DIR}/PRM2222/dox_L1.yaml"
+            currentBaseLink: "WAIST"
+            rootPosition: [ 0.174965955, 0.359569246, 0.176384655 ]
+            rootAttitude: [ 
+              1.00000083, -4.51046502e-15, 1.70510655e-14, 
+              3.36691045e-15, -0.999842606, 0.0177885421, 
+              -3.0161023e-14, -0.0177885273, -0.999841772 ]
+            jointPositions: [  ]
+            initialRootPosition: [ 0, 0, 0 ]
+            initialRootAttitude: [ 
+              1, 0, 0, 
+              0, 1, 0, 
+              0, 0, 1 ]
+            zmp: [ 0, 0, 0 ]
+            collisionDetection: true
+            selfCollisionDetection: false
+            isEditable: true
+        - 
+          id: 18
+          name: "box_L2"
+          plugin: Body
+          class: BodyItem
+          data: 
+            modelFile: "${PROJECT_DIR}/PRM2222/dox_L2.yaml"
+            currentBaseLink: "WAIST"
+            rootPosition: [ 0.120182989, 0.49807832, 0.12823568 ]
+            rootAttitude: [ 
+              1, 0, 0, 
+              0, 1, 0, 
+              0, 0, 1 ]
+            jointPositions: [  ]
+            initialRootPosition: [ 0, 0, 0 ]
+            initialRootAttitude: [ 
+              1, 0, 0, 
+              0, 1, 0, 
+              0, 0, 1 ]
+            zmp: [ 0, 0, 0 ]
+            collisionDetection: true
+            selfCollisionDetection: false
+            isEditable: true
+        - 
+          id: 19
+          name: "box_L3"
+          plugin: Body
+          class: BodyItem
+          data: 
+            modelFile: "${PROJECT_DIR}/PRM2222/dox_L3.yaml"
+            currentBaseLink: "WAIST"
+            rootPosition: [ 0.0240009646, 0.379416774, 0.113416825 ]
+            rootAttitude: [ 
+              1, 0, 0, 
+              0, 1, 0, 
+              0, 0, 1 ]
+            jointPositions: [  ]
+            initialRootPosition: [ 0, 0, 0 ]
+            initialRootAttitude: [ 
+              1, 0, 0, 
+              0, 1, 0, 
+              0, 0, 1 ]
+            zmp: [ 0, 0, 0 ]
+            collisionDetection: true
+            selfCollisionDetection: false
+            isEditable: true
+        - 
+          id: 20
+          name: "box_L4"
+          plugin: Body
+          class: BodyItem
+          data: 
+            modelFile: "${PROJECT_DIR}/PRM2222/dox_L4.yaml"
+            currentBaseLink: "WAIST"
+            rootPosition: [ 0, 0, 0 ]
+            rootAttitude: [ 
+              1, 0, 0, 
+              0, 1, 0, 
+              0, 0, 1 ]
+            jointPositions: [  ]
+            initialRootPosition: [ 0, 0, 0 ]
+            initialRootAttitude: [ 
+              1, 0, 0, 
+              0, 1, 0, 
+              0, 0, 1 ]
+            zmp: [ 0, 0, 0 ]
+            collisionDetection: true
+            selfCollisionDetection: false
+            isEditable: true
+        - 
+          id: 21
+          name: "box_L5"
+          plugin: Body
+          class: BodyItem
+          data: 
+            modelFile: "${PROJECT_DIR}/PRM2222/dox_L5.yaml"
+            currentBaseLink: "WAIST"
+            rootPosition: [ 0, 0, 0 ]
+            rootAttitude: [ 
+              1, 0, 0, 
+              0, 1, 0, 
+              0, 0, 1 ]
+            jointPositions: [  ]
+            initialRootPosition: [ 0, 0, 0 ]
+            initialRootAttitude: [ 
+              1, 0, 0, 
+              0, 1, 0, 
+              0, 0, 1 ]
+            zmp: [ 0, 0, 0 ]
+            collisionDetection: true
+            selfCollisionDetection: false
+            isEditable: true
+        - 
+          id: 22
+          name: "box_S1"
+          plugin: Body
+          class: BodyItem
+          data: 
+            modelFile: "${PROJECT_DIR}/PRM2222/eox_S1.yaml"
+            currentBaseLink: "WAIST"
+            rootPosition: [ 0.0406044354, -0.0571502798, 0.128505314 ]
+            rootAttitude: [ 
+              1, 0, 0, 
+              0, 1, 0, 
+              0, 0, 1 ]
+            jointPositions: [  ]
+            initialRootPosition: [ 0, 0, 0 ]
+            initialRootAttitude: [ 
+              1, 0, 0, 
+              0, 1, 0, 
+              0, 0, 1 ]
+            zmp: [ 0, 0, 0 ]
+            collisionDetection: true
+            selfCollisionDetection: false
+            isEditable: true
+        - 
+          id: 23
+          name: "box_S2"
+          plugin: Body
+          class: BodyItem
+          data: 
+            modelFile: "${PROJECT_DIR}/PRM2222/eox_S2.yaml"
+            currentBaseLink: "WAIST"
+            rootPosition: [ 0.179545188, 0.572899158, 0.11713341 ]
+            rootAttitude: [ 
+              0.987834848, 0, -0.155506637, 
+              0, 1, 0, 
+              0.155506637, 0, 0.987834848 ]
+            jointPositions: [  ]
+            initialRootPosition: [ 0, 0, 0 ]
+            initialRootAttitude: [ 
+              1, 0, 0, 
+              0, 1, 0, 
+              0, 0, 1 ]
+            zmp: [ 0, 0, 0 ]
+            collisionDetection: true
+            selfCollisionDetection: false
+            isEditable: true
+        - 
+          id: 24
+          name: "box_S3"
+          plugin: Body
+          class: BodyItem
+          data: 
+            modelFile: "${PROJECT_DIR}/PRM2222/eox_S3.yaml"
+            currentBaseLink: "WAIST"
+            rootPosition: [ 0.0282682301, 0.573490973, 0.100380382 ]
+            rootAttitude: [ 
+              1, 0, 0, 
+              0, 1, 0, 
+              0, 0, 1 ]
+            jointPositions: [  ]
+            initialRootPosition: [ 0, 0, 0 ]
+            initialRootAttitude: [ 
+              1, 0, 0, 
+              0, 1, 0, 
+              0, 0, 1 ]
+            zmp: [ 0, 0, 0 ]
+            collisionDetection: true
+            selfCollisionDetection: false
+            isEditable: true
+        - 
+          id: 25
+          name: "box_S4"
+          plugin: Body
+          class: BodyItem
+          data: 
+            modelFile: "${PROJECT_DIR}/PRM2222/eox_S4.yaml"
+            currentBaseLink: "WAIST"
+            rootPosition: [ 0, 0, 0 ]
+            rootAttitude: [ 
+              1, 0, 0, 
+              0, 1, 0, 
+              0, 0, 1 ]
+            jointPositions: [  ]
+            initialRootPosition: [ 0, 0, 0 ]
+            initialRootAttitude: [ 
+              1, 0, 0, 
+              0, 1, 0, 
+              0, 0, 1 ]
+            zmp: [ 0, 0, 0 ]
+            collisionDetection: true
+            selfCollisionDetection: false
+            isEditable: true
+        - 
+          id: 26
+          name: "box_S5"
+          plugin: Body
+          class: BodyItem
+          data: 
+            modelFile: "${PROJECT_DIR}/PRM2222/eox_S5.yaml"
+            currentBaseLink: "WAIST"
+            rootPosition: [ 0, 0, 0 ]
+            rootAttitude: [ 
+              1, 0, 0, 
+              0, 1, 0, 
+              0, 0, 1 ]
+            jointPositions: [  ]
+            initialRootPosition: [ 0, 0, 0 ]
+            initialRootAttitude: [ 
+              1, 0, 0, 
+              0, 1, 0, 
+              0, 0, 1 ]
+            zmp: [ 0, 0, 0 ]
+            collisionDetection: true
+            selfCollisionDetection: false
+            isEditable: true
+        - 
+          id: 27
+          name: "mistery"
+          plugin: Body
+          class: BodyItem
+          data: 
+            modelFile: "${PROJECT_DIR}/PRM2222/dbox.yaml"
+            currentBaseLink: "WAIST"
+            rootPosition: [ 0, 0, 0 ]
+            rootAttitude: [ 
+              1, 0, 0, 
+              0, 1, 0, 
+              0, 0, 1 ]
+            jointPositions: [  ]
+            initialRootPosition: [ 0, 0, 0 ]
+            initialRootAttitude: [ 
+              1, 0, 0, 
+              0, 1, 0, 
+              0, 0, 1 ]
+            zmp: [ 0, 0, 0 ]
+            collisionDetection: true
+            selfCollisionDetection: false
+            isEditable: true
+        - 
+          id: 28
+          name: "box_L6"
+          plugin: Body
+          class: BodyItem
+          data: 
+            modelFile: "${PROJECT_DIR}/PRM2222/dox_L1.yaml"
+            currentBaseLink: "WAIST"
+            rootPosition: [ -0.0237148291, 0.479697925, 0.113624024 ]
+            rootAttitude: [ 
+              1, 0, 0, 
+              0, 1, 0, 
+              0, 0, 1 ]
+            jointPositions: [  ]
+            initialRootPosition: [ 0, 0, 0 ]
+            initialRootAttitude: [ 
+              1, 0, 0, 
+              0, 1, 0, 
+              0, 0, 1 ]
+            zmp: [ 0, 0, 0 ]
+            collisionDetection: true
+            selfCollisionDetection: false
+            isEditable: true
+        - 
+          id: 29
+          name: "box_L7"
+          plugin: Body
+          class: BodyItem
+          data: 
+            modelFile: "${PROJECT_DIR}/PRM2222/dox_L2.yaml"
+            currentBaseLink: "WAIST"
+            rootPosition: [ -0.0886049354, -0.0193793212, 0.116746445 ]
+            rootAttitude: [ 
+              1, 0, 0, 
+              0, 1, 0, 
+              0, 0, 1 ]
+            jointPositions: [  ]
+            initialRootPosition: [ 0, 0, 0 ]
+            initialRootAttitude: [ 
+              1, 0, 0, 
+              0, 1, 0, 
+              0, 0, 1 ]
+            zmp: [ 0, 0, 0 ]
+            collisionDetection: true
+            selfCollisionDetection: false
+            isEditable: true
+        - 
+          id: 30
+          name: "box_L8"
+          plugin: Body
+          class: BodyItem
+          data: 
+            modelFile: "${PROJECT_DIR}/PRM2222/dox_L3.yaml"
+            currentBaseLink: "WAIST"
+            rootPosition: [ 0.0405241983, -0.189674694, 0.115136375 ]
+            rootAttitude: [ 
+              1, 0, 0, 
+              0, 1, 0, 
+              0, 0, 1 ]
+            jointPositions: [  ]
+            initialRootPosition: [ 0, 0, 0 ]
+            initialRootAttitude: [ 
+              1, 0, 0, 
+              0, 1, 0, 
+              0, 0, 1 ]
+            zmp: [ 0, 0, 0 ]
+            collisionDetection: true
+            selfCollisionDetection: false
+            isEditable: true
+        - 
+          id: 31
+          name: "box_L9"
+          plugin: Body
+          class: BodyItem
+          data: 
+            modelFile: "${PROJECT_DIR}/PRM2222/dox_L4.yaml"
+            currentBaseLink: "WAIST"
+            rootPosition: [ 0, 0, 0 ]
+            rootAttitude: [ 
+              1, 0, 0, 
+              0, 1, 0, 
+              0, 0, 1 ]
+            jointPositions: [  ]
+            initialRootPosition: [ 0, 0, 0 ]
+            initialRootAttitude: [ 
+              1, 0, 0, 
+              0, 1, 0, 
+              0, 0, 1 ]
+            zmp: [ 0, 0, 0 ]
+            collisionDetection: true
+            selfCollisionDetection: false
+            isEditable: true
+        - 
+          id: 32
+          name: "box_L10"
+          plugin: Body
+          class: BodyItem
+          data: 
+            modelFile: "${PROJECT_DIR}/PRM2222/dox_L5.yaml"
+            currentBaseLink: "WAIST"
+            rootPosition: [ 0, 0, 0 ]
+            rootAttitude: [ 
+              1, 0, 0, 
+              0, 1, 0, 
+              0, 0, 1 ]
+            jointPositions: [  ]
+            initialRootPosition: [ 0, 0, 0 ]
+            initialRootAttitude: [ 
+              1, 0, 0, 
+              0, 1, 0, 
+              0, 0, 1 ]
+            zmp: [ 0, 0, 0 ]
+            collisionDetection: true
+            selfCollisionDetection: false
+            isEditable: true
+        - 
+          id: 33
+          name: "box_S1"
+          plugin: Body
+          class: BodyItem
+          data: 
+            modelFile: "${PROJECT_DIR}/PRM2222/eox_S1.yaml"
+            currentBaseLink: "WAIST"
+            rootPosition: [ 0, 0, 0 ]
+            rootAttitude: [ 
+              1, 0, 0, 
+              0, 1, 0, 
+              0, 0, 1 ]
+            jointPositions: [  ]
+            initialRootPosition: [ 0, 0, 0 ]
+            initialRootAttitude: [ 
+              1, 0, 0, 
+              0, 1, 0, 
+              0, 0, 1 ]
+            zmp: [ 0, 0, 0 ]
+            collisionDetection: true
+            selfCollisionDetection: false
+            isEditable: true
+        - 
+          id: 34
+          name: "box_S2"
+          plugin: Body
+          class: BodyItem
+          data: 
+            modelFile: "${PROJECT_DIR}/PRM2222/eox_S2.yaml"
+            currentBaseLink: "WAIST"
+            rootPosition: [ 0, 0, 0 ]
+            rootAttitude: [ 
+              1, 0, 0, 
+              0, 1, 0, 
+              0, 0, 1 ]
+            jointPositions: [  ]
+            initialRootPosition: [ 0, 0, 0 ]
+            initialRootAttitude: [ 
+              1, 0, 0, 
+              0, 1, 0, 
+              0, 0, 1 ]
+            zmp: [ 0, 0, 0 ]
+            collisionDetection: true
+            selfCollisionDetection: false
+            isEditable: true
+        - 
+          id: 35
+          name: "box_S3"
+          plugin: Body
+          class: BodyItem
+          data: 
+            modelFile: "${PROJECT_DIR}/PRM2222/eox_S3.yaml"
+            currentBaseLink: "WAIST"
+            rootPosition: [ 0, 0, 0 ]
+            rootAttitude: [ 
+              1, 0, 0, 
+              0, 1, 0, 
+              0, 0, 1 ]
+            jointPositions: [  ]
+            initialRootPosition: [ 0, 0, 0 ]
+            initialRootAttitude: [ 
+              1, 0, 0, 
+              0, 1, 0, 
+              0, 0, 1 ]
+            zmp: [ 0, 0, 0 ]
+            collisionDetection: true
+            selfCollisionDetection: false
+            isEditable: true
+        - 
+          id: 36
+          name: "box_S4"
+          plugin: Body
+          class: BodyItem
+          data: 
+            modelFile: "${PROJECT_DIR}/PRM2222/eox_S4.yaml"
+            currentBaseLink: "WAIST"
+            rootPosition: [ 0, 0, 0 ]
+            rootAttitude: [ 
+              1, 0, 0, 
+              0, 1, 0, 
+              0, 0, 1 ]
+            jointPositions: [  ]
+            initialRootPosition: [ 0, 0, 0 ]
+            initialRootAttitude: [ 
+              1, 0, 0, 
+              0, 1, 0, 
+              0, 0, 1 ]
+            zmp: [ 0, 0, 0 ]
+            collisionDetection: true
+            selfCollisionDetection: false
+            isEditable: true
+        - 
+          id: 37
+          name: "box_S5"
+          plugin: Body
+          class: BodyItem
+          data: 
+            modelFile: "${PROJECT_DIR}/PRM2222/eox_S5.yaml"
+            currentBaseLink: "WAIST"
+            rootPosition: [ 0, 0, 0 ]
+            rootAttitude: [ 
+              1, 0, 0, 
+              0, 1, 0, 
+              0, 0, 1 ]
+            jointPositions: [  ]
+            initialRootPosition: [ 0, 0, 0 ]
+            initialRootAttitude: [ 
+              1, 0, 0, 
+              0, 1, 0, 
+              0, 0, 1 ]
+            zmp: [ 0, 0, 0 ]
+            collisionDetection: true
+            selfCollisionDetection: false
+            isEditable: true
+        - 
+          id: 38
+          name: "box_M1"
+          plugin: Body
+          class: BodyItem
+          data: 
+            modelFile: "${PROJECT_DIR}/PRM2222/box_M1.yaml"
+            currentBaseLink: "WAIST"
+            rootPosition: [ 0, 0, 0 ]
+            rootAttitude: [ 
+              1, 0, 0, 
+              0, 1, 0, 
+              0, 0, 1 ]
+            jointPositions: [  ]
+            initialRootPosition: [ 0, 0, 0 ]
+            initialRootAttitude: [ 
+              1, 0, 0, 
+              0, 1, 0, 
+              0, 0, 1 ]
+            zmp: [ 0, 0, 0 ]
+            collisionDetection: true
+            selfCollisionDetection: false
+            isEditable: true
+        - 
+          id: 39
+          name: "box_M2"
+          plugin: Body
+          class: BodyItem
+          data: 
+            modelFile: "${PROJECT_DIR}/PRM2222/box_M2.yaml"
+            currentBaseLink: "WAIST"
+            rootPosition: [ 0, 0, 0 ]
+            rootAttitude: [ 
+              1, 0, 0, 
+              0, 1, 0, 
+              0, 0, 1 ]
+            jointPositions: [  ]
+            initialRootPosition: [ 0, 0, 0 ]
+            initialRootAttitude: [ 
+              1, 0, 0, 
+              0, 1, 0, 
+              0, 0, 1 ]
+            zmp: [ 0, 0, 0 ]
+            collisionDetection: true
+            selfCollisionDetection: false
+            isEditable: true
+        - 
+          id: 40
+          name: "box_M3"
+          plugin: Body
+          class: BodyItem
+          data: 
+            modelFile: "${PROJECT_DIR}/PRM2222/box_M3.yaml"
+            currentBaseLink: "WAIST"
+            rootPosition: [ 0, 0, 0 ]
+            rootAttitude: [ 
+              1, 0, 0, 
+              0, 1, 0, 
+              0, 0, 1 ]
+            jointPositions: [  ]
+            initialRootPosition: [ 0, 0, 0 ]
+            initialRootAttitude: [ 
+              1, 0, 0, 
+              0, 1, 0, 
+              0, 0, 1 ]
+            zmp: [ 0, 0, 0 ]
+            collisionDetection: true
+            selfCollisionDetection: false
+            isEditable: true
+        - 
+          id: 41
+          name: "box_M4"
+          plugin: Body
+          class: BodyItem
+          data: 
+            modelFile: "${PROJECT_DIR}/PRM2222/box_M4.yaml"
+            currentBaseLink: "WAIST"
+            rootPosition: [ 0, 0, 0 ]
+            rootAttitude: [ 
+              1, 0, 0, 
+              0, 1, 0, 
+              0, 0, 1 ]
+            jointPositions: [  ]
+            initialRootPosition: [ 0, 0, 0 ]
+            initialRootAttitude: [ 
+              1, 0, 0, 
+              0, 1, 0, 
+              0, 0, 1 ]
+            zmp: [ 0, 0, 0 ]
+            collisionDetection: true
+            selfCollisionDetection: false
+            isEditable: true
+        - 
+          id: 42
+          name: "box_M5"
+          plugin: Body
+          class: BodyItem
+          data: 
+            modelFile: "${PROJECT_DIR}/PRM2222/box_M5.yaml"
+            currentBaseLink: "WAIST"
+            rootPosition: [ 0, 0, 0 ]
+            rootAttitude: [ 
+              1, 0, 0, 
+              0, 1, 0, 
+              0, 0, 1 ]
+            jointPositions: [  ]
+            initialRootPosition: [ 0, 0, 0 ]
+            initialRootAttitude: [ 
+              1, 0, 0, 
+              0, 1, 0, 
+              0, 0, 1 ]
+            zmp: [ 0, 0, 0 ]
+            collisionDetection: true
+            selfCollisionDetection: false
+            isEditable: true
+        - 
+          id: 43
+          name: "box_M6"
+          plugin: Body
+          class: BodyItem
+          data: 
+            modelFile: "${PROJECT_DIR}/PRM2222/box_M1.yaml"
+            currentBaseLink: "WAIST"
+            rootPosition: [ 0, 0, 0 ]
+            rootAttitude: [ 
+              1, 0, 0, 
+              0, 1, 0, 
+              0, 0, 1 ]
+            jointPositions: [  ]
+            initialRootPosition: [ 0, 0, 0 ]
+            initialRootAttitude: [ 
+              1, 0, 0, 
+              0, 1, 0, 
+              0, 0, 1 ]
+            zmp: [ 0, 0, 0 ]
+            collisionDetection: true
+            selfCollisionDetection: false
+            isEditable: true
+        - 
+          id: 44
+          name: "box_M7"
+          plugin: Body
+          class: BodyItem
+          data: 
+            modelFile: "${PROJECT_DIR}/PRM2222/box_M2.yaml"
+            currentBaseLink: "WAIST"
+            rootPosition: [ 0, 0, 0 ]
+            rootAttitude: [ 
+              1, 0, 0, 
+              0, 1, 0, 
+              0, 0, 1 ]
+            jointPositions: [  ]
+            initialRootPosition: [ 0, 0, 0 ]
+            initialRootAttitude: [ 
+              1, 0, 0, 
+              0, 1, 0, 
+              0, 0, 1 ]
+            zmp: [ 0, 0, 0 ]
+            collisionDetection: true
+            selfCollisionDetection: false
+            isEditable: true
+        - 
+          id: 45
+          name: "box_M8"
+          plugin: Body
+          class: BodyItem
+          data: 
+            modelFile: "${PROJECT_DIR}/PRM2222/box_M3.yaml"
+            currentBaseLink: "WAIST"
+            rootPosition: [ 0, 0, 0 ]
+            rootAttitude: [ 
+              1, 0, 0, 
+              0, 1, 0, 
+              0, 0, 1 ]
+            jointPositions: [  ]
+            initialRootPosition: [ 0, 0, 0 ]
+            initialRootAttitude: [ 
+              1, 0, 0, 
+              0, 1, 0, 
+              0, 0, 1 ]
+            zmp: [ 0, 0, 0 ]
+            collisionDetection: true
+            selfCollisionDetection: false
+            isEditable: true
+        - 
+          id: 46
+          name: "box_M9"
+          plugin: Body
+          class: BodyItem
+          data: 
+            modelFile: "${PROJECT_DIR}/PRM2222/box_M4.yaml"
+            currentBaseLink: "WAIST"
+            rootPosition: [ 0, 0, 0 ]
+            rootAttitude: [ 
+              1, 0, 0, 
+              0, 1, 0, 
+              0, 0, 1 ]
+            jointPositions: [  ]
+            initialRootPosition: [ 0, 0, 0 ]
+            initialRootAttitude: [ 
+              1, 0, 0, 
+              0, 1, 0, 
+              0, 0, 1 ]
+            zmp: [ 0, 0, 0 ]
+            collisionDetection: true
+            selfCollisionDetection: false
+            isEditable: true
+        - 
+          id: 47
+          name: "box_M10"
+          plugin: Body
+          class: BodyItem
+          data: 
+            modelFile: "${PROJECT_DIR}/PRM2222/box_M5.yaml"
+            currentBaseLink: "WAIST"
+            rootPosition: [ 0, 0, 0 ]
+            rootAttitude: [ 
+              1, 0, 0, 
+              0, 1, 0, 
+              0, 0, 1 ]
+            jointPositions: [  ]
+            initialRootPosition: [ 0, 0, 0 ]
+            initialRootAttitude: [ 
+              1, 0, 0, 
+              0, 1, 0, 
+              0, 0, 1 ]
+            zmp: [ 0, 0, 0 ]
+            collisionDetection: true
+            selfCollisionDetection: false
+            isEditable: true
+views: 
+  - 
+    id: 0
+    plugin: Base
+    class: ItemPropertyView
+    mounted: true
+  - 
+    id: 1
+    plugin: Base
+    class: ItemTreeView
+    mounted: true
+    state: 
+      selected: [ 6 ]
+      checked: [ 1, 2, 3, [ 3, "0x49d19800", "tip" ], [ 3, "0x49d2bb00", "prehension_L_pipe" ], [ 3, "0x49d2bb00", "" ], 4, 5, 6, 7, 8, 17, 18, 19, 22, 23, 24, 28, 29, 30 ]
+      expanded: [ 1, 2, 6 ]
+  - 
+    id: 2
+    plugin: Base
+    class: MessageView
+    mounted: true
+  - 
+    id: 3
+    plugin: Base
+    class: SceneView
+    mounted: true
+    state: 
+      editMode: false
+      viewpointControlMode: thirdPerson
+      collisionLines: false
+      polygonMode: fill
+      defaultHeadLight: true
+      defaultHeadLightIntensity: 0.75
+      headLightLightingFromBack: false
+      worldLight: true
+      worldLightIntensity: 0.5
+      worldLightAmbient: 0.3
+      additionalLights: true
+      fog: true
+      floorGrid: true
+      floorGridSpan: 10
+      floorGridInterval: 0.5
+      xzGridSpan: 10
+      xzGridInterval: 0.5
+      xzGrid: false
+      yzGridSpan: 10
+      yzGridInterval: 0.5
+      texture: true
+      lineWidth: 1
+      pointSize: 1
+      normalVisualization: false
+      normalLength: 0.01
+      coordinateAxes: true
+      fpsTestIteration: 1
+      showFPS: false
+      enableNewDisplayListDoubleRendering: false
+      useBufferForPicking: true
+      upsideDown: false
+      cameras: 
+        - 
+          camera: [ System, Perspective ]
+          isCurrent: true
+          fieldOfView: 0.698132
+          near: 0.01
+          far: 100
+          eye: [ -0.524893118, 0.286987331, 0.791582687 ]
+          direction: [ 0.604745864, -0.00287840459, -0.796413307 ]
+          up: [ 0.796404286, -0.00379063981, 0.604752714 ]
+        - 
+          camera: [ System, Orthographic ]
+          orthoHeight: 20
+          near: 0.01
+          far: 100
+      backgroundColor: [ 0.100000001, 0.100000001, 0.300000012 ]
+      gridColor: [ 0.899999976, 0.899999976, 0.899999976, 1 ]
+      xzgridColor: [ 0.899999976, 0.899999976, 0.899999976, 1 ]
+      yzgridColor: [ 0.899999976, 0.899999976, 0.899999976, 1 ]
+      dedicatedItemTreeViewChecks: false
+  - 
+    id: 4
+    plugin: Body
+    class: BodyLinkView
+    mounted: true
+    state: 
+      showRotationMatrix: false
+  - 
+    id: 5
+    plugin: Body
+    class: JointSliderView
+    mounted: true
+    state: 
+      showAllJoints: true
+      jointId: false
+      name: true
+      numColumns: 1
+      spinBox: true
+      slider: true
+      labelOnLeft: true
+      currentBodyItem: 6
+  - 
+    id: 6
+    plugin: Body
+    class: LinkSelectionView
+    mounted: true
+    state: 
+      listingMode: "Link List"
+      currentBodyItem: 6
+      bodyItems: 
+        - 
+          id: 3
+          selectedLinks: [ 12 ]
+        - 
+          id: 5
+          selectedLinks: [ 0 ]
+        - 
+          id: 17
+          selectedLinks: [ 0 ]
+        - 
+          id: 30
+          selectedLinks: [ 0 ]
+  - 
+    id: 7
+    plugin: MotionFile
+    class: MotionEdit
+    mounted: true
+  - 
+    id: 8
+    plugin: Python
+    class: PythonConsoleView
+    mounted: true
+toolbars: 
+  "TimeBar": 
+    minTime: 0
+    maxTime: 30
+    frameRate: 100
+    playbackFrameRate: 50
+    idleLoopDrivenMode: false
+    currentTime: 0
+    speedScale: 1
+    syncToOngoingUpdates: true
+    autoExpansion: true
+  "KinematicsBar": 
+    mode: AUTO
+    enablePositionDragger: true
+    penetrationBlock: false
+    collisionLinkHighlight: false
+    snapDistance: 0.025
+    penetrationBlockDepth: 0.0005
+    lazyCollisionDetectionMode: true
+  "BodyBar": 
+    current: 6
+  "LeggedBodyBar": 
+    stanceWidth: 0.15
+  "GraspBar": 
+    graspRobot: 3
+    graspObject: 6
+    graspEnv: [ 15, 11, 9, 5, 4, 12, 2, 23, 24, 20, 
+      32, 7, 8, 10, 13, 14, 18, 19, 16, 25, 
+      21, 22, 26, 27, 28, 29, 30, 31, 33, 34, 
+      35, 37, 36, 38, 39, 40, 41, 42, 43, 44, 
+      45, 46, 47 ]
+    objTag2Item: [ 3, 17, 6 ]
+    camera: 0
+  "BodyMotionGenerationBar": 
+    autoGenerationForNewBody: true
+    balancer: false
+    autoGeneration: false
+    timeScaleRatio: 1
+    preInitialDuration: 1
+    postFinalDuration: 1
+    onlyTimeBarRange: false
+    makeNewBodyItem: true
+    stealthyStepMode: true
+    stealthyHeightRatioThresh: 2
+    flatLiftingHeight: 0.005
+    flatLandingHeight: 0.005
+    impactReductionHeight: 0.005
+    impactReductionTime: 0.04
+    autoZmp: true
+    minZmpTransitionTime: 0.1
+    zmpCenteringTimeThresh: 0.03
+    zmpTimeMarginBeforeLiftingSpin: 0
+    zmpMaxDistanceFromCenter: 0.02
+    allLinkPositions: false
+    lipSyncMix: false
+    timeToStartBalancer: 0
+    balancerIterations: 2
+    plainBalancerMode: false
+    boundaryConditionType: position
+    boundarySmootherType: quintic
+    boundarySmootherTime: 0.5
+    boundaryCmAdjustment: false
+    boundaryCmAdjustmentTime: 1
+    waistHeightRelaxation: false
+    gravity: 9.8
+    dynamicsTimeRatio: 1
+Body: 
+  "BodyMotionEngine": 
+    updateJointVelocities: false
+  "EditableSceneBody": 
+    editableSceneBodies: 
+      - 
+        bodyItem: 2
+        showCenterOfMass: false
+        showPpcom: false
+        showZmp: false
+      - 
+        bodyItem: 3
+        showCenterOfMass: false
+        showPpcom: false
+        showZmp: false
+      - 
+        bodyItem: 4
+        showCenterOfMass: false
+        showPpcom: false
+        showZmp: false
+      - 
+        bodyItem: 5
+        showCenterOfMass: false
+        showPpcom: false
+        showZmp: false
+      - 
+        bodyItem: 6
+        showCenterOfMass: false
+        showPpcom: false
+        showZmp: false
+      - 
+        bodyItem: 7
+        showCenterOfMass: false
+        showPpcom: false
+        showZmp: false
+      - 
+        bodyItem: 8
+        showCenterOfMass: false
+        showPpcom: false
+        showZmp: false
+      - 
+        bodyItem: 9
+        showCenterOfMass: false
+        showPpcom: false
+        showZmp: false
+      - 
+        bodyItem: 17
+        showCenterOfMass: false
+        showPpcom: false
+        showZmp: false
+      - 
+        bodyItem: 18
+        showCenterOfMass: false
+        showPpcom: false
+        showZmp: false
+      - 
+        bodyItem: 19
+        showCenterOfMass: false
+        showPpcom: false
+        showZmp: false
+      - 
+        bodyItem: 22
+        showCenterOfMass: false
+        showPpcom: false
+        showZmp: false
+      - 
+        bodyItem: 23
+        showCenterOfMass: false
+        showPpcom: false
+        showZmp: false
+      - 
+        bodyItem: 24
+        showCenterOfMass: false
+        showPpcom: false
+        showZmp: false
+      - 
+        bodyItem: 28
+        showCenterOfMass: false
+        showPpcom: false
+        showZmp: false
+      - 
+        bodyItem: 29
+        showCenterOfMass: false
+        showPpcom: false
+        showZmp: false
+      - 
+        bodyItem: 30
+        showCenterOfMass: false
+        showPpcom: false
+        showZmp: false
+    staticModelEditing: true
+  "KinematicFaultChecker": 
+    checkJointPositions: true
+    angleMargin: 0
+    translationMargin: 0
+    checkJointVelocities: true
+    velocityLimitRatio: 100
+    targetJoints: all
+    checkSelfCollisions: true
+    onlyTimeBarRange: false
+viewAreas: 
+  - 
+    type: embedded
+    tabs: true
+    contents: 
+      type: splitter
+      orientation: horizontal
+      sizes: [ 262, 1581 ]
+      children: 
+        - 
+          type: splitter
+          orientation: vertical
+          sizes: [ 600, 254 ]
+          children: 
+            - 
+              type: pane
+              views: [ 1 ]
+              current: 1
+            - 
+              type: pane
+              views: [ 0, 6 ]
+              current: 6
+        - 
+          type: splitter
+          orientation: vertical
+          sizes: [ 645, 209 ]
+          children: 
+            - 
+              type: splitter
+              orientation: horizontal
+              sizes: [ 408, 1169 ]
+              children: 
+                - 
+                  type: pane
+                  views: [ 4, 5, 7 ]
+                  current: 4
+                - 
+                  type: pane
+                  views: [ 3 ]
+                  current: 3
+            - 
+              type: pane
+              views: [ 2, 8 ]
+              current: 2
+layoutOfToolBars: 
+  rows: 
+    - 
+      - { name: "FileBar", x: 0, priority: 0 }
+      - { name: "ScriptBar", x: 49, priority: 0 }
+      - { name: "TimeBar", x: 98, priority: 0 }
+      - { name: "SceneBar", x: 1048, priority: 0 }
+      - { name: "GraphBar", x: 1323, priority: 0 }
+      - { name: "SimulationBar", x: 1436, priority: 0 }
+      - { name: "BodyBar", x: 1645, priority: 0 }
+    - 
+      - { name: "KinematicsBar", x: 0, priority: 0 }
+      - { name: "GraspBar", x: 248, priority: 0 }
+    - 
+      - { name: "BodyMotionGenerationBar", x: 0, priority: 0 }
+      - { name: "PCLBar", x: 145, priority: 0 }
+    - 
+      - { name: "ManipBar", x: 0, priority: 0 }

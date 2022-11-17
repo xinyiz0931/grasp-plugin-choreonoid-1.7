@@ -1,4 +1,4 @@
-modelFile: main_with_provision_schunk.wrl
+modelFile: main_with_provision_left.wrl
 
 standardPose: [ 
 0, 0, 0,

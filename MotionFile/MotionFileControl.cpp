@@ -652,8 +652,49 @@ void MotionFileControl::LoadFromMotionFile(std::string motionfilename, bool fixw
 	if ( PlanBase::instance()->targetObject != NULL )
 		TrackObjectPose();
 	isMotionFileSucceed = tp.isTrajectorySectionSucceed;
-
 }
+
+// added by xinyi
+// void MotionFileControl::LoadFromJntFile(std::string jntfilename)
+// {
+// 	// ロボットが設定されているか？
+// 	if ( PlanBase::instance()->targetArmFinger == NULL ) {
+// 		MessageView::mainInstance()->cout() << "No data of the robot. (SetRobot)" << endl;
+// 		cout << "targetArmFinger=" << PlanBase::instance()->targetArmFinger << endl;
+// 		return;
+// 	}
+
+// 	// ロボットの腕タイプを取得
+// 	ArmType = PlanBase::instance()->armsList.size();
+// 	if ( ArmType == ARM_NONE ) {
+// 		MessageView::mainInstance()->cout() << "Arm none." << endl;
+// 		cout << PlanBase::instance()->armsList.size() << endl;
+// 		return;
+// 	}
+
+// 	// モーションシーケンスのクリア
+// 	PlanBase::instance()->graspMotionSeq.clear();
+// 	// directly load the file and feed into graspMotionSeq(vector)
+// 	cout << "[*] Load joint file : " << jntfilename << endl;
+// 	ifstream jntListFile((jntfilename).c_str());
+// 	char line[1024];
+// 	while (jntListFile) {
+// 		jntListFile.getline(line, 1024);
+// 		if ( objListFile.eof() ) {
+
+// 			pause = 0;
+// 			MessageView::mainInstance()->cout() << "motion.dat(EOF) " << PlanBase::instance()->graspMotionSeq.size()-1 <<
+// 													":" << CommandCnt <<
+// 													":" << MotionCnt << endl;
+// 			if(headForward) HeadForwardFunc();
+
+// 			break;
+// 		}
+// 	}
+
+
+
+// }
 
 
 //-----------------------------------------------------------------------------
@@ -686,8 +727,8 @@ void MotionFileControl::ClearMotionFile( void )
 	headForward = false;
 }
 
-
 // --------------------------------------------------------------------------------------
+
 // JOINT_ABS : 関節角度の絶対値
 // --------------------------------------------------------------------------------------
 bool MotionFileControl::JointAbs( double Ts, double Te, VectorXd Value )

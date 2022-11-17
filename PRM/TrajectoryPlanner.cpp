@@ -430,6 +430,7 @@ bool TrajectoryPlanner::doTrajectoryPlanning() {
 				config_tmp.push_back(cfull);
 				bool success;
 				std::string error_message = "";
+				
 				if (params.param.algo == PRMParams::ALGO_SBL) {
 						success = planner.call_planner(config_tmp, inputMotionSeq[i].pathPlanDOF);
 						if (!success) error_message = planner.error_message();
@@ -471,6 +472,7 @@ bool TrajectoryPlanner::doTrajectoryPlanning() {
 				gc->body()->link(0)->R() = rotFromRpy(inputMotionSeq[i+1].rpy);
 				gc->calcForwardKinematics();
 
+
 				vector<VectorXd> config_tmp2;
 
 				for(unsigned int j=0; j<config_tmp.size()-1; j++){
@@ -494,16 +496,13 @@ bool TrajectoryPlanner::doTrajectoryPlanning() {
 					gc->calcForwardKinematics();
 					MotionState temp = gc->getMotionState();
 					motionSeq.push_back( temp );
-					
 					if(outputGraspMotionSeq){
 						if( l < inputMotionSeq.size()  )  temp.motionTime = inputMotionSeq[l].motionTime;
 //						if( l < gc->motionTimeSeq.size()  )  temp.motionTime = gc->motionTimeSeq[l];
 						if(j < config_tmp2.size()-1 || i==inputMotionSeq.size()-2){
 							gc->graspMotionSeq.push_back(temp);
-							
 						}
 					}
-
 				}
 
 			}
@@ -622,42 +621,42 @@ bool TrajectoryPlanner::doTrajectoryPlanning() {
 		// 20210802
 		// DIR *pDir;
 		// pDir = opendir("extplugin/graspPlugin/RobotInterface");
-		int stateLft_old = gc->NOT_GRASPING;
+		// int stateLft_old = gc->NOT_GRASPING;
 		// if(pDir != NULL){
 
-				// ofstream gout("extplugin/graspPlugin/MotionFile/data/motion_ik.dat");
+		// ofstream gout("extplugin/graspPlugin/MotionFile/data/motion_ik.dat");
+		
 		// ofstream gout("./ext/bpbot/data/motion/motion_ik.dat");
 		// cout << "Write joint info to file" << endl;
 		// double p = p=180.0/3.1415;
 		// // gout <<"6 7";
 		// for(unsigned int i=1; i<gc->graspMotionSeq.size(); i++){
 			
-		// 	gout <<gc->graspMotionSeq[i].motionTime << " ";
+		// 	gout << gc->graspMotionSeq[i].motionTime << " ";
 		// 	// determine when to open/close
-		// 	int gstateLft = gc->graspMotionSeq[i].graspingState2;
-		// 	// 0: close aciton
-		// 	// 1: open action
-		// 	// 2: nothing??? 
-		// 	if (gstateLft==gc->GRASPING && stateLft_old ==gc->UNDER_GRASPING){
-		// 		gout <<"0"<<" ";
-		// 	}
-		// 	else if (gstateLft==gc->NOT_GRASPING && stateLft_old==gc->UNDER_GRASPING)
-		// 	{
-		// 		gout <<"1"<<" ";
-		// 	}
-		// 	else if (gstateLft==gc->UNDER_GRASPING && stateLft_old==gc->NOT_GRASPING)
-		// 	{
-		// 		gout <<"1"<<" ";
-		// 	}
-		// 	else{
-		// 		gout <<"2"<<" ";
-		// 	}
+		// 	// int gstateLft = gc->graspMotionSeq[i].graspingState2;
+		// 	// // 0: close aciton
+		// 	// // 1: open action
+		// 	// // 2: nothing??? 
+		// 	// if (gstateLft==gc->GRASPING && stateLft_old ==gc->UNDER_GRASPING){
+		// 	// 	gout <<"0"<<" ";
+		// 	// }
+		// 	// else if (gstateLft==gc->NOT_GRASPING && stateLft_old==gc->UNDER_GRASPING)
+		// 	// {
+		// 	// 	gout <<"1"<<" ";
+		// 	// }
+		// 	// else if (gstateLft==gc->UNDER_GRASPING && stateLft_old==gc->NOT_GRASPING)
+		// 	// {
+		// 	// 	gout <<"1"<<" ";
+		// 	// }
+		// 	// else{
+		// 	// 	gout <<"2"<<" ";
+		// 	// }
 		// 	for(int j=0;j<gc->bodyItemRobot()->body()->numJoints();j++) {
 		// 		gout << gc->graspMotionSeq[i].jointSeq[j]*p << " ";
 		// 	}
-		// 	stateLft_old = gstateLft;
+		// 	// stateLft_old = gstateLft;
 		// 	gout << endl;
-		// }
 		// }
 		return successAll;
 }

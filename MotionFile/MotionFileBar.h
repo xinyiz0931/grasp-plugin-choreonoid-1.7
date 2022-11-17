@@ -46,6 +46,8 @@ using namespace cnoid;
 			void onLoadButtonClicked();
 			void onClearButtonClicked();
 			void onSavePositionButtonClicked();
+			
+			void doMove();
         };
    }
 

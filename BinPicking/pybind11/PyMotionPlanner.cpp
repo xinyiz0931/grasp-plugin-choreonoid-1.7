@@ -57,29 +57,16 @@ vector<double> Get_motion() {
 	vector<double> seqs;
 	PlanBase * tc = PlanBase::instance();
 	int size = tc->graspMotionSeq.size();
-
-	//int stateLft_old = tc->NOT_GRASPING;
-
+	cout << "xinyitest: " << tc->bodyItemRobot()->body()->name() << endl;
 	for (int i; i < size; i++) {
-		// start to create motion sequence
+		// one seq = [tm, px19]
 		seqs.push_back(tc->graspMotionSeq[i].motionTime);
-
-		//int gstateLft = tc->graspMotionSeq[i].graspingState2;
-		//// 0: close , 1: open, 2. nothing, stay same
-		//if (gstateLft == tc->GRASPING && stateLft_old == tc->UNDER_GRASPING) 
-		//	seqs.push_back(0);
-		//else if (gstateLft == tc->NOT_GRASPING && stateLft_old == tc->UNDER_GRASPING) 
-		//	seqs.push_back(1);
-		//else if (gstateLft == tc->UNDER_GRASPING && stateLft_old == tc->NOT_GRASPING)
-		//	seqs.push_back(1);
-		//else 
-		//	seqs.push_back(2);
 		
 		for (int j=0;j<tc->bodyItemRobot()->body()->numJoints();j++) {
 			seqs.push_back(tc->graspMotionSeq[i].jointSeq[j]*180.0/M_PI); // radian to degree
 		}
-		//stateLft_old = gstateLft;
 	}
+	
 	return seqs;	
 }
 }
