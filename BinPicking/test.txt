@@ -1,0 +1,11 @@
+All in /opt/ros/melodic/lib/python2.7/dist-packages/hrpsys/hrpsys_config.py 
+
+setJointAnglesOfGroup(self, gname, pose, tm, wait=True)
+setJointAnglesOfGroup('torso', angles[0:1], tm, False)
+angle = (19,)
+
+setJointAnglesSequence(self, angless, tms):
+
+setJointAnglesSequenceOfGroup(self, gname, angless, tms):
+
+

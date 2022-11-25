@@ -107,7 +107,7 @@ items:
       plugin: Python
       class: PythonScriptItem
       data: 
-        file: "${PROGRAM_TOP}/ext/bpbot/example/script_autopick.py"
+        file: "${PROGRAM_TOP}/ext/bpbot/example/run_autopick.py"
         executionOnLoading: false
         backgroundExecution: false
 views: 
