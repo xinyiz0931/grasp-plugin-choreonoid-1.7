@@ -29,7 +29,7 @@ git clone https://github.com/xinyiz0931/grasp-plugin-choreonoid-1.7.git
 4. Install graspPlugin, you can follow manuals from graspPlugin [wiki](http://www.hlab.sys.es.osaka-u.ac.jp/grasp/ja/node/311). Otherwise follow these steps: 
 ```
 cd choreonoid-1.7.0
-./ext/Grasp/install-requiresities-ubuntu.sh
+./ext/graspPlugin/Grasp/install-requiresities-ubuntu.sh
 ccmake .
 (In ccmake, check the following options) 
 (GRASP_PLUGINS  Grasp;PRM;MotionFile;BinPicking)
