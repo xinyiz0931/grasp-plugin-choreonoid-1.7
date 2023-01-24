@@ -68,51 +68,41 @@ vector<double> Get_motion() {
 	
 	return seqs;	
 }
-vector<double> Solve_IK(vector<double> Values, int LR_flag) {
-	// Intiialize, left arm-> 1, right arm -> 0 
-	vector<double> seqs;
-	MotionState tmpState;
+// vector<double> Solve_IK(vector<double> Values, int LR_flag) {
+// 	/* ここで、arm変数の引数は右の場合は0で左の場合は1 */
+// 	vector<double> seqs;
+// 	MotionState tmpState;
 
-	int jntNum = PlanBase::instance()->arm(LR_flag)->arm_path->numJoints();
+// 	int jntNum = PlanBase::instance()->arm(LR_flag)->arm_path->numJoints();
+// 	int seqNum = int(Values.size()/6);
+// 	for (int i; i < seqNum; i++) {
+// 		Vector3 pos = Vector3(Values[i*6+0], Values[i*6+1], Values[i*6+2]);
+// 		Vector3 rpy = Vector3(Values[i*6+3], Values[i*6+4], Values[i*6+5]);
+// 		rpy = RadConv(rpy);
+// 		//手先位置を関節角に変換
+// 		PlanBase::instance()->arm(LR_flag)->IK_arm(pos, PlanBase::instance()->arm(LR_flag)->arm_path->joint(jntNum-1)->calcRfromAttitude(rotFromRpy(rpy)));
 
+// 		int jntNum2 = PlanBase::instance()->bodyItemRobot()->body()->numJoints();
+// 		VectorXd Value2(jntNum);
 
+// 		if (PlanBase::instance()->graspMotionSeq.size() > 0) 
+// 			Value2 = PlanBase::instance()->graspMotionSeq.back().jointSeq;
+// 		else {
+// 			for (int j=0; j < jntNum2; j++) 
+// 				Values2(i) = PlanBase::instance()->bodyItemRobot()->body()->joint(j)->q();
+// 		} 
 
-	// Read poses sequence
-	int seqNum = int(Values.size()/6);
-	for (int i; i < seqNum; i++) {
-		Vector3 pos = Vector3(Values[i*6+0], Values[i*6+1], Values[i*6+2]);
-		Vector3 rpy = Vector3(Values[i*6+3], Values[i*6+4], Values[i*6+5]);
-		rpy = RadConv(rpy);
-		//手先位置を関節角に変換
-		PlanBase::instance()->arm(LR_flag)->IK_arm(pos, PlanBase::instance()->arm(LR_flag)->arm_path->joint(jntNum-1)->calcRfromAttitude(rotFromRpy(rpy)));
-
-		int jntNum2 = PlanBase::instance()->bodyItemRobot()->body()->numJoints();
-		VectorXd Value2(jntNum);
-
-		if (PlanBase::instance()->graspMotionSeq.size() > 0) 
-			Value2 = PlanBase::instance()->graspMotionSeq.back().jointSeq;
-		else {
-			for (int j=0; j < jntNum2; j++) 
-				Values2(i) = PlanBase::instance()->bodyItemRobot()->body()->joint(j)->q();
-		} 
-
-		for (int j=0; j<jntNum;j++)
-			Value2(PlanBase::instance()->arm(LR_flag)->arm_path->joint(j)->jointId()) = PlanBase::instance()->arm(LR_flag)->arm_path->joint(j)->q();
+// 		for (int j=0; j<jntNum;j++)
+// 			Value2(PlanBase::instance()->arm(LR_flag)->arm_path->joint(j)->jointId()) = PlanBase::instance()->arm(LR_flag)->arm_path->joint(j)->q();
 		
-		tmpState.pos = MotionFileControl::instance()->InitBasePos;
-		tmpState.rpy = MotionFileControl::instance()->InitBaseRPY;
-		tmpState.jointSeq = Value2;
-		tmpState.motionTime = 1.0;
-		tmpState.startTime = 0.0;
-		tmpState.startTime = 1.0;
-
-		tmpState.pathPlanDOFclear()
+// 		tmpState.pos = MotionFileControl::instance()->InitBasePos;
+// 		tmpState.rpy = MotionFileControl::instance()->InitBaseRPY;
 		
-	}
-	MotionFileControl *instance = new MotionFileControl();
-	FILE *fp;
-	if ((fp=fopen((motionfilename))))
-}
+// 	}
+// 	MotionFileControl *instance = new MotionFileControl();
+// 	FILE *fp;
+// 	if ((fp=fopen((motionfilename))))
+// }
 }
 
 namespace cnoid {

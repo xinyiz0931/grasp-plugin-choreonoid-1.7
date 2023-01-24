@@ -606,9 +606,9 @@ DEF main_withHands Humanoid{
                   jointType "slide"
                   jointAxis 0 1 0
                   jointId 15
-				  translation -0.0900 0 0
+				  translation -0.0890 0 0
                   rotation 1 0 0 0
-                  ulimit 0.023
+                  ulimit 0.017
                   llimit 0.01
                   children [
                     DEF RHAND_L_Link Segment {
@@ -655,10 +655,10 @@ DEF main_withHands Humanoid{
                   jointType "slide"
                   jointAxis 0 1 0
                   jointId 16
-				  translation -0.0900 0 0
+				  translation -0.0890 0 0
                   rotation 1 0 0 0
                   ulimit -0.01
-                  llimit -0.023
+                  llimit -0.017
                   children [
                     DEF RHAND_R_Link Segment {
                       mass 0.01

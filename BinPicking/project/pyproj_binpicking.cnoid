@@ -18,8 +18,8 @@ items:
           0, 1, 0, 
           -0, 0, 1 ]
         jointPositions: [ 
-           0.000000,  0.000000,  0.000000, -0.174533, -0.448550, -2.225290,  0.000000,  0.000000,  0.000000,  0.401426, 
-          -0.448550, -2.225290, -0.122130,  0.000000,  0.000000,  0.023000, -0.023000,  0.017000, -0.017000 ]
+           0.000000,  0.000000,  0.000000, -0.174533, -0.448550, -2.225294,  0.000000,  0.000000,  0.000000,  0.401426, 
+          -0.448550, -2.225294, -0.122173,  0.000000,  0.000000,  0.012497, -0.012497,  0.012497, -0.012497 ]
         initialRootPosition: [ 0, 0, 0 ]
         initialRootAttitude: [ 
           1, 0, 0, 
@@ -40,11 +40,11 @@ items:
       data: 
         modelFile: "${PROGRAM_TOP}/ext/graspPlugin/Samples/Object/M0Hrp.wrl"
         currentBaseLink: "WAIST"
-        rootPosition: [ -0.484742775, 0.342802634, 0.0660838235 ]
+        rootPosition: [ -0.906743287, 0.701802195, 0.0910854259 ]
         rootAttitude: [ 
-          -0.870891718, -0.491470374, 0.00211819046, 
-          0.491471218, -0.870893807, -0.000136955792, 
-          0.00191202867, 0.00092175598, 0.999997747 ]
+          -0.870891714, -0.491470372, 0.00212004174, 
+          0.491471221, -0.870893806, -0.000135581849, 
+          0.00191296569, 0.000923862394, 0.999997743 ]
         jointPositions: [  ]
         initialRootPosition: [ 0, 0, 0 ]
         initialRootAttitude: [ 
@@ -107,7 +107,7 @@ items:
       plugin: Python
       class: PythonScriptItem
       data: 
-        file: "${PROGRAM_TOP}/ext/bpbot/example/run_autopick.py"
+        file: "${PROGRAM_TOP}/ext/bpbot/example/run_click.py"
         executionOnLoading: false
         backgroundExecution: false
 views: 
@@ -122,7 +122,7 @@ views:
     class: ItemTreeView
     mounted: true
     state: 
-      selected: [ 3 ]
+      selected: [ 1 ]
       checked: [ 1, [ 1, "right_arm", "tip" ], [ 1, "left_arm", "tip" ], 3, 4, 5 ]
       expanded: [ 1 ]
   - 
@@ -209,7 +209,7 @@ views:
       slider: true
       dial: false
       labelOnLeft: true
-      currentBodyItem: 3
+      currentBodyItem: 1
   - 
     id: 6
     plugin: Body
@@ -217,7 +217,7 @@ views:
     mounted: true
     state: 
       listingMode: "Link List"
-      currentBodyItem: 3
+      currentBodyItem: 1
       bodyItems: 
         - 
           id: 1
@@ -252,6 +252,8 @@ toolbars:
     graspEnv: [ 3 ]
     objTag2Item: [ 2 ]
     camera: 0
+  "BodyBar": 
+    current: 1
   "BodyMotionGenerationBar": 
     autoGenerationForNewBody: true
     balancer: false
@@ -293,8 +295,6 @@ toolbars:
     snapDistance: 0.025
     penetrationBlockDepth: 0.0005
     lazyCollisionDetectionMode: true
-  "BodyBar": 
-    current: 3
   "LeggedBodyBar": 
     stanceWidth: 0.15
 Body: 
@@ -344,12 +344,12 @@ viewAreas:
     contents: 
       type: splitter
       orientation: horizontal
-      sizes: [ 315, 1534 ]
+      sizes: [ 238, 1157 ]
       children: 
         - 
           type: splitter
           orientation: vertical
-          sizes: [ 436, 434 ]
+          sizes: [ 972, 968 ]
           children: 
             - 
               type: pane
@@ -362,12 +362,12 @@ viewAreas:
         - 
           type: splitter
           orientation: vertical
-          sizes: [ 436, 434 ]
+          sizes: [ 972, 968 ]
           children: 
             - 
               type: splitter
               orientation: horizontal
-              sizes: [ 816, 714 ]
+              sizes: [ 615, 538 ]
               children: 
                 - 
                   type: pane
@@ -396,6 +396,6 @@ layoutOfToolBars:
       - { name: "GraspBar", x: 234, priority: 0 }
     - 
       - { name: "BodyMotionGenerationBar", x: 0, priority: 0 }
-      - { name: "MotionFileBar", x: 145, priority: 0 }
+      - { name: "BinPickingBar", x: 145, priority: 0 }
     - 
       - { name: "PCLBar", x: 0, priority: 0 }

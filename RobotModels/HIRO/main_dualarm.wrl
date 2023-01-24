@@ -547,8 +547,8 @@ DEF main_withHands Humanoid{
 						       ]
 						    }
 						 ]
-					      }
-					      DEF RARM_JOINT5 Joint {
+					     }
+					     DEF RARM_JOINT5 Joint {
 						 jointType "rotate"
 						 jointId 8
 						 jointAxis 1.0 0.0 0.0 

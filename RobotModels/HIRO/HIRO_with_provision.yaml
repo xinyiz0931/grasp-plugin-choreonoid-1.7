@@ -1,4 +1,4 @@
-modelFile: main_with_provision_left.wrl
+modelFile: main_with_provision.wrl
 
 standardPose: [ 
 0, 0, 0,

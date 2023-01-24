@@ -626,38 +626,38 @@ bool TrajectoryPlanner::doTrajectoryPlanning() {
 
 		// ofstream gout("extplugin/graspPlugin/MotionFile/data/motion_ik.dat");
 		
-		// ofstream gout("./ext/bpbot/data/motion/motion_ik.dat");
+		ofstream gout("./ext/bpbot/data/motion/motion_ik.dat");
 		// cout << "Write joint info to file" << endl;
-		// double p = p=180.0/3.1415;
-		// // gout <<"6 7";
-		// for(unsigned int i=1; i<gc->graspMotionSeq.size(); i++){
+		double p = p=180.0/3.1415;
+		// gout <<"6 7";
+		for(unsigned int i=1; i<gc->graspMotionSeq.size(); i++){
 			
-		// 	gout << gc->graspMotionSeq[i].motionTime << " ";
-		// 	// determine when to open/close
-		// 	// int gstateLft = gc->graspMotionSeq[i].graspingState2;
-		// 	// // 0: close aciton
-		// 	// // 1: open action
-		// 	// // 2: nothing??? 
-		// 	// if (gstateLft==gc->GRASPING && stateLft_old ==gc->UNDER_GRASPING){
-		// 	// 	gout <<"0"<<" ";
-		// 	// }
-		// 	// else if (gstateLft==gc->NOT_GRASPING && stateLft_old==gc->UNDER_GRASPING)
-		// 	// {
-		// 	// 	gout <<"1"<<" ";
-		// 	// }
-		// 	// else if (gstateLft==gc->UNDER_GRASPING && stateLft_old==gc->NOT_GRASPING)
-		// 	// {
-		// 	// 	gout <<"1"<<" ";
-		// 	// }
-		// 	// else{
-		// 	// 	gout <<"2"<<" ";
-		// 	// }
-		// 	for(int j=0;j<gc->bodyItemRobot()->body()->numJoints();j++) {
-		// 		gout << gc->graspMotionSeq[i].jointSeq[j]*p << " ";
-		// 	}
-		// 	// stateLft_old = gstateLft;
-		// 	gout << endl;
-		// }
+			gout << gc->graspMotionSeq[i].motionTime << " ";
+			// determine when to open/close
+			// int gstateLft = gc->graspMotionSeq[i].graspingState2;
+			// // 0: close aciton
+			// // 1: open action
+			// // 2: nothing??? 
+			// if (gstateLft==gc->GRASPING && stateLft_old ==gc->UNDER_GRASPING){
+			// 	gout <<"0"<<" ";
+			// }
+			// else if (gstateLft==gc->NOT_GRASPING && stateLft_old==gc->UNDER_GRASPING)
+			// {
+			// 	gout <<"1"<<" ";
+			// }
+			// else if (gstateLft==gc->UNDER_GRASPING && stateLft_old==gc->NOT_GRASPING)
+			// {
+			// 	gout <<"1"<<" ";
+			// }
+			// else{
+			// 	gout <<"2"<<" ";
+			// }
+			for(int j=0;j<gc->bodyItemRobot()->body()->numJoints();j++) {
+				gout << gc->graspMotionSeq[i].jointSeq[j]*p << " ";
+			}
+			// stateLft_old = gstateLft;
+			gout << endl;
+		}
 		return successAll;
 }
 

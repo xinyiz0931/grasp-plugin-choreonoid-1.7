@@ -16,14 +16,14 @@
 #endif
 
 #define ARM_NONE			0								// 腕無しロボット
-#define ONE_ARM			1								// 片腕ロボット
-#define DOUBLE_ARM		2								// 双腕ロボット
-#define RIGHT_FLAG		0								// 右腕フラグ
+#define ONE_ARM				1								// 片腕ロボット
+#define DOUBLE_ARM			2								// 双腕ロボット
+#define RIGHT_FLAG			0								// 右腕フラグ
 #define LEFT_FLAG			1								// 左腕フラグ
 #define RAD_CONV			(3.141592/180.0)				// radian変換
-#define RadConv(x)		((x)*(3.141592)/(180.0))
+#define RadConv(x)			((x)*(3.141592)/(180.0))
 #define DEG_CONV			(180.0/3.141592)				// degree変換
-#define DegConv(x)		((x)*(180.0)/(3.141592))
+#define DegConv(x)			((x)*(180.0)/(3.141592))
 // #define DEBUG_MOTIONFILE_INPUT 1
 
 using namespace std;
@@ -105,7 +105,7 @@ void MotionFileControl::loadObjectData()
 }
 
 // void MotionFileControl::LoadFromMotionFile(std::string motionfilename)
-void MotionFileControl::LoadFromMotionFile(std::string motionfilename, bool fixwaist)
+void MotionFileControl::LoadFromMotionFile(std::string motionfilename, bool fixtorso)
 {
 	// ロボットが設定されているか？
 	if ( PlanBase::instance()->targetArmFinger == NULL ) {
@@ -121,7 +121,6 @@ void MotionFileControl::LoadFromMotionFile(std::string motionfilename, bool fixw
 		cout << PlanBase::instance()->armsList.size() << endl;
 		return;
 	}
-
 	// モーションシーケンスのクリア
 	PlanBase::instance()->graspMotionSeq.clear();
 
@@ -169,6 +168,7 @@ void MotionFileControl::LoadFromMotionFile(std::string motionfilename, bool fixw
 		// ------------------------------------------------------------------------
 		// 初期モーションデータの設定
 		// ------------------------------------------------------------------------
+
 		CommandCnt = 0;
 		MotionCnt  = 0;
 
@@ -213,7 +213,9 @@ void MotionFileControl::LoadFromMotionFile(std::string motionfilename, bool fixw
 		fclose(fp);
 	}
 */
-	cout << "[*] Load motion file : " << motionfilename << endl;
+	// added by xinyi
+	fixTorso = fixtorso;
+	cout << "[*] Fix torso? " << fixTorso << " and load " << motionfilename << endl;
 	ifstream objListFile( (motionfilename).c_str() );
 	char line[1024];
 	int PauseCnt = 0;
@@ -364,11 +366,7 @@ void MotionFileControl::LoadFromMotionFile(std::string motionfilename, bool fixw
 #if DEBUG_MOTIONFILE_INPUT
 			cout << "NAME : RARM_XYZ_ABS" << endl;
 #endif
-			// added by xinyi
-			if (fixwaist == false)
-				ArmXYZAbs( 0, Ts, Te, Value );
-			else
-				ArmXYZAbsFixedWaist(0, Ts, Te, Value);
+			ArmXYZAbs( 0, Ts, Te, Value );
 			continue;
 		}
 		else if ( NAME == "RARM_XYZ_REL" ) {
@@ -378,11 +376,7 @@ void MotionFileControl::LoadFromMotionFile(std::string motionfilename, bool fixw
 #if DEBUG_MOTIONFILE_INPUT
 			cout << "NAME : RARM_XYZ_REL" << endl;
 #endif
-			// added by xinyi
-			if (fixwaist == false)
-				ArmXYZRel( 0, Ts, Te, Value );
-			else
-				ArmXYZRelFixedWaist(0, Ts, Te, Value);
+			ArmXYZRel( 0, Ts, Te, Value );
 			continue;
 		}
 		else if ( NAME == "RARM_LINEAR_ABS" ) {
@@ -495,10 +489,7 @@ void MotionFileControl::LoadFromMotionFile(std::string motionfilename, bool fixw
 #if DEBUG_MOTIONFILE_INPUT
 				cout << "NAME : LARM_XYZ_ABS" << endl;
 #endif
-				if (fixwaist == false)
-					ArmXYZAbs( 1, Ts, Te, Value );
-				else
-					ArmXYZAbsFixedWaist(1, Ts, Te, Value); 
+				ArmXYZAbs( 1, Ts, Te, Value );
 			}
 			else if ( NAME == "LARM_XYZ_REL" ) {
 				// ------------------------------------------------------------
@@ -507,12 +498,7 @@ void MotionFileControl::LoadFromMotionFile(std::string motionfilename, bool fixw
 #if DEBUG_MOTIONFILE_INPUT
 				cout << "NAME : LARM_XYZ_REL" << endl;
 #endif
-
-				// added by xinyi
-				if (fixwaist == false)
-					ArmXYZRel( 0, Ts, Te, Value );
-				else
-					ArmXYZRelFixedWaist(0, Ts, Te, Value);
+				ArmXYZRel( 0, Ts, Te, Value );
 			}
 			else if ( NAME == "LARM_LINEAR_ABS" ) {
 				// ------------------------------------------------------------
@@ -654,49 +640,6 @@ void MotionFileControl::LoadFromMotionFile(std::string motionfilename, bool fixw
 	isMotionFileSucceed = tp.isTrajectorySectionSucceed;
 }
 
-// added by xinyi
-// void MotionFileControl::LoadFromJntFile(std::string jntfilename)
-// {
-// 	// ロボットが設定されているか？
-// 	if ( PlanBase::instance()->targetArmFinger == NULL ) {
-// 		MessageView::mainInstance()->cout() << "No data of the robot. (SetRobot)" << endl;
-// 		cout << "targetArmFinger=" << PlanBase::instance()->targetArmFinger << endl;
-// 		return;
-// 	}
-
-// 	// ロボットの腕タイプを取得
-// 	ArmType = PlanBase::instance()->armsList.size();
-// 	if ( ArmType == ARM_NONE ) {
-// 		MessageView::mainInstance()->cout() << "Arm none." << endl;
-// 		cout << PlanBase::instance()->armsList.size() << endl;
-// 		return;
-// 	}
-
-// 	// モーションシーケンスのクリア
-// 	PlanBase::instance()->graspMotionSeq.clear();
-// 	// directly load the file and feed into graspMotionSeq(vector)
-// 	cout << "[*] Load joint file : " << jntfilename << endl;
-// 	ifstream jntListFile((jntfilename).c_str());
-// 	char line[1024];
-// 	while (jntListFile) {
-// 		jntListFile.getline(line, 1024);
-// 		if ( objListFile.eof() ) {
-
-// 			pause = 0;
-// 			MessageView::mainInstance()->cout() << "motion.dat(EOF) " << PlanBase::instance()->graspMotionSeq.size()-1 <<
-// 													":" << CommandCnt <<
-// 													":" << MotionCnt << endl;
-// 			if(headForward) HeadForwardFunc();
-
-// 			break;
-// 		}
-// 	}
-
-
-
-// }
-
-
 //-----------------------------------------------------------------------------
 // Clearボタンの処理
 //-----------------------------------------------------------------------------
@@ -833,11 +776,11 @@ bool MotionFileControl::ArmXYZAbs( int LR_flag, double Ts, double Te, VectorXd V
 #endif
 
 	//手先位置を関節角に変換
-	PlanBase::instance()->arm(LR_flag)->IK_arm(pos, PlanBase::instance()->arm(LR_flag)->arm_path->joint(num-1)->calcRfromAttitude(rotFromRpy(rpy)));
-
 	// revised by xinyi
-	// Fix the base
-	//PlanBase::instance()->arm(LR_flag)->IK_arm(pos, PlanBase::instance()->arm(LR_flag)->arm_path->joint(num-1)->calcRfromAttitude(rotFromRpy(rpy)), 0);
+	if (!fixTorso)
+		PlanBase::instance()->arm(LR_flag)->IK_arm(pos, PlanBase::instance()->arm(LR_flag)->arm_path->joint(num-1)->calcRfromAttitude(rotFromRpy(rpy)));
+	else
+		PlanBase::instance()->arm(LR_flag)->IK_arm(pos, PlanBase::instance()->arm(LR_flag)->arm_path->joint(num-1)->calcRfromAttitude(rotFromRpy(rpy)), 0);
 
 #if 0
 	cout << "===手先位置を関節角に変換後===" << endl;
@@ -888,96 +831,6 @@ bool MotionFileControl::ArmXYZAbs( int LR_flag, double Ts, double Te, VectorXd V
 	return true;
 }
 
-// --------------------- added by xinyi ---------------------------- 
-bool MotionFileControl::ArmXYZAbsFixedWaist( int LR_flag, double Ts, double Te, VectorXd Value )
-{
-	Vector3 pos = Vector3( Value(0), Value(1), Value(2) );
-	Vector3 rpy = Vector3( Value(3), Value(4), Value(5) );
-
-	// ロール・ピッチ・ヨーの角度をラジアンに変換
-	rpy = RadConv(rpy);
-
-	// 腕の関節数を取得する
-	int num = PlanBase::instance()->arm(LR_flag)->arm_path->numJoints();
-
-	//手先位置を関節角に変換
-	// Fix the base
-	PlanBase::instance()->arm(LR_flag)->IK_arm(pos, PlanBase::instance()->arm(LR_flag)->arm_path->joint(num-1)->calcRfromAttitude(rotFromRpy(rpy)), 0);
-
-	int num2 = PlanBase::instance()->bodyItemRobot()->body()->numJoints();
-	VectorXd Value2(num);
-
-	if ( PlanBase::instance()->graspMotionSeq.size() > 0 )
-		Value2 = PlanBase::instance()->graspMotionSeq.back().jointSeq;
-	else {
-		for ( int i = 0; i < num2; i++ )
-            Value2(i) = PlanBase::instance()->bodyItemRobot()->body()->joint(i)->q();
-	}
-
-	for ( int i=0; i < num; i++ )
-		//計算された関節角を代入
-        Value2(PlanBase::instance()->arm(LR_flag)->arm_path->joint(i)->jointId()) = PlanBase::instance()->arm(LR_flag)->arm_path->joint(i)->q();
-
-	tmpState.pos		= InitBasePos;
-	tmpState.rpy		= InitBaseRPY;
-	tmpState.jointSeq	= Value2;
-	tmpState.motionTime = Te - Ts;
-	tmpState.startTime = Ts;
-	tmpState.endTime = Te;
-
-	tmpState.pathPlanDOF.clear();
-	for(int i=0;i<PlanBase::instance()->arm(LR_flag)->nJoints;i++)
-            tmpState.pathPlanDOF.push_back(PlanBase::instance()->arm(LR_flag)->arm_path->joint(i)->jointId());
-
-	PlanBase::instance()->graspMotionSeq.push_back(tmpState);
-
-	return true;
-}
-// ---------------------------- added by xinyi ---------------------------------
-bool MotionFileControl::ArmXYZRelFixedWaist( int LR_flag, double Ts, double Te, VectorXd Value )
-{
-
-	Vector3 pos = Vector3( Value(0), Value(1), Value(2) );
-	Vector3 rpy = Vector3( Value(3), Value(4), Value(5) );
-
-	int num2 = PlanBase::instance()->bodyItemRobot()->body()->numJoints();
-
-	if ( PlanBase::instance()->graspMotionSeq.size() > 0 )
-		for ( int i = 0; i < num2; i++ )
-            PlanBase::instance()->bodyItemRobot()->body()->joint(i)->q() = PlanBase::instance()->graspMotionSeq.back().jointSeq(i);
-
-	PlanBase::instance()->bodyItemRobot()->body()->calcForwardKinematics();
-
-    pos += PlanBase::instance()->arm(LR_flag)->palm->p();
-
-	rpy  = RadConv(rpy);
-	rpy += rpyFromRot(PlanBase::instance()->arm(LR_flag)->palm->attitude());
-
-	// 腕の関節数を取得する
-	int num = PlanBase::instance()->arm(LR_flag)->arm_path->numJoints();
-
-	//手先位置を関節角に変換
-	PlanBase::instance()->arm(LR_flag)->IK_arm(pos, PlanBase::instance()->arm(LR_flag)->arm_path->joint(num-1)->calcRfromAttitude(rotFromRpy(rpy)), 0);
-
-	VectorXd Value2(num2);
-	for ( int i = 0; i < num2; i++ )
-            Value2(i) = PlanBase::instance()->bodyItemRobot()->body()->joint(i)->q();
-
-	tmpState.pos		= InitBasePos;
-	tmpState.rpy		= InitBaseRPY;
-	tmpState.jointSeq	= Value2;
-	tmpState.motionTime = Te - Ts;
-	tmpState.startTime = Ts;
-	tmpState.endTime = Te;
-
-	tmpState.pathPlanDOF.clear();
-	for(int i=0;i<PlanBase::instance()->arm(LR_flag)->nJoints;i++)
-            tmpState.pathPlanDOF.push_back(PlanBase::instance()->arm(LR_flag)->arm_path->joint(i)->jointId());
-
-	PlanBase::instance()->graspMotionSeq.push_back(tmpState);
-
-	return true;
-}
 // --------------------------------------------------------------------------------------
 // RARM_XYZ_REL:右腕の絶対座標系から見た位置・姿勢の変位量
 // LARM_XYZ_REL:左腕の絶対座標系から見た位置・姿勢の変位量
@@ -1027,8 +880,11 @@ bool MotionFileControl::ArmXYZRel( int LR_flag, double Ts, double Te, VectorXd V
 #endif
 
 	//手先位置を関節角に変換
-	PlanBase::instance()->arm(LR_flag)->IK_arm(pos, PlanBase::instance()->arm(LR_flag)->arm_path->joint(num-1)->calcRfromAttitude(rotFromRpy(rpy)));
-	//PlanBase::instance()->arm(LR_flag)->IK_arm(pos, PlanBase::instance()->arm(LR_flag)->arm_path->joint(num-1)->calcRfromAttitude(rotFromRpy(rpy)), 0);
+	// revised by xinyi
+	if (!fixTorso)
+		PlanBase::instance()->arm(LR_flag)->IK_arm(pos, PlanBase::instance()->arm(LR_flag)->arm_path->joint(num-1)->calcRfromAttitude(rotFromRpy(rpy)));
+	else
+		PlanBase::instance()->arm(LR_flag)->IK_arm(pos, PlanBase::instance()->arm(LR_flag)->arm_path->joint(num-1)->calcRfromAttitude(rotFromRpy(rpy)), 0);
 
 	VectorXd Value2(num2);
 	for ( int i = 0; i < num2; i++ )
@@ -1328,7 +1184,7 @@ bool MotionFileControl::HandJntAbs( int LR_flag, double Ts, double Te, VectorXd 
 			}
 		}
 	}
-
+	
 	if(LR_flag == 0) {
 		tmpState.graspingState = state;
 		if(state == PlanBase::GRASPING)
@@ -1502,7 +1358,7 @@ bool MotionFileControl::HandJntOpen( int LR_flag, double Ts, double Te )
 	VectorXd Value(numJoints);
 	int k=0;
 	for(int i=0; i<PlanBase::instance()->nFing(LR_flag); i++)
-		for(int j=0; j<PlanBase::instance()->fingers(LR_flag, i)->fing_path->numJoints(); j++){
+		for(int j=0; j<PlanBase::instance()->fingers(LR_flag,i)->fing_path->numJoints(); j++){
 			Value(k) = PlanBase::instance()->fingers(LR_flag,i)->fingerOpenPose[j];
 			k++;
 		}
