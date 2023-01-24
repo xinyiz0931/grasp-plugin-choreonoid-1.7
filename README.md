@@ -1,61 +1,71 @@
 # Minimal graspPlugin for Choreonoid 1.7
 
-## Plugins: 
-- Grasp
-- PRM
-- MotionFile
-- BinPicking
+This is a repository for minimal graspPlugin on Chreonoid-1.7.0. 
 
-## Robot and object models
-- RobotModels
-- Samples
+Official documents for [Choreonoid](https://choreonoid.org/ja/documents/1.7/index.html) and [graspPlugin](http://www.hlab.sys.es.osaka-u.ac.jp/grasp/ja/node/311). 
+
+**Plugins:** Grasp, PRM, MotionFile, BinPicking
+
+**Robot and object models:** RobotModels, Samples
 
 ## Requirements
 Ubuntu 18, C++ (std+11), CMake > 3.10, Pybind11
 
-## Installation (Ubuntu)
+## Installation (Docker in Windows) -> Temporal
+If you want to use docker, copy `docker/Dockerfile` in your computer and build 
+```
+docker build -t robot-image .
+```
+Enter the container
+```
+docker run -it --name robot-container -e DISPLAY=host.docker.internal:0.0 -e LIBGL_ALWAYS_INDIRECT=0 -e NVIDIA_VISIBLE_DEVICES=all -e NVIDIA_DRIVER_CAPABILITIES=graphics --gpus all robot-image bash
+```
 
-1. Install Choreonoid 1.7 following the [manual](https://choreonoid.org/ja/documents/1.7/index.html) on the official website. 
-2. Check if the main windows can be loaded successfully: 
+## Installation (Ubuntu)
+Enter your source directory and download all the code
+
+```
+cd ~
+```
+```
+wget https://choreonoid.org/_downloads/82c0099aa3492a273519e1906ea56e54/choreonoid-1.7.0.zip && unzip choreonoid-1.7.0.zip && rm choreonoid-1.7.0.zip
+```
+```
+cd ~/choreonoid-1.7.0/ext && git clone https://github.com/xinyiz0931/grasp-plugin-choreonoid-1.7.git graspPlugin```
+```
+```
+cd ~/choreonoid-1.7.0/ext/graspPlugin && ./INSTALL-REQUISITES.sh 
+```
+
+## Build
+Enter the directory
 ```
 cd choreonoid-1.7.0
-bin/choreonoid
 ```
-3. Clone this repository
 ```
-cd choreonoid-1.7.0/ext
-git clone https://github.com/xinyiz0931/grasp-plugin-choreonoid-1.7.git graspPlugin
-```
-4. Install graspPlugin, you can follow manuals from graspPlugin [wiki](http://www.hlab.sys.es.osaka-u.ac.jp/grasp/ja/node/311). Otherwise follow these steps: 
-```
-cd choreonoid-1.7.0
-./ext/graspPlugin/Grasp/install-requiresities-ubuntu.sh
 ccmake .
 (In ccmake, check the following options) 
 (GRASP_PLUGINS  Grasp;PRM;MotionFile;BinPicking)
 (USE_PYBIND11   ON)
 (USE_PYTHON3    ON)
 (USE_QT5        ON)
+```
+```
 make
 ```
-6. Test if the installation is successfully done
+# Test
+Test using the projects in `ext/graspPlugin/BinPicking/test_project`. 
 ```
 cd choreonoid-1.7.0
-bin/chorenoid ext/graspPlugin/BinPicking/project/binpicking.cnoid
 ```
-7. Test if the python script can be loaded
 ```
-cd choreonoid-1.7.0
-bin/choreonoid -p ext/graspPlugin/BinPicking/script/pa10_grasp_plan_ahiru.py
-(or)
-bin/choreonoid ext/graspPlugin/BinPicking/project/python_pa10_grasp_plan_ahiru.cnoid
+bin/chorenoid ext/graspPlugin/BinPicking/test_project/pyproj_hiro.cnoid
 ```
-Click the `play` button to check if the motion is planned
-
-## Installation via Docker
-
-1. Build docker image
-
+or 
+```
+bin/chorenoid ext/graspPlugin/BinPicking/test_project/pyproj_pa10.cnoid
+```
+Click `Grasp`, `Plan` or `Play` button to check if grasp/motion is planned 
 
 ## Usage
 
