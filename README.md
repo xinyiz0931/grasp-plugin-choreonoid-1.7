@@ -24,7 +24,7 @@ bin/choreonoid
 3. Clone this repository
 ```
 cd choreonoid-1.7.0/ext
-git clone https://github.com/xinyiz0931/grasp-plugin-choreonoid-1.7.git
+git clone https://github.com/xinyiz0931/grasp-plugin-choreonoid-1.7.git graspPlugin
 ```
 4. Install graspPlugin, you can follow manuals from graspPlugin [wiki](http://www.hlab.sys.es.osaka-u.ac.jp/grasp/ja/node/311). Otherwise follow these steps: 
 ```
