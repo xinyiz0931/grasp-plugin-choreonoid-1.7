@@ -57,10 +57,9 @@ items:
       plugin: Python
       class: PythonScriptItem
       data: 
-        file: "${PROGRAM_TOP}/ext/bpbot/example/script_pa10_grasp_plan_ahiru.py"
+        file: "${PROJECT_DIR}/script_pa10_grasp_plan_ahiru.py"
         executionOnLoading: false
         backgroundExecution: false
-
 views: 
   - 
     id: 0
@@ -73,7 +72,7 @@ views:
     class: ItemTreeView
     mounted: true
     state: 
-      checked: [ 1, [ 1, "0x55f2278d57700", "tip" ], 2 ]
+      checked: [ 1, [ 1, "0x55b4b8baafe00", "tip" ], 2 ]
   - 
     id: 2
     plugin: Base
@@ -126,7 +125,7 @@ views:
           far: 200
           eye: [ 4, 2, 1.5 ]
           direction: [ -0.888888889, -0.444444444, -0.111111111 ]
-          up: [ -0.099380799, -0.0496903995, 0.99380799 ]
+          up: [ -0.0993807989, -0.0496903995, 0.99380799 ]
         - 
           camera: [ System, Orthographic ]
           orthoHeight: 20
@@ -186,11 +185,6 @@ toolbars:
     speedScale: 1
     syncToOngoingUpdates: true
     autoExpansion: true
-  "GraspBar": 
-    graspRobot: 1
-    graspObject: 2
-    objTag2Item: [ 2 ]
-    camera: 0
   "LeggedBodyBar": 
     stanceWidth: 0.15
   "KinematicsBar": 
@@ -234,6 +228,11 @@ toolbars:
     waistHeightRelaxation: false
     gravity: 9.8
     dynamicsTimeRatio: 1
+  "GraspBar": 
+    graspRobot: 1
+    graspObject: 2
+    objTag2Item: [ 2 ]
+    camera: 0
 Body: 
   "BodyMotionEngine": 
     updateJointVelocities: false
@@ -271,12 +270,12 @@ viewAreas:
     contents: 
       type: splitter
       orientation: horizontal
-      sizes: [ 329, 1554 ]
+      sizes: [ 335, 1581 ]
       children: 
         - 
           type: splitter
           orientation: vertical
-          sizes: [ 974, 973 ]
+          sizes: [ 427, 426 ]
           children: 
             - 
               type: pane
@@ -289,12 +288,12 @@ viewAreas:
         - 
           type: splitter
           orientation: vertical
-          sizes: [ 1391, 556 ]
+          sizes: [ 609, 244 ]
           children: 
             - 
               type: splitter
               orientation: horizontal
-              sizes: [ 686, 864 ]
+              sizes: [ 698, 879 ]
               children: 
                 - 
                   type: pane
@@ -321,7 +320,7 @@ layoutOfToolBars:
     - 
       - { name: "BodyBar", x: 0, priority: 0 }
       - { name: "BodyMotionGenerationBar", x: 276, priority: 0 }
-      - { name: "PCLBar", x: 421, priority: 0 }
+      - { name: "TrajectoryBar", x: 421, priority: 0 }
     - 
       - { name: "GraspBar", x: 0, priority: 0 }
     - 

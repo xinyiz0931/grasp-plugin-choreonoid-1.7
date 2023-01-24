@@ -13,7 +13,7 @@
 ## Requirements
 Ubuntu 18, C++ (std+11), CMake > 3.10, Pybind11
 
-## Installation
+## Installation (Ubuntu)
 
 1. Install Choreonoid 1.7 following the [manual](https://choreonoid.org/ja/documents/1.7/index.html) on the official website. 
 2. Check if the main windows can be loaded successfully: 
@@ -51,6 +51,11 @@ bin/choreonoid -p ext/graspPlugin/BinPicking/script/pa10_grasp_plan_ahiru.py
 bin/choreonoid ext/graspPlugin/BinPicking/project/python_pa10_grasp_plan_ahiru.cnoid
 ```
 Click the `play` button to check if the motion is planned
+
+## Installation via Docker
+
+1. Build docker image
+
 
 ## Usage
 

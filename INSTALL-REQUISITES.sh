@@ -1,6 +1,6 @@
 #!/bin/sh
 
-apt-get -y install \
+apt-get update && apt-get -y install \
 build-essential \
 cmake-curses-gui \
 libboost-all-dev \

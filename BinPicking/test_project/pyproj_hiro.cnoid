@@ -55,15 +55,6 @@ items:
         collisionDetection: true
         selfCollisionDetection: false
         isEditable: true
-    - 
-      id: 3
-      name: "script_hiro_grasp_plan_box.py"
-      plugin: Python
-      class: PythonScriptItem
-      data: 
-        file: "${PROJECT_DIR}/ext/graspPlugin/BinPicking/project/script_hiro_grasp_plan_box.py"
-        executionOnLoading: true
-        backgroundExecution: false
 views: 
   - 
     id: 0
@@ -77,7 +68,7 @@ views:
     mounted: true
     state: 
       selected: [ 1 ]
-      checked: [ 1, [ 1, "right_arm", "tip" ], [ 1, "left_arm", "tip" ], 2, 3 ]
+      checked: [ 1, [ 1, "right_arm", "tip" ], [ 1, "left_arm", "tip" ], 2 ]
   - 
     id: 2
     plugin: Base
@@ -192,11 +183,8 @@ toolbars:
     speedScale: 1
     syncToOngoingUpdates: true
     autoExpansion: true
-  "GraspBar": 
-    graspRobot: 1
-    graspObject: 2
-    objTag2Item: [ 2 ]
-    camera: 0
+  "LeggedBodyBar": 
+    stanceWidth: 0.15
   "KinematicsBar": 
     mode: AUTO
     enablePositionDragger: true
@@ -207,8 +195,6 @@ toolbars:
     lazyCollisionDetectionMode: true
   "BodyBar": 
     current: 1
-  "LeggedBodyBar": 
-    stanceWidth: 0.15
   "BodyMotionGenerationBar": 
     autoGenerationForNewBody: true
     balancer: false
@@ -242,6 +228,11 @@ toolbars:
     waistHeightRelaxation: false
     gravity: 9.8
     dynamicsTimeRatio: 1
+  "GraspBar": 
+    graspRobot: 1
+    graspObject: 2
+    objTag2Item: [ 2 ]
+    camera: 0
 Body: 
   "BodyMotionEngine": 
     updateJointVelocities: false
@@ -279,12 +270,12 @@ viewAreas:
     contents: 
       type: splitter
       orientation: horizontal
-      sizes: [ 315, 1534 ]
+      sizes: [ 326, 1590 ]
       children: 
         - 
           type: splitter
           orientation: vertical
-          sizes: [ 463, 461 ]
+          sizes: [ 435, 434 ]
           children: 
             - 
               type: pane
@@ -297,12 +288,12 @@ viewAreas:
         - 
           type: splitter
           orientation: vertical
-          sizes: [ 660, 264 ]
+          sizes: [ 621, 248 ]
           children: 
             - 
               type: splitter
               orientation: horizontal
-              sizes: [ 665, 865 ]
+              sizes: [ 689, 897 ]
               children: 
                 - 
                   type: pane
@@ -332,3 +323,4 @@ layoutOfToolBars:
     - 
       - { name: "BodyMotionGenerationBar", x: 0, priority: 0 }
       - { name: "MotionFileBar", x: 145, priority: 0 }
+      - { name: "TrajectoryBar", x: 429, priority: 0 }
