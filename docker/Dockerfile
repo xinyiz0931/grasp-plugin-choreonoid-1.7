@@ -12,11 +12,13 @@ RUN apt-get update && apt-get install -y \
         ros-melodic-rtmros-nextage \ 
         ros-melodic-rtmros-hironx
 
-RUN cd ~ 
+WORKDIR /root/
 RUN wget https://choreonoid.org/_downloads/82c0099aa3492a273519e1906ea56e54/choreonoid-1.7.0.zip && unzip choreonoid-1.7.0.zip && rm choreonoid-1.7.0.zip
 
-RUN cd ~/choreonoid-1.7.0/ext && git clone https://github.com/xinyiz0931/grasp-plugin-choreonoid-1.7.git graspPlugin
+WORKDIR /root/choreonoid-1.7.0/ext 
+RUN git clone https://github.com/xinyiz0931/grasp-plugin-choreonoid-1.7.git graspPlugin
+RUN ./graspPlugin/INSTALL-REQUISITES.sh 
 
-RUN cd ~/choreonoid-1.7.0/ext/graspPlugin && ./INSTALL-REQUISITES.sh 
+WORKDIR /root/
 
 RUN echo "All Done!"
