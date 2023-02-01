@@ -20,6 +20,10 @@ Enter the container
 ```
 docker run -it --name robot-container -e DISPLAY=host.docker.internal:0.0 -e LIBGL_ALWAYS_INDIRECT=0 -e NVIDIA_VISIBLE_DEVICES=all -e NVIDIA_DRIVER_CAPABILITIES=graphics --gpus all robot-image bash
 ```
+```
+docker run -it --name robot-container -e DISPLAY=$DISPLAY -v /tmp/.X11-unix/:/tmp/.X11-unix -e LIBGL_ALWAYS_INDIRECT=0 -e NVIDIA_VISIBLE_DEVICES=all -e NVIDIA_DRIVER_CAPABILITIES=graphics --gpus all robot-image bash
+```
+
 
 ## Installation (Ubuntu)
 Enter your source directory and download all the code
