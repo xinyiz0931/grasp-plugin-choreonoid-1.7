@@ -17,7 +17,9 @@
 #include "lccp_segmentation.h"
 
 #define NOOUTPUT_TIMELOG
-#include "../PCL/Util/StopWatch.h"
+// revised by xinyi
+// #include "../GraspDataGen/Util/StopWatch.h"
+#include "../Grasp/Util/StopWatch.h" 
 
 AbstractSegmenter::AbstractSegmenter() :
 	segmented_cloud(new PointCloudT),

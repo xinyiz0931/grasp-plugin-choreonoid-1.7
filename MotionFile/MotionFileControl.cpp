@@ -777,10 +777,14 @@ bool MotionFileControl::ArmXYZAbs( int LR_flag, double Ts, double Te, VectorXd V
 
 	//手先位置を関節角に変換
 	// revised by xinyi
-	if (!fixTorso)
+
+	if (!fixTorso) {
 		PlanBase::instance()->arm(LR_flag)->IK_arm(pos, PlanBase::instance()->arm(LR_flag)->arm_path->joint(num-1)->calcRfromAttitude(rotFromRpy(rpy)));
-	else
-		PlanBase::instance()->arm(LR_flag)->IK_arm(pos, PlanBase::instance()->arm(LR_flag)->arm_path->joint(num-1)->calcRfromAttitude(rotFromRpy(rpy)), 0);
+	}
+	else {
+		cout << "Re-calculate here! " << endl;
+		// PlanBase::instance()->arm(LR_flag)->IK_arm(pos, PlanBase::instance()->arm(LR_flag)->arm_path->joint(num-1)->calcRfromAttitude(rotFromRpy(rpy)), 0);
+	}
 
 #if 0
 	cout << "===手先位置を関節角に変換後===" << endl;

@@ -32,6 +32,7 @@ class EXCADE_API TrajectoryPlanner {
 	virtual void setStartPos();
 	virtual bool doTrajectoryPlanning();
 	virtual bool simpleTrajectoryPlanning();
+	bool testTrajectoryPlanning();
 		
 	virtual bool updateTrajectoryFromMotion(const cnoid::BodyMotionPtr motionObject, const cnoid::BodyMotionPtr motionRobot, std::vector<MotionState>& motionSeq);
 	virtual bool outputTrajectoryForOpenHRP(const cnoid::BodyMotionPtr motionRobot);

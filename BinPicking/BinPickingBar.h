@@ -47,10 +47,12 @@ using namespace cnoid;
 
 			void onPlanButtonClicked();
 			void onPlanDualArmButtonClicked();
-			void onPlanTmpButtonClicked();
 			void onClearButtonClicked();
 			void onSaveButtonClicked();
-			void doMoveFT();
+
+			void doBinPickingFunc();
+			void doCablePickingFunc();
+			void doNewFunc();
 
 			void doMove();
 			void doIniPose();

@@ -40,7 +40,9 @@
 
 // for measuring the time
 // #define NOOUTPUT_TIMELOG
-#include "../PCL/Util/StopWatch.h"
+// revised by xinyi
+// #include "../PCL/Util/StopWatch.h"
+#include "../Grasp/Util/StopWatch.h"
 
 using namespace std;
 

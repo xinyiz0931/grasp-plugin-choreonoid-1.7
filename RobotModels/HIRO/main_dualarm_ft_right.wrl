@@ -591,10 +591,8 @@ DEF main_withHands Humanoid{
 								   ]
 								}
                 Transform {
-					translation -0.0255 0 0
-					#translation -0.0325 0 0
-					#translation -0.03 0 0
-					#translation -0.032 0 0
+					#translation -0.0255 0 0
+					translation -0.0292 0 0
 								   rotation -0.5773 0.5773 0.5773 2.09
 								   children[
 								      Inline { url "./provision/hand_smc_ft.wrl" }
@@ -606,10 +604,10 @@ DEF main_withHands Humanoid{
                   jointType "slide"
                   jointAxis 0 1 0
                   jointId 15
-				  translation -0.0890 0 0
+				  translation -0.1042 0 0
                   rotation 1 0 0 0
-                  ulimit 0.017
-                  llimit 0.01
+                  ulimit 0.025
+                  llimit 0.000
                   children [
                     DEF RHAND_L_Link Segment {
                       mass 0.01
@@ -622,7 +620,7 @@ DEF main_withHands Humanoid{
                           rotation -0.5773 0.5773 0.5773 2.09
                           children[
                             Inline {
-                               url "./provision/finger_medium.wrl"
+                               url "./provision/finger_large.wrl"
                             }
                           ]
                         }
@@ -655,10 +653,10 @@ DEF main_withHands Humanoid{
                   jointType "slide"
                   jointAxis 0 1 0
                   jointId 16
-				  translation -0.0890 0 0
+				  translation -0.1042 0 0
                   rotation 1 0 0 0
-                  ulimit -0.01
-                  llimit -0.017
+                  ulimit -0.000
+                  llimit -0.025
                   children [
                     DEF RHAND_R_Link Segment {
                       mass 0.01
@@ -671,7 +669,7 @@ DEF main_withHands Humanoid{
                           rotation 0.5773 -0.5773 0.5773 2.09
                           children[
                             Inline {
-                              url "./provision/finger_medium.wrl"
+                             url "./provision/finger_large.wrl"
                             }
                           ]
                         }
@@ -875,26 +873,38 @@ DEF main_withHands Humanoid{
 								      Inline { url "./provision/tool_changer.wrl" }
 								   ]
 								}
+                #Transform {
+				#	translation -0.0255 0 0
+				#	#translation -0.0325 0 0
+				#	#translation -0.03 0 0
+				#	#translation -0.032 0 0
+				#				   rotation 0.5773 -0.5773 0.5773 2.09
+				#				   children[
+				#				      Inline { url "./provision/hand_schunk.wrl" }
+				#				   ]
+				#				}
+				#		       ]
+				#		    }
                 Transform {
-					translation -0.0255 0 0
+					translation -0.0292 0 0
 					#translation -0.0325 0 0
 					#translation -0.03 0 0
 					#translation -0.032 0 0
-								   rotation 0.5773 -0.5773 0.5773 2.09
+								   rotation -0.5773 0.5773 0.5773 2.09
 								   children[
-								      Inline { url "./provision/hand_schunk.wrl" }
+								      Inline { url "./provision/hand_smc_softwrist.wrl" }
 								   ]
-								}
+								}                
 						       ]
 						    }
                 DEF LHAND_L Joint {
                   jointType "slide"
                   jointAxis 0 1 0
                   jointId 17
-				  translation -0.0795 0 0
+				  translation -0.0902 0 0
                   rotation 1 0 0 0
-                  ulimit 0.023
-                  llimit 0.01
+                  ulimit 0.025
+                  llimit 0.000
                   children [
                     DEF LHAND_L_Link Segment {
                       mass 0.01
@@ -907,7 +917,7 @@ DEF main_withHands Humanoid{
 								         rotation -0.5773 0.5773 0.5773 2.09
 								         children[
 								           Inline {
-                           url "./provision/finger_long.wrl"
+                           url "./provision/finger_large.wrl"
                            }
                          ]
                        }
@@ -919,10 +929,10 @@ DEF main_withHands Humanoid{
                   jointType "slide"
                   jointAxis 0 1 0
                   jointId 18
-				  translation -0.0795 0 0
+				  translation -0.0902 0 0
                   rotation 1 0 0 0
-                  ulimit -0.01
-                  llimit -0.023
+                  ulimit -0.000
+                  llimit -0.025
                   children [
                     DEF LHAND_R_Link Segment {
                       mass 0.01
@@ -935,7 +945,7 @@ DEF main_withHands Humanoid{
 								         rotation 0.5773 -0.5773 0.5773 2.09
 								         children[
 								           Inline {
-                          url "./provision/finger_long.wrl"
+                          url "./provision/finger_large.wrl"
                            }
                          ]
                        }

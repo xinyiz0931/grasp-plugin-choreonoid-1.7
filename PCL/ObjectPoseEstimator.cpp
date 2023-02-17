@@ -10,7 +10,7 @@
 #include <boost/lexical_cast.hpp>
 
 #include "../Grasp/VectorMath.h"
-#include "../PCL/Util/Logger.h"
+// #include "../GraspDataGen/Util/Logger.h"
 #include "../Grasp/Camera.h"
 #include "../Grasp/ObjectPoseEstimationSolution.h"
 
@@ -30,7 +30,9 @@
 
 #include "PoseEstimationResultMatcher.h"
 
-#include "../PCL/Util/StopWatch.h"
+// revised by xinyi
+#include "../Grasp/Util/Logger.h"
+#include "../Grasp/Util/StopWatch.h"
 
 #if !defined(CNOID_10_11_12_13) && !defined(CNOID_14)
 #include "../Grasp/ColdetConverter.h"

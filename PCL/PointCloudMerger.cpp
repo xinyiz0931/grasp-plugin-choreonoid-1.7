@@ -6,7 +6,9 @@
 #include "../Grasp/ObjectPoseEstimationSolution.h"
 
 #define NOOUTPUT_TIMELOG
-#include "../PCL/Util/StopWatch.h"
+// reivsed by xinyi
+// #include "../GraspDataGen/Util/StopWatch.h"
+#include "../Grasp/Util/StopWatch.h"
 
 #include <iostream>
 
@@ -249,7 +251,7 @@ bool PointCloudMerger::isIntersectAABBray(const cnoid::Vector3& aabb_min, const 
 // 		double dn[3] = {-dir.x(), -dir.y(), -dir.z()};
 // 		for (size_t i = 0; i < models.size(); i++) {
 // 			if (cluster_holder->isPrevGraspTarget(i)) continue;
-// 			double dist1 = models[i]->computeDistanceWithRay(p, dp);
+// 			double dist1 = models[i]->WithRay(p, dp);
 // 			if (dist1 != 0.0) {
 // 				if (dist1 > dist_th_) {
 // 					n_out[i]++;

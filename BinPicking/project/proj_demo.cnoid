@@ -29,7 +29,7 @@ items:
               -0, 0, 1 ]
             jointPositions: [ 
                0.000000,  0.000000,  0.000000,  0.000000, -0.448550, -2.225294,  0.000000,  0.000000,  0.000000,  0.139626, 
-              -0.448550, -2.333505, -0.122173,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000 ]
+              -0.448550, -2.333505, -0.122173,  0.000000,  0.000000,  0.000000, -0.000000,  0.000000, -0.000000 ]
             initialRootPosition: [ 0, 0, 0 ]
             initialRootAttitude: [ 
               1, 0, 0, 
@@ -146,8 +146,8 @@ views:
     class: ItemTreeView
     mounted: true
     state: 
-      selected: [ 3 ]
-      checked: [ 1, 2, [ 2, "right_arm", "tip" ], [ 2, "left_arm", "tip" ], 3, 5 ]
+      selected: [ 4 ]
+      checked: [ 1, 2, [ 2, "right_arm", "tip" ], [ 2, "left_arm", "tip" ], 3, 4, 5 ]
       expanded: [ 1, 2 ]
   - 
     id: 2
@@ -201,7 +201,7 @@ views:
           far: 100
           eye: [ 2.01290147, 0.871894642, 0.582944495 ]
           direction: [ -0.902851178, -0.3856073, -0.190175605 ]
-          up: [ -0.174892033, -0.0746963023, 0.98175009 ]
+          up: [ -0.174892033, -0.0746963022, 0.98175009 ]
         - 
           camera: [ System, Orthographic ]
           orthoHeight: 20
@@ -233,7 +233,7 @@ views:
       slider: true
       dial: false
       labelOnLeft: true
-      currentBodyItem: 3
+      currentBodyItem: 4
   - 
     id: 6
     plugin: Body
@@ -241,7 +241,7 @@ views:
     mounted: true
     state: 
       listingMode: "Link List"
-      currentBodyItem: 3
+      currentBodyItem: 4
   - 
     id: 7
     plugin: MotionFile
@@ -263,6 +263,12 @@ toolbars:
     speedScale: 5
     syncToOngoingUpdates: true
     autoExpansion: true
+  "GraspBar": 
+    graspRobot: 2
+    graspObject: 4
+    graspEnv: [ 3, 6 ]
+    objTag2Item: [ 4 ]
+    camera: 0
   "KinematicsBar": 
     mode: FK
     enablePositionDragger: true
@@ -271,10 +277,10 @@ toolbars:
     snapDistance: 0.025
     penetrationBlockDepth: 0.0005
     lazyCollisionDetectionMode: true
+  "BodyBar": 
+    current: 4
   "LeggedBodyBar": 
     stanceWidth: 0.15
-  "BodyBar": 
-    current: 3
   "BodyMotionGenerationBar": 
     autoGenerationForNewBody: true
     balancer: false
@@ -308,12 +314,6 @@ toolbars:
     waistHeightRelaxation: false
     gravity: 9.8
     dynamicsTimeRatio: 1
-  "GraspBar": 
-    graspRobot: 2
-    graspObject: 4
-    graspEnv: [ 3, 6 ]
-    objTag2Item: [ 4 ]
-    camera: 0
 Body: 
   "BodyMotionEngine": 
     updateJointVelocities: false
@@ -366,12 +366,12 @@ viewAreas:
     contents: 
       type: splitter
       orientation: horizontal
-      sizes: [ 315, 1534 ]
+      sizes: [ 321, 1562 ]
       children: 
         - 
           type: splitter
           orientation: vertical
-          sizes: [ 436, 435 ]
+          sizes: [ 975, 972 ]
           children: 
             - 
               type: pane
@@ -384,12 +384,12 @@ viewAreas:
         - 
           type: splitter
           orientation: vertical
-          sizes: [ 622, 249 ]
+          sizes: [ 1390, 557 ]
           children: 
             - 
               type: splitter
               orientation: horizontal
-              sizes: [ 665, 865 ]
+              sizes: [ 677, 881 ]
               children: 
                 - 
                   type: pane
@@ -416,6 +416,7 @@ layoutOfToolBars:
     - 
       - { name: "BodyBar", x: 0, priority: 0 }
       - { name: "BodyMotionGenerationBar", x: 260, priority: 0 }
+      - { name: "BinPickingBar", x: 420, priority: 0 }
     - 
       - { name: "GraspBar", x: 0, priority: 0 }
     - 

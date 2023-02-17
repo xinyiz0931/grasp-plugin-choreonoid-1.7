@@ -34,10 +34,10 @@ motion_seq = np.reshape(motion_seq, (num_seq, 20))
 print(f"[*] Total {num_seq-1} motion sequences! ")
 
 ############### Record for the whole process
-import os
-os.system("bash /home/hlab/bpbot/script/start_ft.sh")
-nxt.playMotionFT(motion_seq)
-os.system("bash /home/hlab/bpbot/script/stop_ft.sh")
+# import os
+# os.system("bash /home/hlab/bpbot/script/start_ft.sh")
+# nxt.playMotionFT(motion_seq)
+# os.system("bash /home/hlab/bpbot/script/stop_ft.sh")
 
 ft = FTSensor()
 from bpbot.motion import FlingActor
