@@ -55,6 +55,7 @@ using namespace cnoid;
 			void doNewFunc();
 
 			void doMove();
+			void doMoveTHK();
 			void doIniPose();
         };
    }

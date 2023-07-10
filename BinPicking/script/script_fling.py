@@ -138,7 +138,7 @@ nxt.playMotion(place_seq)
 # motion_seq = get_motion()
 # print(f"[*] Total {motion_seq.shape[0]} motion sequences! ")
 # if PLAY: 
-#     nxt.playBinPickingMotion(motion_seq)
+#     nxt.playMotion(motion_seq)
 
 # # print("[*] Picking motion planning2! ")
 # # plan_pick(xyz=[0.470, -0.152, 0.150], rpy=[120,-90,-90], init=False, clear=True)
@@ -151,7 +151,7 @@ nxt.playMotion(place_seq)
 # motion_seq = get_motion()
 # print(f"[*] Total {motion_seq.shape[0]} motion sequences! ")
 # if PLAY:
-#     nxt.playBinPickingMotion(motion_seq)
+#     nxt.playMotion(motion_seq)
 
 # # # nxt.goInitialArm("larm", tm=3)
 

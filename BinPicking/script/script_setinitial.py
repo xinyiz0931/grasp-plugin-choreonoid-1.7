@@ -5,6 +5,6 @@ print("[*] Move to initial pose! ")
 nxt = NxtRobot(host='[::]:15005')
 nxt.openHandToolLft()
 nxt.openHandToolRgt()
-nxt.goInitial()
+nxt.setInitial(arm='all', tm=3)
 
 

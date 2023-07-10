@@ -103,11 +103,11 @@ items:
         isEditable: false
     - 
       id: 5
-      name: "script_pickorsep.py"
+      name: "python script"
       plugin: Python
       class: PythonScriptItem
       data: 
-        file: "${PROGRAM_TOP}/ext/bpbot/example/run_click.py"
+        file: "${PROGRAM_TOP}/ext/bpbot/example/run_pick.py"
         executionOnLoading: false
         backgroundExecution: false
 views: 

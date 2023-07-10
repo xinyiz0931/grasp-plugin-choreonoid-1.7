@@ -82,20 +82,31 @@ using namespace cnoid;
 			void initJointSeq();
 			void clearJointSeq(VectorXd jnt);
 
+			void calcIK(int LR_flag, Vector3d pos, Vector3d rpy, VectorXd &jnt);
 			void calcArmJointSeq(VectorXd& armJointseq, ArmPtr& arm);
 			void calJointSeq(Vector3d pos, Vector3d rpy);
-			void calcJointSeqRegrasp(int repeat=1, double offsetZ=0.05);
+			void calcJointSeqTwoPoses(int LR_flag, Vector3d startpos, Vector3d startrpy, Vector3d endpos, Vector3d endrpy);
+			// void calcJointSeqMoveTo(int LR_flag, Vector3d endpos, Vector3d endrpy);
+			void calcJointSeqMoveTo(int LR_flag, vector<VectorXd> poses, vector<double> tms);
+			void calcJointSeqRegrasp(Vector3d initGraspPos, Vector3d initGraspRPY, Vector3d terminatePos, Vector3d terminateRPY);
 			void calcJointSeqPick(int LR_flag, Vector3d pos, Vector3d rpy);
-			void calcJointSeqTwoPoses(int LR_flag, Vector3d pos, Vector3d rpy, Vector3d endpos);
-			void calcJointSeqFling(int LR_flag, Vector3d pos, Vector3d rpy, double angleJnt3, double angleJnt4);
+			void calcJointSeqTransport(int LR_flag, Vector3d pos, Vector3d rpy);
+			void calcJointSeqSwing(int LR_flag, Vector3d pos, Vector3d rpy, Vector3d angles, double T=0.5, int repeat=1, bool bilateral=false, Vector3d endpos={});
+			void calcJointSeqSpin(int LR_flag, double velocity);
+			void calcJointSeqPut(int LR_flag, Vector3d pos, Vector3d rpy);
 			// for demo 20230217
 			void calcJointSeqWaveHand();
+
+			void calcJointSeqShake(int LR_Flag, Vector3d startpos, Vector3d startrpy, Vector3d endpos, int n=8);
 
 			void setMotionSeqDual(int LR_flag, double T, Vector3d pos, Vector3d rpy, bool is_fixwaist=true);
 			void setMotionSeq(int LR_flag, double T, Vector3d pos, Vector3d rpy);
 			void setHandStateSeq(int LR_flag, int handState);
 			void setArmJointSeq(int LR_flag, double T, VectorXd armJnt);
 			void setJointSeq(double T, VectorXd jnt);
+			
+			//new function
+			void setRelJoint(double T, string jntName, double jntAngle);
 
 			bool trajectoryPlanning();
 			void doBinPickingPlanning(int LR_flag, Vector3d pickP, Vector3d pickR, Vector3d placeP);

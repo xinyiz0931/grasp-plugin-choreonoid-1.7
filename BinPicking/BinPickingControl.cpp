@@ -24,7 +24,7 @@
 #define RadConv(x)		((x)*(3.141592)/(180.0))
 #define DEG_CONV			(180.0/3.141592)				// degree変換
 #define DegConv(x)		((x)*(180.0)/(3.141592))
-#define DEBUG_MODE 1
+// #define DEBUG_MODE 0
 
 using namespace std;
 using namespace boost;
@@ -51,8 +51,9 @@ BinPickingControl::BinPickingControl()
 	tmpState.graspingState2 = PlanBase::NOT_GRASPING;
 	InitBasePos = Vector3( 0.0, 0.0, 0.0 );
 	InitBaseRPY = Vector3( 0.0, 0.0, 0.0 );
-	// _InitJnt = {0,0,0,-0.174533,-0.44855,-2.22529,0,0,0,0.401426,-0.44855,-2.22529,-0.122173,0,0,0.026,-0.026,0.026,-0.026};
-	_InitJnt = {0,0,0,-0.232334,-0.132166,-2.16145,-0.343502,-0.818023,0.517139,0.182075,-0.474497,-2.32239,0.193182,-0.338776,-0.326721,0,0,0,0};
+	_InitJnt = {0,0,0,-0.174533,-0.44855,-2.22529,0,0,0,0.401426,-0.44855,-2.22529,-0.122173,0,0,0.026,-0.026,0.026,-0.026};
+	// following joint info: for openlab demo
+	// _InitJnt = {0,0,0,-0.232334,-0.132166,-2.16145,-0.343502,-0.818023,0.517139,0.182075,-0.474497,-2.32239,0.193182,-0.338776,-0.326721,0,0,0,0};
 	
 	InitJnt.resize(_InitJnt.size());
 	for (int i=0; i<numJnt; i++) {
@@ -151,6 +152,28 @@ void BinPickingControl::setHandStateSeq(int LR_flag, int handState)
 
 }
 
+void BinPickingControl::calcIK(int LR_flag, Vector3d pos, Vector3d rpy, VectorXd &jnt)
+{
+	int numArmJnt = gc->arm(LR_flag)->arm_path->numJoints();
+	Matrix3 rot = gc->arm(LR_flag)->arm_path->joint(numArmJnt-1)->calcRfromAttitude(rotFromRpy(rpy));
+	
+	gc->arm(LR_flag)->IK_arm(pos, rot);
+
+	jnt(numJnt);
+	if (gc->graspMotionSeq.size() > 0) {
+		jnt = gc->graspMotionSeq.back().jointSeq;
+	}
+	else {
+		for (int i=0; i<numJnt; i++) {
+			jnt(i) = gc->bodyItemRobot()->body()->joint(i)->q();
+		}
+	}
+
+	for (int i=0; i<numArmJnt; i++) {
+		jnt(gc->arm(LR_flag)->arm_path->joint(i)->jointId()) = gc->arm(LR_flag)->arm_path->joint(i)->q();
+	}
+}
+
 void BinPickingControl::setMotionSeq(int LR_flag, double T, Vector3d pos, Vector3d rpy) 
 {
 	int numJnt = gc->bodyItemRobot()->body()->numJoints();
@@ -207,7 +230,7 @@ void BinPickingControl::setMotionSeqDual(int LR_flag, double T, Vector3d pos, Ve
 
 	if (is_fixwaist) {
 		arm->IK_arm(pos, rot, arm->arm_path->joint(0)->q());
-		// arm_->IK_arm(pos2, rot2, arm_->arm_path->joint(0)->q());
+		arm_->IK_arm(pos2, rot2, arm_->arm_path->joint(0)->q());
 	}
 	else {
 		arm->IK_arm(pos, rot);
@@ -299,102 +322,143 @@ void BinPickingControl::setArmJointSeq(int LR_flag, double T, VectorXd armJnt)
 
 }
 
-void BinPickingControl::calcJointSeqRegrasp(int repeat, double offsetZ)
+void BinPickingControl::calcJointSeqRegrasp(Vector3d initGraspPos, Vector3d initGraspRPY, Vector3d terminatePos, Vector3d terminateRPY)
 {
+	int repeat = 1;
+
 	int LR_flag = RIGHT_FLAG; // main arm equipped with force sensor
 	
-	double regraspOffset = 0.05;
+	double regraspOffset = 0.03;
 
-	Vector3 initGraspPos = Vector3(0.480, -0.170, 0.450);
-	Vector3 regraspPos = Vector3(initGraspPos(0), 0.140, initGraspPos(2)-regraspOffset);
+
+	// Vector3 initGraspPos = Vector3(0.480, -0.170, 0.450);
+	// Vector3 regraspPos = Vector3(initGraspPos(0), 0.130, initGraspPos(2)-regraspOffset);
+	Vector3 regraspPos = Vector3(initGraspPos(0), initGraspPos(1)+0.3, initGraspPos(2)-regraspOffset);
+
 	vector<Vector3> regraspRPY;
-	regraspRPY.push_back(RadConv(Vector3(180.0, 0.0, -90.0))); // right arm
+	// regraspRPY.push_back(RadConv(Vector3(180.0, 0.0, -90.0))); // right arm
+	// regraspRPY.push_back(RadConv(Vector3(0.0, 0.0, -90.0))); // right arm
+	regraspRPY.push_back(RadConv(initGraspRPY)); // right arm
 	regraspRPY.push_back(RadConv(Vector3(180.0, 0.0, 90.0))); // left arm
 	
 	Vector3 tmpPos;
 
-	setMotionSeq(LR_flag, 3.0, initGraspPos, regraspRPY[LR_flag]);
+	setMotionSeq(LR_flag, 1.0, initGraspPos, regraspRPY[LR_flag]);
 
 	double backOffset = 0.08;
 	double upOffset = 0.11;
-	double downOffset = 0.12;
+	double downOffset = 0.15;
 	
 	// define keyposes
 	for (int i=0; i<repeat; i++) {
 
-		// left: back pose
+		// **support**: back pose
 		tmpPos = Vector3(regraspPos(0), regraspPos(1)+backOffset, regraspPos(2));		
-		setMotionSeqDual(1-LR_flag, 3.0, tmpPos, regraspRPY[1-LR_flag]);
+		setMotionSeqDual(1-LR_flag, 1.0, tmpPos, regraspRPY[1-LR_flag]);
 		
-		// left: approach
-		setMotionSeqDual(1-LR_flag, 3.0, regraspPos, regraspRPY[1-LR_flag]);
+		// **support**: approach
+		setMotionSeqDual(1-LR_flag, 1.0, regraspPos, regraspRPY[1-LR_flag]);
 
-		// left: pushing to locate cable
-		tmpPos = Vector3(regraspPos(0), regraspPos(1)-0.07, regraspPos(2)-downOffset);		
+		// **support**: pushing to locate cable
+		tmpPos = Vector3(regraspPos(0), regraspPos(1)-0.1, regraspPos(2)-downOffset);		
 		setMotionSeqDual(1-LR_flag, 3.0, tmpPos, regraspRPY[1-LR_flag]);
 
+		// **support**: close, **main**: open
 		setHandStateSeq(1-LR_flag, HAND_CLOSING);
 		setHandStateSeq(LR_flag, HAND_OPENING);
 
-		// right: back pose		
+		// **main**: back pose		
 		tmpPos = Vector3(initGraspPos(0), initGraspPos(1)-backOffset, initGraspPos(2));
-		setMotionSeqDual(LR_flag, 3.0, tmpPos, regraspRPY[LR_flag]);
+		setMotionSeqDual(LR_flag, 1.0, tmpPos, regraspRPY[LR_flag]);
 
-		// tmpPos = Vector3(regraspPos(0), regraspPos(1), regraspPos(2)-downOffset);		
-		// setMotionSeqDual(1-LR_flag, 3.0, tmpPos, regraspRPY[1-LR_flag]);
-
-		// left: moving up
+		// **support**: moving up
 		tmpPos = Vector3(regraspPos(0), regraspPos(1), initGraspPos(2)+regraspOffset);		
-		setMotionSeqDual(1-LR_flag, 3.0, tmpPos, regraspRPY[1-LR_flag]);
+		setMotionSeqDual(1-LR_flag, 1.0, tmpPos, regraspRPY[1-LR_flag]);
 
-		// right: regrasp
-		// get regrasping pose
-		// Vector3 fingPos;
 #ifdef DEBUG_MODE
-		cout << "[DEBUG] Finger position: " << gc->fingers(1-LR_flag,0)->tip->p().transpose() << endl;
+		cout << "[DEBUG] Finger 0 position: " << gc->fingers(1-LR_flag,0)->tip->p().transpose() << endl;
+		cout << "[DEBUG] Finger 1 position: " << gc->fingers(1-LR_flag,1)->tip->p().transpose() << endl;
 		cout << "[DEBUG] Wrist  position: " << gc->arm(1-LR_flag)->palm->p().transpose() << endl;;
 #endif
-		Vector3 tracePos = gc->fingers(1-LR_flag,0)->tip->p() + Vector3(0,0,-regraspOffset);
-
-		
-		// Vector3 wristPos = gc->arm(LR_flag)->palm->p();
+		Vector3 tracePos = (gc->fingers(1-LR_flag,0)->tip->p() + gc->fingers(1-LR_flag,1)->tip->p())/2 + Vector3(0,0,-regraspOffset);
 		Vector3 fingPos = gc->fingers(1-LR_flag,0)->tip->p();
 		Matrix3 fingRPY = gc->fingers(1-LR_flag,0)->tip->attitude();
 		tmpPos = tracePos + fingRPY * Vector3(-0.090-0.0882, 0, 0); // finger length
-		
-		setMotionSeqDual(LR_flag, 3.0, tmpPos, regraspRPY[LR_flag]);
 
+		// **main**: approach
+		setMotionSeqDual(LR_flag, 1.0, tmpPos, regraspRPY[LR_flag]);
+		
+		// **main**: locate cable 
+		setMotionSeqDual(LR_flag, 1.0, Vector3(tmpPos(0),tmpPos(1)+0.03, tmpPos(2)-0.07), regraspRPY[LR_flag]);
+
+		// **main**: close, **support**: open
 		setHandStateSeq(LR_flag, HAND_CLOSING);
 		setHandStateSeq(1-LR_flag, HAND_OPENING);
 		
-		tmpPos = Vector3(regraspPos(0), regraspPos(1)+backOffset, initGraspPos(2)+regraspOffset);		
-		setMotionSeqDual(1-LR_flag, 3.0, tmpPos, regraspRPY[1-LR_flag]);
+		// **support**: back pose
+		// tmpPos = Vector3(regraspPos(0), regraspPos(1)+backOffset, initGraspPos(2)-regraspOffset);		
+		tmpPos = Vector3(regraspPos(0), regraspPos(1)+downOffset, initGraspPos(2)-regraspOffset);		
+		setMotionSeqDual(1-LR_flag, 2.0, tmpPos, regraspRPY[1-LR_flag]);
 	}
 
-	setArmJointSeq(1-LR_flag, 3.0, InitArmJnt[1-LR_flag]);
+	// **main**: move the the ending pose
+	setMotionSeq(LR_flag, 2.0, terminatePos, RadConv(terminateRPY));
 	
+	// **support**: back to initial pose
+	setArmJointSeq(1-LR_flag, 2.0, InitArmJnt[1-LR_flag]);
+
+	
+}
+void BinPickingControl::calcJointSeqPut(int LR_flag, Vector3 pos, Vector3 rpy)
+{
+	setMotionSeq(LR_flag, 1.0, pos, RadConv(rpy));
+	setHandStateSeq(LR_flag, HAND_OPENING);
+	setJointSeq(2.0, InitJnt);
 }
 
 void BinPickingControl::calcJointSeqPick(int LR_flag, Vector3 pos, Vector3 rpy)
 {
-	double bufferH = 0.23;
+	double bufferH = 0.30;
 	// setMotionSeq(LR_flag, 1.2, Vector3(pickP(0),pickP(1),bufferH), RadConv(pickR));
 	// setMotionSeq(LR_flag, 0.8, Vector3(pickP(0),pickP(1),pickP(2)+0.02), RadConv(pickR));
 	// setMotionSeq(LR_flag, 0.8, pickP, RadConv(pickR));
 	
 	// setHandStateSeq(LR_flag, HAND_CLOSING);
 
-	setMotionSeq(LR_flag, 3.0, Vector3(pos(0),pos(1),bufferH), RadConv(rpy));
-	setMotionSeq(LR_flag, 3.0, Vector3(pos(0),pos(1),pos(2)+0.02), RadConv(rpy));
-	setMotionSeq(LR_flag, 3.0, pos, RadConv(rpy));
+	setMotionSeq(LR_flag, 1.5, Vector3(pos(0),pos(1),bufferH), RadConv(rpy));
+	setHandStateSeq(LR_flag, HAND_CLOSING);
+	setHandStateSeq(LR_flag, HAND_OPENING);
+	setMotionSeq(LR_flag, 1.0, Vector3(pos(0),pos(1),pos(2)+0.02), RadConv(rpy));
+	setMotionSeq(LR_flag, 1.0, pos, RadConv(rpy));
 	setHandStateSeq(LR_flag, HAND_CLOSING);
 }
 
-void BinPickingControl::calcJointSeqTwoPoses(int LR_flag, Vector3 pos, Vector3 rpy, Vector3 endpos)
+void BinPickingControl::calcJointSeqTransport(int LR_flag, Vector3 pos, Vector3 rpy)
+{
+	setMotionSeq(LR_flag, 6.0, pos, RadConv(rpy));
+	// setMotionSeq(LR_flag, 2.0, Vector3(pos(0),pos(1),pos(2)-0.1), RadConv(rpy));
+	// setHandStateSeq(LR_flag, HAND_OPENING);
+
+	// setJointSeq(3.0, InitJnt);
+}
+
+void BinPickingControl::calcJointSeqTwoPoses(int LR_flag, Vector3 startpos, Vector3 startrpy, Vector3 endpos, Vector3 endrpy)
 {
 
-	setMotionSeq(LR_flag, 3.0, pos, RadConv(rpy));
-	setMotionSeq(LR_flag, 6.0, endpos, RadConv(rpy));
+	setMotionSeq(LR_flag, 3.0, startpos, RadConv(startrpy));
+	setMotionSeq(LR_flag, 6.0, endpos, RadConv(endrpy));
+}
+
+void BinPickingControl::calcJointSeqMoveTo(int LR_flag, vector<VectorXd> poses, vector<double> tms)
+{
+	Vector3d xyz, rpy;
+	for (int i; i<poses.size(); i++) {
+		for (int j=0; j<3; j++) {
+			xyz(j) = poses[i][j];
+			rpy(j) = poses[i][3+j];
+		}
+		setMotionSeq(LR_flag, tms[i], xyz, RadConv(rpy));
+	}
 }
 
 void BinPickingControl::initJointSeq()
@@ -420,6 +484,10 @@ void BinPickingControl::initJointSeq()
 		}
 		// when init: record arm joint for initial pose without waist joint
 		VectorXd valueArmJnt(gc->arm(i)->arm_path->numJoints());
+		for (int j=0; j<gc->arm(i)->arm_path->numJoints(); j++) {
+			valueArmJnt(j) = InitJnt(gc->arm(i)->arm_path->joint(j)->jointId());	
+		}
+		InitArmJnt.push_back(valueArmJnt);
 #ifdef DEBUG_MODE
 		cout << "        ";
 		for (int j=0; j<gc->arm(i)->arm_path->numJoints(); j++) {
@@ -428,7 +496,6 @@ void BinPickingControl::initJointSeq()
 		}
 		cout << endl;
 #endif
-		InitArmJnt.push_back(valueArmJnt);
 	}
 	// InitBasePos = gc->bodyItemRobot()->body()->link(0)->p();
 	// InitBaseRPY = rpyFromRot(gc->bodyItemRobot()->body()->link(0)->attitude());
@@ -453,15 +520,12 @@ void BinPickingControl::initJointSeq()
 
 void BinPickingControl::clearJointSeq(VectorXd jnt)
 {
-	cout << "test" << endl;
 	VectorXd valueJnt, lastJnt;
 	valueJnt.resize(numJnt);
 	if (jnt.size() < 1) {
-		cout << "[DEBUG] insert the last jnt seq" << endl; 
 		valueJnt = gc->graspMotionSeq.back().jointSeq;
 	}
 	else if (jnt.size() == numJnt -4) { // 15
-		cout << "[DEBUG] add hand state" << endl;
 		lastJnt = gc->graspMotionSeq.back().jointSeq;
 		for (int i=0; i<numJnt; i++) {
 			if (i < jnt.size()) 
@@ -495,47 +559,225 @@ void BinPickingControl::clearJointSeq(VectorXd jnt)
 	// motionSeq.clear();
 }
 
-void BinPickingControl::calcJointSeqFling(int LR_flag, Vector3 pos, Vector3 rpy, double angleJnt3, double angleJnt4) 
+void BinPickingControl::setRelJoint(double T, string jntName, double jntAngle)
+{
+	cout << "setRelJoint()" << endl;
+	int id = gc->bodyItemRobot()->body()->link(jntName)->jointId();
+	
+	// setMotionSeq(LR_flag, 3.0, pos, RadConv(rpy));
+	VectorXd valueJnt(numJnt);
+
+	for (int i=0; i<numJnt; i++) {
+		if (i == id) {
+			valueJnt(i) = gc->bodyItemRobot()->body()->joint(i)->q() + RadConv(jntAngle);
+		}
+		else {
+			valueJnt(i) = gc->bodyItemRobot()->body()->joint(i)->q();
+		}
+	}
+	setJointSeq(T, valueJnt);
+}
+void BinPickingControl::calcJointSeqSpin(int LR_flag, double velocity)
 {
 	string n;
 	if (LR_flag == 0) n="R";
 	else n="L";
 	
-	int j3 = gc->bodyItemRobot()->body()->link(n+"ARM_JOINT3")->jointId();
-	int j4 = gc->bodyItemRobot()->body()->link(n+"ARM_JOINT4")->jointId();
+	int j5 = gc->bodyItemRobot()->body()->link(n+"ARM_JOINT5")->jointId();
 	int numArmJnt = gc->arm(LR_flag)->arm_path->numJoints();
 	
-	setMotionSeq(LR_flag, 3.0, pos, RadConv(rpy));
+	// setMotionSeq(LR_flag, 3.0, pos, RadConv(rpy));
 	VectorXd valueJnt(numJnt);
-	VectorXd flingJnt1(numJnt);
-	VectorXd flingJnt2(numJnt);
+	VectorXd spinJnt1(numJnt), spinJnt2(numJnt);
 
 	for (int i=0; i<numJnt; i++) {
-		// valueJnt(i) = gc->graspMotionSeq.back().jointSeq(i);
 		valueJnt(i) = gc->bodyItemRobot()->body()->joint(i)->q();
-		flingJnt1(i) = gc->bodyItemRobot()->body()->joint(i)->q();
-		flingJnt2(i) = gc->bodyItemRobot()->body()->joint(i)->q();
-		if (i == j3) {
-			flingJnt1(i) = gc->bodyItemRobot()->body()->joint(i)->q() + RadConv(angleJnt3);
-			flingJnt2(i) = gc->bodyItemRobot()->body()->joint(i)->q() - RadConv(angleJnt3);
+		spinJnt1(i) = gc->bodyItemRobot()->body()->joint(i)->q();
+		spinJnt2(i) = gc->bodyItemRobot()->body()->joint(i)->q();
+		if (i==j5) {
+			spinJnt1(i) = gc->bodyItemRobot()->body()->joint(i)->q() + RadConv(90);
+			spinJnt2(i) = gc->bodyItemRobot()->body()->joint(i)->q() - RadConv(60);
 		}
-		else if (i==j4) {
-			flingJnt1(i) = gc->bodyItemRobot()->body()->joint(i)->q() + RadConv(angleJnt4);
-			flingJnt2(i) = gc->bodyItemRobot()->body()->joint(i)->q() - RadConv(angleJnt4);
-		}
-	}
 
-	int repeat = 2;
-	for (int i=0; i<repeat; i++) {
-		setJointSeq(1.0, valueJnt);
-		setJointSeq(1.0, flingJnt2);
 	}
-	setJointSeq(1.0, valueJnt);
+	if (velocity > 1.0 and velocity < 0.1) 
+		velocity = 1.0;
+	setJointSeq(velocity, spinJnt1);
+	setJointSeq(velocity, spinJnt2);
+	
+	setJointSeq(velocity, valueJnt);
+
 }
+void BinPickingControl::calcJointSeqShake(int LR_Flag, Vector3d startpos, Vector3d startrpy, Vector3d endpos, int n)
+{
+	cout << "TEST shaking funciton! " << endl;
+	double T = 0.3;
+	for (int i=0; i<n; i++) {
+		Vector3d tmpPos;
+		Vector3d tmpRPY1 = startrpy;
+		Vector3d tmpRPY2 = startrpy;
+		tmpRPY1(1) += 5;
+		tmpRPY2(1) -= 5;
+		tmpPos = startpos + (endpos-startpos)/n*(i+1);
+		setMotionSeq(LR_Flag, T, tmpPos, RadConv(tmpRPY1));
+		setMotionSeq(LR_Flag, T, tmpPos, RadConv(tmpRPY2));
+	}
+}
+
+void BinPickingControl::calcJointSeqSwing(int LR_flag, Vector3d pos, Vector3d rpy, Vector3d angles, double T, int repeat, bool bilateral, Vector3d endPos)
+{
+	string n;
+	if (LR_flag == 0) n="R";
+	else n="L";
+	// double T = 0.4;
+	if (T > 1.0 and T < 0.1) 
+		T = 0.5;
+
+	int j3 = gc->bodyItemRobot()->body()->link(n+"ARM_JOINT3")->jointId();
+	int j4 = gc->bodyItemRobot()->body()->link(n+"ARM_JOINT4")->jointId();
+	int j5 = gc->bodyItemRobot()->body()->link(n+"ARM_JOINT5")->jointId();
+
+	// VectorXd valueJnt(numJnt);
+	// valueJnt = gc->graspMotionSeq.back().jointSeq;
+
+	// for (int i=0; i<numJnt; i++) 
+	// 	valueJnt(i) = gc->bodyItemRobot()->body()->joint(i)->q();
+	
+	// VectorXd flingJnt(numJnt);
+	// flingJnt = valueJnt;
+	setMotionSeq(LR_flag, 3, pos, RadConv(rpy));
+	VectorXd valueJnt(numJnt), swingJnt(numJnt);
+
+	for (int i=0; i<repeat; i++) {
+		Vector3d tmpPos;
+		// tmpPos = pos + (endPos-pos)/repeat*(i+1);
+		tmpPos = pos + (endPos-pos)*((i+1)*2-1)/(repeat*2);
+		VectorXd tmpJnt;
+		calcIK(LR_flag, tmpPos, RadConv(rpy), tmpJnt);
+		// setMotionSeq(LR_flag, T, tmpPos, RadConv(rpy));
+
+		tmpPos = pos + (endPos-pos)*(i+1)/repeat;
+		calcIK(LR_flag, tmpPos, RadConv(rpy), tmpJnt);
+		// for (int j=0; j<numJnt; j++) 
+		// 	valueJnt(j) = gc->bodyItemRobot()->body()->joint(j)->q();
+
+		// flingJnt = valueJnt;
+		swingJnt = tmpJnt;
+		swingJnt(j3) = swingJnt(j3) - RadConv(angles(0));
+		swingJnt(j4) = swingJnt(j4) - RadConv(angles(1));
+		swingJnt(j5) = swingJnt(j5) - RadConv(angles(2));
+		setJointSeq(T, swingJnt);
+		
+		if (bilateral) {
+			VectorXd swingJnt2 = tmpJnt;
+			swingJnt2(j3) = swingJnt2(j3) + RadConv(angles(0));
+			swingJnt2(j4) = swingJnt2(j4) + RadConv(angles(1));
+			swingJnt2(j5) = swingJnt2(j5) + RadConv(angles(2));
+			setJointSeq(T, swingJnt2);
+		}
+		else {
+			setJointSeq(T, tmpJnt);
+		}
+
+		// for (int j=0; j<numJnt; j++) {
+		// 	if (j == j3) 
+		// 		flingJnt(j) = flingJnt(j) - RadConv(angleJnt3);
+		// 	else if (j == j4)
+		// 		flingJnt(j) = flingJnt(j) - RadConv(angleJnt4);
+		// 	else if (j == j5)
+		// 		flingJnt(j) = flingJnt(j) - RadConv(angleJnt5);
+		// }
+		// cout << "=== " << i << ": " << flingJnt.transpose() << endl; 	
+
+		// setRelJoint(T, n+"ARM_JOINT5", angleJnt5);
+		// setJointSeq(T, flingJnt);
+		// tmpPos = pos + (endPos-pos)/repeat*(i+1);
+		
+		// if (!bilateral){
+		// 	setMotionSeq(LR_flag, T, tmpPos, RadConv(rpy));
+		// }
+	}
+	// for (int i=0; i<numJnt; i++) {
+	// 	if (i == j3) {
+	// 		flingJnt(i) = flingJnt(i) - RadConv(angleJnt3);
+	// 	}
+	// 	else if (i == j4)
+	// 	{
+	// 		flingJnt(i) = flingJnt(i) - RadConv(angleJnt4);
+	// 	}
+	// 	else if (i == j5)
+	// 	{
+	// 		flingJnt(i) = flingJnt(i) - RadConv(angleJnt5);
+	// 	}
+	// }
+	// double T = 1.0;
+	// for (int i=0; i<repeat; i++) {
+	// 	setJointSeq(T, flingJnt);
+	// 	setJointSeq(T, valueJnt);
+	// }
+}
+// void BinPickingControl::calcJointSeqSwing(int LR_flag, Vector3 pos, Vector3 rpy, double angleJnt3, double angleJnt4, double velocity, int repeat) 
+// {
+// 	angleJnt4 = 45;
+// 	angleJnt3 = 0.0;
+// 	string n;
+// 	if (LR_flag == 0) n="R";
+// 	else n="L";
+	
+// 	int j3 = gc->bodyItemRobot()->body()->link(n+"ARM_JOINT3")->jointId();
+// 	int j4 = gc->bodyItemRobot()->body()->link(n+"ARM_JOINT4")->jointId();
+// 	int j5 = gc->bodyItemRobot()->body()->link(n+"ARM_JOINT5")->jointId();
+// 	int numArmJnt = gc->arm(LR_flag)->arm_path->numJoints();
+	
+// 	setMotionSeq(LR_flag, 3.0, pos, RadConv(rpy));
+
+// 	VectorXd valueJnt(numJnt);
+// 	// valueJnt = gc->graspMotionSeq.back().jointSeq;
+// 	for (int i=0; i<numJnt; i++) {
+// 		valueJnt(i) = gc->bodyItemRobot()->body()->joint(i)->q();
+// 	}
+
+// 	VectorXd flingJnt1(numJnt), flingJnt2(numJnt);
+// 	flingJnt1 = valueJnt;
+// 	flingJnt2 = valueJnt;
+
+// 	VectorXd spinJnt1(numJnt), spinJnt2(numJnt);
+// 	spinJnt1 = valueJnt;
+// 	spinJnt2 = valueJnt;
+	
+// 	for (int i=0; i<numJnt; i++) {
+
+// 		if (i == j3) {
+// 			flingJnt1(i) = flingJnt1(i) + RadConv(angleJnt3);
+// 			flingJnt2(i) = flingJnt2(i) - RadConv(angleJnt3);
+// 		}
+// 		else if (i==j4) {
+// 			flingJnt1(i) = flingJnt1(i) + RadConv(angleJnt4);
+// 			flingJnt2(i) = flingJnt2(i) - RadConv(angleJnt4);
+// 		}
+// 		else if (i==j5) {
+// 			flingJnt2(i) = flingJnt2(i) + RadConv(70);
+// 			spinJnt1(i) = spinJnt1(i) + RadConv(110);
+// 			spinJnt2(i) = spinJnt2(i) - RadConv(70);
+// 		}
+// 	}
+
+// 	if (velocity > 1.0 and velocity < 0.1) 
+// 		velocity = 1.0;
+
+// 	// setJointSeq(velocity, spinJnt1);
+// 	// setJointSeq(velocity, spinJnt2);
+// 	for (int i=0; i<repeat; i++) {
+// 		setJointSeq(velocity, valueJnt);
+// 		setJointSeq(velocity, flingJnt2);
+// 	}
+// 	setJointSeq(velocity, valueJnt);
+// }
+
 
 void BinPickingControl::doBinPickingPlanning(int LR_flag, Vector3 pickP, Vector3 pickR, Vector3 placeP)
 {
-	double bufferH = 0.23;
+	double bufferH = 0.30;
 	setMotionSeq(LR_flag, 1.2, Vector3(pickP(0),pickP(1),bufferH), RadConv(pickR));
 	setMotionSeq(LR_flag, 0.8, Vector3(pickP(0),pickP(1),pickP(2)+0.02), RadConv(pickR));
 	setMotionSeq(LR_flag, 0.8, pickP, RadConv(pickR));
@@ -562,13 +804,14 @@ void BinPickingControl::calcJointSeqWaveHand()
 	else if (LR_flag == 1) {
 		cout << "Wave left hand!" << endl;
 		setMotionSeqDual(LR_flag, 1.0, Vector3(0.30, 0.3, 0.41), RadConv(Vector3(-180, 0, 180)));
-		setMotionSeqDual(1-LR_flag, 1.0, Vector3(0.30, -0.3, 0.30), RadConv(Vector3(-180, 0, 180)));
+		setMotionSeqDual(1-LR_flag, 1.0, Vector3(0.30, -0.3, 0.30), RadConv(Vector3(-90, 0, 180)));
 		n = "L";
 	}
 
 	double angleJnt3 = 4;
 	double angleJnt4 = 25;
-	
+	int tmp_j = gc->bodyItemRobot()->body()->link("RARM_JOINT0")->jointId();
+
 	int j3 = gc->bodyItemRobot()->body()->link(n+"ARM_JOINT0")->jointId();
 	int j4 = gc->bodyItemRobot()->body()->link(n+"ARM_JOINT5")->jointId();
 	int numArmJnt = gc->arm(LR_flag)->arm_path->numJoints();
@@ -576,6 +819,8 @@ void BinPickingControl::calcJointSeqWaveHand()
 	VectorXd valueJnt(numJnt);
 	VectorXd flingJnt1(numJnt);
 	VectorXd flingJnt2(numJnt);
+	VectorXd iflingJnt1(numJnt);
+	VectorXd iflingJnt2(numJnt);
 
 	VectorXd _flingJnt1(numJnt);
 
@@ -584,19 +829,36 @@ void BinPickingControl::calcJointSeqWaveHand()
 		flingJnt1(i) = gc->bodyItemRobot()->body()->joint(i)->q();
 		flingJnt2(i) = gc->bodyItemRobot()->body()->joint(i)->q();
 		_flingJnt1(i) = gc->bodyItemRobot()->body()->joint(i)->q();
+
+		iflingJnt1(i) = gc->bodyItemRobot()->body()->joint(i)->q();
+		iflingJnt2(i) = gc->bodyItemRobot()->body()->joint(i)->q();
 		if (i == j3) {
 			flingJnt1(i) = gc->bodyItemRobot()->body()->joint(i)->q() + RadConv(angleJnt3);
 			flingJnt2(i) = gc->bodyItemRobot()->body()->joint(i)->q() - RadConv(angleJnt3);
 			_flingJnt1(i) = gc->bodyItemRobot()->body()->joint(i)->q() + RadConv(angleJnt3)/2;
+			iflingJnt1(i) = gc->bodyItemRobot()->body()->joint(i)->q() + RadConv(angleJnt3);
+			iflingJnt2(i) = gc->bodyItemRobot()->body()->joint(i)->q() - RadConv(angleJnt3);
+
 		}
 		else if (i==j4) {
 			flingJnt1(i) = gc->bodyItemRobot()->body()->joint(i)->q() + RadConv(angleJnt4);
 			flingJnt2(i) = gc->bodyItemRobot()->body()->joint(i)->q() - RadConv(angleJnt4);
 			_flingJnt1(i) = gc->bodyItemRobot()->body()->joint(i)->q() + RadConv(angleJnt4)/2;
+			iflingJnt1(i) = gc->bodyItemRobot()->body()->joint(i)->q() + RadConv(angleJnt4);
+			iflingJnt2(i) = gc->bodyItemRobot()->body()->joint(i)->q() - RadConv(angleJnt4);
+			
+		}
+		else if (i==tmp_j) {
+			// flingJnt1(i) = gc->bodyItemRobot()->body()->joint(i)->q() - RadConv(10);
+			// flingJnt2(i) = gc->bodyItemRobot()->body()->joint(i)->q() + RadConv(10);
+			iflingJnt1(i) = gc->bodyItemRobot()->body()->joint(i)->q() - RadConv(20);
+			// iflingJnt2(i) = gc->bodyItemRobot()->body()->joint(i)->q() + RadConv(10);
 		}
 	}
-	
-	double totalT = 600;
+	// totalT unit: second	
+	// double totalT = 10;
+	double totalT = 7200;
+
 	double T = 0.7;
 	int repeat = totalT/(T*2);
 	// int repeat = 300;
@@ -607,6 +869,12 @@ void BinPickingControl::calcJointSeqWaveHand()
 			setJointSeq(T, _flingJnt1);
 			setJointSeq(T, flingJnt2);
 		}
+		// if (i%4 == 0){
+		// 	setJointSeq(T, iflingJnt1);
+		// 	setJointSeq(T, iflingJnt2);
+		// 	// setJointSeq(T, iflingJnt2);
+
+		// }
 		else {
 			setJointSeq(T, flingJnt1);
 			setJointSeq(T, flingJnt2);
@@ -698,6 +966,7 @@ bool BinPickingControl::trajectoryPlanning()
 				error_message = planner.error_message();
 				os << " PRM: fail " << i << " th input motion (" << error_message << ")" << endl;
 			}
+			if(!success) successAll=false; 
 
 			planner.call_smoother(config_tmp);
 
@@ -866,5 +1135,5 @@ bool BinPickingControl::trajectoryPlanning()
 	// }
 	// cout << "-----------------------------------------------" << endl;
 #endif
-	return success;
+	return successAll;
 }

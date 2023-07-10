@@ -37,12 +37,13 @@ using namespace cnoid;
 
 			virtual ~MotionFileControl();
 
-			MotionFileControl();
 			std::string objectBasePath;
 
 			protected:
 
 			private:
+
+			MotionFileControl();
 
 			MessageView& mes;
 			std::ostream& os;
@@ -66,16 +67,10 @@ using namespace cnoid;
 
 			bool		headForward;
 
-			// revised by xinyi
 			void loadObjectData( void );
-			// void LoadFromMotionFile( std::string motionfilename );
-			void LoadFromMotionFile( std::string motionfilename, bool fixtorso=false);
+			void LoadFromMotionFile( std::string motionfilename );
 			void ClearMotionFile( void );
 			void SavePositionToDB( void );
-
-			// added by xinyi
-			std::vector<bool> isMotionFileSucceed;
-			bool fixTorso;
 
 			private:
 

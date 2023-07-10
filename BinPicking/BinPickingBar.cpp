@@ -52,6 +52,7 @@ BinPickingBar::BinPickingBar()
 		sigClicked().connect(bind(&BinPickingBar::onSaveButtonClicked, this));
 
 	addSeparator();
+
 	addLabel(("=Movement="));
 	
 	addButton(("BinPicking"), ("Execute Bin Picking Task"))->
@@ -60,18 +61,21 @@ BinPickingBar::BinPickingBar()
 	addButton(("Fling"), ("Motion File Play while torso fixed"))->
 		sigClicked().connect(bind(&BinPickingBar::doCablePickingFunc, this));
 
+	addSeparator();
+	addButton(("%TestNewFun%"), ("Plan new motion via python"))->
+		sigClicked().connect(bind(&BinPickingBar::doNewFunc, this));
+	addSeparator();
 	
 	addLabel(("=RobotMove="));
 	addButton(("Move"), (""))->
 		sigClicked().connect(bind(&BinPickingBar::doMove, this));
 	
-	addButton(("GoInitial"), (""))->
+	addButton(("Move[THK]"), (""))->
+		sigClicked().connect(bind(&BinPickingBar::doMoveTHK, this));
+
+	addButton(("SetInitial"), (""))->
 		sigClicked().connect(bind(&BinPickingBar::doIniPose, this));
 
-	addSeparator();
-	addButton(("%TestNewFun%"), ("Motion File Play while torso fixed"))->
-		sigClicked().connect(bind(&BinPickingBar::doNewFunc, this));
-	addSeparator();
 }
 
 BinPickingBar::~BinPickingBar()
@@ -86,12 +90,12 @@ BinPickingBar::~BinPickingBar()
 void BinPickingBar::onPlanButtonClicked()
 {
 	string motionfilepath = cnoid::executableTopDirectory() + "/ext/graspPlugin/BinPicking/motion/motion.dat";
-	MotionFileControl::instance()->LoadFromMotionFile(motionfilepath, false);
+	MotionFileControl::instance()->LoadFromMotionFile(motionfilepath);
 }
 void BinPickingBar::onPlanDualArmButtonClicked()
 {
 	string motionfilepath = cnoid::executableTopDirectory() + "/ext/graspPlugin/BinPicking/motion/motion.dat";
-	MotionFileControl::instance()->LoadFromMotionFile(motionfilepath, true);
+	MotionFileControl::instance()->LoadFromMotionFile(motionfilepath);
 }
 
 /* --------------- */
@@ -145,18 +149,21 @@ void BinPickingBar::doNewFunc()
 	item = ItemManager::create("Python", "PythonScriptItem");
 
 	ScriptItemPtr scriptItem = dynamic_pointer_cast<ScriptItem, Item>(item);
-	string scriptPath = cnoid::executableTopDirectory() + "/ext/graspPlugin/BinPicking/script/script_wave_demo.py";
+	// string scriptPath = cnoid::executableTopDirectory() + "/ext/graspPlugin/BinPicking/script/script_wave_demo.py";
+	string scriptPath = cnoid::executableTopDirectory() + "/ext/graspPlugin/BinPicking/script/script_soft_hand.py";
 	scriptItem->load(scriptPath, "PYTHON-SCRIPT-FILE");
 	
-	int success;
-	BinPickingControl * bp = BinPickingControl::instance();
-	bp->initJointSeq();
-	bp->calcJointSeqWaveHand();
-	success = bp->trajectoryPlanning();
+	scriptItem->execute();
+	
+	// int success;
+	// BinPickingControl * bp = BinPickingControl::instance();
+	// bp->initJointSeq();
+	// bp->calcJointSeqWaveHand();
+	// success = bp->trajectoryPlanning();
 
-	if (success) {
-		scriptItem->execute();
-	}
+	// if (success) {
+	// 	scriptItem->execute();
+	// }
 }
 
 void BinPickingBar::doMove()
@@ -170,6 +177,17 @@ void BinPickingBar::doMove()
     
 	scriptItem->execute();
 }
+void BinPickingBar::doMoveTHK()
+{
+	ItemPtr item;
+    item = ItemManager::create("Python", "PythonScriptItem");
+
+    ScriptItemPtr scriptItem = dynamic_pointer_cast<ScriptItem, Item>(item);
+	string scriptPath = cnoid::executableTopDirectory() + "/ext/graspPlugin/BinPicking/script/script_move_thk.py";
+    scriptItem->load(scriptPath, "PYTHON-SCRIPT-FILE");
+    
+	scriptItem->execute();
+}
 
 void BinPickingBar::doIniPose()
 {
@@ -177,7 +195,7 @@ void BinPickingBar::doIniPose()
     item = ItemManager::create("Python", "PythonScriptItem");
 
     ScriptItemPtr scriptItem = dynamic_pointer_cast<ScriptItem, Item>(item);
-	string scriptPath = cnoid::executableTopDirectory() + "/ext/graspPlugin/BinPicking/script/script_goinitial.py";
+	string scriptPath = cnoid::executableTopDirectory() + "/ext/graspPlugin/BinPicking/script/script_setinitial.py";
     scriptItem->load(scriptPath, "PYTHON-SCRIPT-FILE");
     
 	scriptItem->execute();

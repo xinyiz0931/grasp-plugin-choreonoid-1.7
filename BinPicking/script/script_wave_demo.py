@@ -11,5 +11,5 @@ motion_seq = get_motion()
 nxt = NxtRobot(host='[::]:15005')
 print(f"Move robot! Total {motion_seq.shape[0]} motion sequences! ")
 
-nxt.playBinPickingMotion(motion_seq)
+nxt.playMotion(motion_seq)
 
