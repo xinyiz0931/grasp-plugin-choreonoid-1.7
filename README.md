@@ -4,6 +4,8 @@ This is a repository for minimal graspPlugin on Chreonoid-1.7.0.
 
 Official documents for [Choreonoid](https://choreonoid.org/ja/documents/1.7/index.html) and [graspPlugin](http://www.hlab.sys.es.osaka-u.ac.jp/grasp/ja/node/311). 
 
+More packages of graspPlugin can be found [here](https://github.com/kensuke-harada/graspPlugin). 
+
 **Plugins:** Grasp, PRM, MotionFile, BinPicking
 
 **Robot and object models:** RobotModels, Samples
